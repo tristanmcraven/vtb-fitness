@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using vtb_api.Model;
+
 namespace vtb_api
 {
     public class Program
@@ -12,6 +15,9 @@ namespace vtb_api
             builder.Services.AddControllers();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
+
+            builder.Services.AddDbContext<VtbContext>(options =>
+                options.UseNpgsql("Host=localhost;Database=vtb;Username=postgres;Password=1234"));
 
             var app = builder.Build();
 
