@@ -30,7 +30,7 @@ namespace vtb_api.Controllers
 
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Login == dto.Login);
 
-            if (user == null || BCrypt.Net.BCrypt.Verify(dto.PasswordHash, user.PasswordHash))
+            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
                 return Unauthorized();
 
             return Ok(user);
