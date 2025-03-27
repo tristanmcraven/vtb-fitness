@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace vtb_fitness_client.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWIndow.xaml
+    /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWIndow : Window
+    public partial class MainWindow : Window
     {
-        public MainWIndow()
+        public MainWindow()
         {
             InitializeComponent();
         }

@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:vtb_fitness_client.Windows"
         mc:Ignorable="d"
         Title="StartWindow" Height="540" Width="960"
-        WindowState="Maximized"
-        WindowStyle="None">
+        WindowStyle="None"
+        WindowState="Maximized">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -15,9 +15,19 @@
             <ColumnDefinition Width="25*" />
         </Grid.ColumnDefinitions>
 
+        <MediaElement x:Name="video_MediaElement"
+                      Source="Assets/Videos/vidnew.mp4"
+                      Loaded="video_MediaElement_Loaded"
+                      LoadedBehavior="Manual"
+                      MediaEnded="video_MediaElement_MediaEnded"
+                      
+                      Volume="0"/>
+
         <Frame x:Name="main_Frame"
+               Grid.Column="1"
                NavigationUIVisibility="Hidden"
-               Loaded="main_Frame_Loaded" />
+               Loaded="main_Frame_Loaded"
+               Margin="20"/>
 
     </Grid>
 </Window>

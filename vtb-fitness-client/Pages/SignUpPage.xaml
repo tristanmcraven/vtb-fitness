@@ -4,11 +4,107 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:vtb_fitness_client.Pages"
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="300"
+      
       Title="SignUpPage">
 
     <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Auto"
+                      CanContentScroll="False">
+            
+            <StackPanel Orientation="Vertical">
+                <TextBox x:Name="lastName_TextBox"
+                         md:HintAssist.Hint="Фамилия" />
+                <TextBox x:Name="name_TextBox"
+                         md:HintAssist.Hint="Имя" />
+                <TextBox x:Name="middleName_TextBox"
+                         md:HintAssist.Hint="Отчество" />
+                <TextBox x:Name="phone_TextBox"
+                         md:HintAssist.Hint="Номер телефона" />
+                <TextBox x:Name="email_TextBox"
+                         md:HintAssist.Hint="Email" />
+                <TextBlock Text="Фотография" />
+                <Button x:Name="photo_Button"
+                        Content="Выбрать изображение..."
+                        Click="photo_Button_Click" />
+                <ComboBox x:Name="role_ComboBox"
+                          md:HintAssist.Hint="Вы:"
+                          SelectedIndex="0"
+                          SelectionChanged="role_ComboBox_SelectionChanged">
+                    <ComboBoxItem>Сотрудник ВТБ</ComboBoxItem>
+                    <ComboBoxItem>Тренер</ComboBoxItem>
+                </ComboBox>
+                <DatePicker x:Name="workingInVtbSince_DatePicker"
+                            md:HintAssist.Hint="Вы работаете в ВТБ с:" />
+                <Expander x:Name="passport_Expander"
+                          Header="Паспортные данные">
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="passportSeries_TextBox"
+                                     md:HintAssist.Hint="Серия" />
+                            <TextBox x:Name="passportNumber_TextBox"
+                                     md:HintAssist.Hint="Номер"
+                                     Grid.Column="1"/>
+                        </Grid>
+                        <TextBox x:Name="issuedBy_TextBox"
+                                 md:HintAssist.Hint="Пасспорт выдан" />
+                        <DatePicker x:Name="issuedDate_DatePicker"
+                                    md:HintAssist.Hint="Дата выдачи" />
+                        <TextBox x:Name="unitCode_TextBox"
+                                 md:HintAssist.Hint="Код подразделения" />
+                        <DatePicker x:Name="birthDay_DatePicker"
+                                    md:HintAssist.Hint="Дата рождения" />
+                        <TextBox x:Name="birthPlace_TextBox"
+                                 md:HintAssist.Hint="Место рождения" />
+                    </StackPanel>
+                </Expander>
+                <Expander x:Name="bankingDetails_Expander"
+                          Header="Банковские реквизиты">
+                    <StackPanel Orientation="Vertical">
+                        <TextBox x:Name="correspondentAccount_TextBox"
+                                 md:HintAssist.Hint="Расчётный счёт" />
+                        <TextBox x:Name="bik_TextBox"
+                                 md:HintAssist.Hint="БИК" />
+                        <TextBox x:Name="bankName_TextBox"
+                                 md:HintAssist.Hint="Название Банка" />
+                        <TextBox Name="debitCardNumber_TextBox"
+                                 md:HintAssist.Hint="Номер банковской карты (16 цифр)" />
+                    </StackPanel>
+                </Expander>
+
+                <TextBox x:Name="login_TextBox"
+                         md:HintAssist.Hint="Логин" />
+                <PasswordBox x:Name="passwordBox"
+                             md:HintAssist.Hint="Пароль" />
+                <PasswordBox x:Name="passwordBoxConfirm"
+                             md:HintAssist.Hint="Пароль ещё раз" />
+
+            </StackPanel>
+            
+        </ScrollViewer>
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1">
+            <Button x:Name="signUp_Button"
+                    Content="Зарегистрироваться"
+                    Click="signUp_Button_Click" />
+            <Button x:Name="goBack_Button"
+                    Content="Назад"
+                    Click="goBack_Button_Click" />
+        </StackPanel>
         
     </Grid>
 </Page>

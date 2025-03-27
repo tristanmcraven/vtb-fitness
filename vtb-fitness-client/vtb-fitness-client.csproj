@@ -7,7 +7,27 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Fonts\VTB Group Bold.ttf" />
+    <None Remove="Assets\Fonts\VTB Group Book.ttf" />
+    <None Remove="Assets\Fonts\VTB Group Cond Bold.ttf" />
+    <None Remove="Assets\Fonts\VTB Group Cond Book.ttf" />
+    <None Remove="Assets\Fonts\VTB Group Cond Light.ttf" />
+    <None Remove="Assets\Fonts\VTB Group Demi Bold.ttf" />
+    <None Remove="Assets\Fonts\VTB Group Light.ttf" />
+    <None Remove="Assets\Images\vtb-logo-tp.png" />
+    <None Remove="Assets\Videos\vidnew.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Videos\vidnew.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="UserControls\" />
@@ -25,6 +45,34 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Fonts\VTB Group Bold.ttf" />
+    <Resource Include="Assets\Fonts\VTB Group Book.ttf" />
+    <Resource Include="Assets\Fonts\VTB Group Cond Bold.ttf" />
+    <Resource Include="Assets\Fonts\VTB Group Cond Book.ttf" />
+    <Resource Include="Assets\Fonts\VTB Group Cond Light.ttf" />
+    <Resource Include="Assets\Fonts\VTB Group Demi Bold.ttf" />
+    <Resource Include="Assets\Fonts\VTB Group Light.ttf" />
+    <Resource Include="Assets\Images\vtb-logo-tp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

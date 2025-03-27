@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -10,7 +12,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using vtb_fitness_client.Pages;
 using vtb_fitness_client.Utility;
 
@@ -24,6 +25,7 @@ namespace vtb_fitness_client.Windows
         public StartWindow()
         {
             InitializeComponent();
+
         }
 
         private void signIn_Button_Click(object sender, RoutedEventArgs e)
@@ -40,6 +42,17 @@ namespace vtb_fitness_client.Windows
         {
             PageManager.MainFrame = main_Frame;
             PageManager.MainFrame.Navigate(new SignInPage());
+        }
+
+        private void video_MediaElement_Loaded(object sender, RoutedEventArgs e)
+        {
+            video_MediaElement.Play();
+        }
+
+        private void video_MediaElement_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            video_MediaElement.Position = TimeSpan.Zero;
+            video_MediaElement.Play();
         }
     }
 }

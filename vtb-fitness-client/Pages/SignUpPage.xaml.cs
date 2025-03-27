@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using vtb_fitness_client.Utility;
 
 namespace vtb_fitness_client.Pages
 {
@@ -23,6 +24,26 @@ namespace vtb_fitness_client.Pages
         public SignUpPage()
         {
             InitializeComponent();
+        }
+
+        private void photo_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void role_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void signUp_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void goBack_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageManager.MainFrame.GoBack();
         }
     }
 }

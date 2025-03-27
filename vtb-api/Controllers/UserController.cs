@@ -1,6 +1,7 @@
 ﻿using BCrypt.Net;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 using vtb_api.Dto;
 using vtb_api.Model;
 
@@ -22,7 +23,7 @@ namespace vtb_api.Controllers
             return Ok(users);
         }
 
-        [HttpPost("/sign_in")]
+        [HttpPost("sign_in")]
         public async Task<IActionResult> SignIn(UserSignInDto dto)
         {
             if (!ModelState.IsValid)
@@ -35,5 +36,11 @@ namespace vtb_api.Controllers
 
             return Ok(user);
         }
+
+        //[HttpPost("sign_up")]
+        //public async Task<IActionResult> SignUp(UserSignUpDto dto)
+        //{
+
+        //}
     }
 }

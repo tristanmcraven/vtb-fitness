@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using vtb_fitness_client.Network;
+using vtb_fitness_client.Utility;
+using vtb_fitness_client.Windows;
 
 namespace vtb_fitness_client.Pages
 {
@@ -36,7 +38,7 @@ namespace vtb_fitness_client.Pages
 
         private void signUp_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            PageManager.MainFrame.Navigate(new SignUpPage());
         }
 
         public async void SignIn(string login, string password)
@@ -44,7 +46,7 @@ namespace vtb_fitness_client.Pages
             var user = await ApiClient._User.SignIn(login, password);
             if (user != null)
             {
-
+                WindowManager.Close<StartWindow>();
             }
         }
     }
