@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Runtime.CompilerServices;
-using vtb_api.Dto;
-using vtb_api.Model;
+using vtb_fitness_api.Dto;
+using vtb_fitness_api.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace vtb_api.Controllers
+namespace vtb_fitness_api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -37,10 +37,10 @@ namespace vtb_api.Controllers
             return Ok(user);
         }
 
-        //[HttpPost("sign_up")]
-        //public async Task<IActionResult> SignUp(UserSignUpDto dto)
-        //{
-
-        //}
+        [HttpPost("sign_up")]
+        public async Task<IActionResult> SignUp(UserSignUpDto dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

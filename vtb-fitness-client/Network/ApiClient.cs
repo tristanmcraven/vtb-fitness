@@ -7,7 +7,7 @@ namespace vtb_fitness_client.Network
 {
     public static class ApiClient
     {
-        private static readonly string _apiPath = "http://localhost:5221/api/";
+        private static readonly string _apiPath = "http://localhost:5047/api/";
         private static HttpClient _httpClient = new HttpClient();
 
         private static async Task<T?> SendRequest<T>(string url, HttpMethod method, object? body = null)

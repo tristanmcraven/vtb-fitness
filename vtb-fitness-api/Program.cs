@@ -1,8 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
-using vtb_api.Model;
+using vtb_fitness_api.Model;
 
-namespace vtb_api
+namespace vtb_fitness_api
 {
     public class Program
     {
@@ -13,8 +13,9 @@ namespace vtb_api
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             builder.Services.AddDbContext<VtbContext>(options =>
                 options.UseNpgsql("Host=localhost;Database=vtb;Username=postgres;Password=1234"));
@@ -24,7 +25,8 @@ namespace vtb_api
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseAuthorization();

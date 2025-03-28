@@ -24,6 +24,10 @@
             <FontFamily x:Key="cond_book">pack://application:,,,/Assets/Fonts/#VTB Group Cond Book</FontFamily>
             <FontFamily x:Key="cond_bold">pack://application:,,,/Assets/Fonts/#VTB Group Cond Bold</FontFamily>
 
+            <SolidColorBrush x:Key="dark_blue"
+                             Color="#202735" />
+            <Color x:Key="dark_blue_color">#202735</Color>
+
             <Style TargetType="ScrollViewer"
                    BasedOn="{StaticResource MaterialDesignScrollViewer}">
                 <Setter Property="md:ScrollViewerAssist.IsAutoHideEnabled"

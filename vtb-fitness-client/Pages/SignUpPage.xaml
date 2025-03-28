@@ -38,7 +38,6 @@
                         Click="photo_Button_Click" />
                 <ComboBox x:Name="role_ComboBox"
                           md:HintAssist.Hint="Вы:"
-                          SelectedIndex="0"
                           SelectionChanged="role_ComboBox_SelectionChanged">
                     <ComboBoxItem>Сотрудник ВТБ</ComboBoxItem>
                     <ComboBoxItem>Тренер</ComboBoxItem>

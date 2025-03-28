@@ -1,4 +1,4 @@
-﻿namespace vtb_api.Dto
+﻿namespace vtb_fitness_api.Dto
 {
     public class UserSignInDto
     {

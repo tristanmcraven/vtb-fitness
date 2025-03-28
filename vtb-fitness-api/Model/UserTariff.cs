@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace vtb_api.Model;
+namespace vtb_fitness_api.Model;
 
 public partial class UserTariff
 {
