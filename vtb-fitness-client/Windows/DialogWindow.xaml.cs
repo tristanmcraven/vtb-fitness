@@ -71,7 +71,7 @@ namespace vtb_fitness_client.Windows
                     Background = new SolidColorBrush(Colors.Black),
                     Name = "tint"
                 };
-                tint.Background.Opacity = 0.5;
+                tint.Background.Opacity = 0.7;
                 Grid.SetColumnSpan(body, 10);
                 Grid.SetRowSpan(body, 10);
                 Panel.SetZIndex(body, 2);

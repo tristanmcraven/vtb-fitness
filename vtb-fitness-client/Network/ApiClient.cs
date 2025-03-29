@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using vtb_fitness_client.Dto;
 using vtb_fitness_client.Model;
 
 namespace vtb_fitness_client.Network
@@ -44,6 +45,11 @@ namespace vtb_fitness_client.Network
                     Password = password
                 };
                 return await SendRequest<User>("user/sign_in", HttpMethod.Post, dto);
+            }
+
+            public static async Task<User?> SignUp(UserSignUpDto dto)
+            {
+                return await SendRequest<User>("user/sign_up", HttpMethod.Post, dto);
             }
         }
     }

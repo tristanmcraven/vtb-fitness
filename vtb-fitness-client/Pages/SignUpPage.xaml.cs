@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using vtb_fitness_client.Dto;
+using vtb_fitness_client.Network;
 using vtb_fitness_client.Utility;
 using vtb_fitness_client.Windows;
 
@@ -72,26 +74,7 @@ namespace vtb_fitness_client.Pages
             return passwordBox.Password == passwordBoxConfirm.Password;
         }
 
-        private void photo_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void role_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (role_ComboBox.SelectedIndex == 0)
-            {
-                workingInVtbSince_DatePicker.Visibility = Visibility.Visible;
-                bankingDetails_Expander.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                workingInVtbSince_DatePicker.Visibility = Visibility.Collapsed;
-                bankingDetails_Expander.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void signUp_Button_Click(object sender, RoutedEventArgs e)
+        private async void SignUp()
         {
             if (IsSomethingEmpty())
             {
@@ -114,13 +97,96 @@ namespace vtb_fitness_client.Pages
                 { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
                 return;
             }
+            var roleId = role_ComboBox.SelectedIndex == 0 ? 3 : 4;
+            var dto = new UserSignUpDto
+            {
+                Lastname = lastName_TextBox.Text,
+                Name = name_TextBox.Text,
+                Middlename = middleName_TextBox.Text,
+                Phone = phone_TextBox.Text,
+                Email = email_TextBox.Text,
+                Pfp = null,
+                RoleId = roleId,
+                WorkingInVtbSince = role_ComboBox.SelectedIndex == 1 ? null : DateOnly.FromDateTime((DateTime)workingInVtbSince_DatePicker.SelectedDate!),
+                Login = login_TextBox.Text,
+                Password = passwordBox.Password,
+                PassportCreateDto = new PassportCreateDto
+                {
+                    PassportSeries = passportSeries_TextBox.Text,
+                    PassportNumber = passportNumber_TextBox.Text,
+                    IssuedBy = issuedBy_TextBox.Text,
+                    IssuedDate = DateOnly.FromDateTime((DateTime)issuedDate_DatePicker.SelectedDate!),
+                    UnitCode = unitCode_TextBox.Text,
+                    BirthDate = DateOnly.FromDateTime((DateTime)birthDay_DatePicker.SelectedDate!),
+                    BirthPlace = birthPlace_TextBox.Text
+                },
+                BankingDetailsDto = role_ComboBox.SelectedIndex == 0 ? null : new BankingDetailsCreateDto
+                {
+                    CorrespondentAccount = correspondentAccount_TextBox.Text,
+                    Bik = bik_TextBox.Text,
+                    BankName = bankName_TextBox.Text,
+                    DebitCardNumber = debitCardNumber_TextBox.Text
+                }
+            };
+            var user = await ApiClient._User.SignUp(dto);
+            if (user == null)
+            {
+                new DialogWindow(WindowManager.Get<StartWindow>(),
+                    "Ошибка",
+                    "Что-то пошло не так",
+                    DialogWindowButtons.Ok,
+                    DialogWindowType.Error)
+                { Owner = WindowManager.Get<StartWindow>()}.ShowDialog();
+                return;
+            }
+        }
 
+        private void GoBack()
+        {
+            PageManager.MainFrame.GoBack();
+        }
 
+        private void photo_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void role_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (role_ComboBox.SelectedIndex == 0)
+            {
+                workingInVtbSince_DatePicker.Visibility = Visibility.Visible;
+                bankingDetails_Expander.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                workingInVtbSince_DatePicker.Visibility = Visibility.Collapsed;
+                bankingDetails_Expander.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void signUp_Button_Click(object sender, RoutedEventArgs e)
+        {
+            SignUp();
         }
 
         private void goBack_Button_Click(object sender, RoutedEventArgs e)
         {
-            PageManager.MainFrame.GoBack();
+            GoBack();
+        }
+
+        private void Page_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    SignUp();
+                    break;
+                case Key.Escape:
+                    GoBack();
+                    break;
+            }
+            e.Handled = true;
         }
     }
 }

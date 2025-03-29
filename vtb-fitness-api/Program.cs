@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
 using vtb_fitness_api.Model;
+using vtb_fitness_api.Services;
+using vtb_fitness_api.Services.Interfaces;
 
 namespace vtb_fitness_api
 {
@@ -16,6 +18,9 @@ namespace vtb_fitness_api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<IBankingDetailsService, BankingDetailsService>();
+            builder.Services.AddScoped<IPassportService, PassportService>();
 
             builder.Services.AddDbContext<VtbContext>(options =>
                 options.UseNpgsql("Host=localhost;Database=vtb;Username=postgres;Password=1234"));
