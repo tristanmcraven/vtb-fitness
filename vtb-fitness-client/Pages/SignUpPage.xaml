@@ -10,6 +10,50 @@
       KeyUp="Page_KeyUp"
       Title="SignUpPage">
 
+    <Page.Resources>
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource global_TextBox}">
+            <Setter Property="Margin"
+                    Value="0 0 0 10" />
+        </Style>
+        <Style TargetType="ComboBox"
+               BasedOn="{StaticResource global_ComboBox}">
+            <Setter Property="Margin"
+                    Value="0 0 0 10" />
+            <Setter Property="md:HintAssist.Background"
+                    Value="{StaticResource bg}" />
+            <Setter Property="md:HintAssist.HintPaddingBrush"
+                    Value="{StaticResource bg}" />
+        </Style>
+        <Style TargetType="DatePicker"
+               BasedOn="{StaticResource global_DatePicker}">
+            <Setter Property="Margin"
+                    Value="0 0 0 10" />
+        </Style>
+        <Style TargetType="PasswordBox"
+               BasedOn="{StaticResource global_PasswordBox}">
+            <Setter Property="Margin"
+                    Value="0 0 0 10" />
+            <Setter Property="md:HintAssist.Background"
+                    Value="{StaticResource bg}" />
+            <Setter Property="md:HintAssist.HintPaddingBrush"
+                    Value="{StaticResource bg}" />
+        </Style>
+        <Style TargetType="Expander"
+               BasedOn="{StaticResource MaterialDesignExpander}">
+            <Setter Property="Margin"
+                    Value="0 0 0 10" />
+            <Setter Property="Padding"
+                    Value="10" />
+        </Style>
+
+        <Style TargetType="Button"
+               BasedOn="{StaticResource global_Button}">
+            <Setter Property="Margin"
+                    Value="0 0 0 15" />
+        </Style>
+    </Page.Resources>
+
     <Grid>
         
         <Grid.RowDefinitions>
@@ -22,6 +66,13 @@
                       CanContentScroll="False">
             
             <StackPanel Orientation="Vertical">
+
+                <TextBlock Text="Регистрация"
+                           HorizontalAlignment="Center"
+                           FontFamily="{StaticResource demi_bold}"
+                           FontSize="24"
+                           Margin="0 10 0 20"/>
+
                 <TextBox x:Name="lastName_TextBox"
                          md:HintAssist.Hint="Фамилия" />
                 <TextBox x:Name="name_TextBox"
@@ -32,7 +83,8 @@
                          md:HintAssist.Hint="Номер телефона" />
                 <TextBox x:Name="email_TextBox"
                          md:HintAssist.Hint="Email" />
-                <TextBlock Text="Фотография" />
+                <TextBlock Text="Фотография"
+                           Style="{StaticResource global_TextBlock}"/>
                 <Button x:Name="photo_Button"
                         Content="Выбрать изображение..."
                         Click="photo_Button_Click" />
@@ -50,13 +102,14 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="0.1*" />
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="passportSeries_TextBox"
                                      md:HintAssist.Hint="Серия" />
                             <TextBox x:Name="passportNumber_TextBox"
                                      md:HintAssist.Hint="Номер"
-                                     Grid.Column="1"/>
+                                     Grid.Column="2"/>
                         </Grid>
                         <TextBox x:Name="issuedBy_TextBox"
                                  md:HintAssist.Hint="Пасспорт выдан" />
@@ -73,6 +126,13 @@
                 <Expander x:Name="bankingDetails_Expander"
                           Header="Банковские реквизиты">
                     <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource global_TextBlock}"
+                                   TextWrapping="Wrap"
+                                   MaxWidth="350"
+                                   HorizontalAlignment="Left"
+                                   Margin="15 -10 0 10">
+                            Пожалуйста, укажите банковские реквизиты для перечисления заработной платы.
+                        </TextBlock>
                         <TextBox x:Name="correspondentAccount_TextBox"
                                  md:HintAssist.Hint="Расчётный счёт" />
                         <TextBox x:Name="bik_TextBox"
@@ -85,7 +145,8 @@
                 </Expander>
 
                 <TextBox x:Name="login_TextBox"
-                         md:HintAssist.Hint="Логин" />
+                         md:HintAssist.Hint="Логин"
+                         Margin="0 20 0 10"/>
                 <PasswordBox x:Name="passwordBox"
                              md:HintAssist.Hint="Пароль" />
                 <PasswordBox x:Name="passwordBoxConfirm"
@@ -99,10 +160,12 @@
                     Grid.Row="1">
             <Button x:Name="signUp_Button"
                     Content="Зарегистрироваться"
-                    Click="signUp_Button_Click" />
+                    Click="signUp_Button_Click"
+                    Margin="0 0 0 8"/>
             <Button x:Name="goBack_Button"
                     Content="Назад"
-                    Click="goBack_Button_Click" />
+                    Click="goBack_Button_Click"
+                    Margin="0"/>
         </StackPanel>
         
     </Grid>

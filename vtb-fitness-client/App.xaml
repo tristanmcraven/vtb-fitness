@@ -10,7 +10,7 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <md:BundledTheme BaseTheme="Light"
+                <md:BundledTheme BaseTheme="Dark"
                                  PrimaryColor="Blue"
                                  SecondaryColor="Yellow" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
@@ -26,6 +26,8 @@
 
             <SolidColorBrush x:Key="dark_blue"
                              Color="#202735" />
+            <SolidColorBrush x:Key="bg"
+                             Color="#1c1f26" />
             <Color x:Key="dark_blue_color">#202735</Color>
 
             <Style TargetType="ScrollViewer"
@@ -35,7 +37,8 @@
                 <Style.Resources>
                     <Style TargetType="ScrollBar"
                            BasedOn="{StaticResource MaterialDesignScrollBarMinimal}">
-                        
+                        <Setter Property="md:ScrollBarAssist.ThumbCornerRadius"
+                                Value="7" />
                     </Style>
                 </Style.Resources>
             </Style>
@@ -45,38 +48,82 @@
                         Value="HighQuality" />
             </Style>
 
-            <Style TargetType="TextBox"
+            <Style x:Key="global_TextBox"
+                   TargetType="TextBox"
                    BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">
                 <Setter Property="FontFamily"
                         Value="{StaticResource light}" />
                 <Setter Property="Padding"
                         Value="10" />
-                <Setter Property="md:HintAssist.Background"
-                        Value="White" />
-                
+                <Setter Property="md:HintAssist.FloatingScale"
+                        Value="0.9" />
+                <Setter Property="FontSize"
+                        Value="14" />
             </Style>
 
-            <Style TargetType="PasswordBox"
+            <Style x:Key="global_PasswordBox"
+                   TargetType="PasswordBox"
                    BasedOn="{StaticResource MaterialDesignOutlinedRevealPasswordBox}">
                 <Setter Property="FontFamily"
                         Value="{StaticResource light}" />
                 <Setter Property="Padding"
                         Value="10" />
+                <Setter Property="md:HintAssist.FloatingScale"
+                        Value="0.9" />
+                <Setter Property="FontSize"
+                        Value="14" />
             </Style>
 
-            <Style TargetType="DatePicker"
+            <Style x:Key="global_DatePicker"
+                   TargetType="DatePicker"
                    BasedOn="{StaticResource MaterialDesignOutlinedDatePicker}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource light}" />
                 <Setter Property="Padding"
                         Value="10" />
                 <Setter Property="Language"
                         Value="ru-RU" />
+                <Setter Property="md:HintAssist.FloatingScale"
+                        Value="0.9" />
+                <Setter Property="FontSize"
+                        Value="14" />
             </Style>
 
-            <Style TargetType="ComboBox"
+            <Style x:Key="global_ComboBox"
+                   TargetType="ComboBox"
                    BasedOn="{StaticResource MaterialDesignOutlinedComboBox}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource light}" />
                 <Setter Property="Padding"
                         Value="10" />
+                <Setter Property="md:HintAssist.FloatingScale"
+                        Value="0.9" />
+                <Setter Property="FontSize"
+                        Value="14" />
             </Style>
+
+            <Style x:Key="global_TextBlock"
+                   TargetType="TextBlock"
+                   BasedOn="{StaticResource MaterialDesignTextBlock}">
+                <Setter Property="FontFamily"
+                        Value="{StaticResource book}" />
+            </Style>
+
+            <Style x:Key="global_Button"
+                   TargetType="Button"
+                   BasedOn="{StaticResource MaterialDesignRaisedButton}">
+                <Setter Property="Foreground"
+                        Value="White" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource demi_bold}" />
+                <Setter Property="FontSize"
+                        Value="16" />
+                <Setter Property="Height"
+                        Value="40" />
+            </Style>
+            
+            
+
                    
             
         </ResourceDictionary>

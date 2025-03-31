@@ -9,6 +9,7 @@ namespace vtb_fitness_client.Utility
     public enum DialogWindowType
     {
         Error,
-        Warning
+        Warning,
+        Info
     }
 }

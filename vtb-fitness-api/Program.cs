@@ -14,7 +14,10 @@ namespace vtb_fitness_api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+            });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -23,7 +26,7 @@ namespace vtb_fitness_api
             builder.Services.AddScoped<IPassportService, PassportService>();
 
             builder.Services.AddDbContext<VtbContext>(options =>
-                options.UseNpgsql("Host=localhost;Database=vtb;Username=postgres;Password=1234"));
+                options.UseNpgsql("Host=localhost;Database=vtb;Username=postgres;Password=1234").UseLazyLoadingProxies(false));
 
             var app = builder.Build();
 

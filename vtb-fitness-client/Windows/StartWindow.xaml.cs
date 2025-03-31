@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,6 +55,14 @@ namespace vtb_fitness_client.Windows
         {
             video_MediaElement.Position = TimeSpan.Zero;
             video_MediaElement.Play();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //no idea why
+            var paletteHelper = new PaletteHelper();
+            paletteHelper.SetTheme(Theme.Create(BaseTheme.Light, SwatchHelper.Lookup[MaterialDesignColor.Blue], SwatchHelper.Lookup[MaterialDesignColor.YellowSecondary]));
+            paletteHelper.SetTheme(Theme.Create(BaseTheme.Dark, SwatchHelper.Lookup[MaterialDesignColor.Blue], SwatchHelper.Lookup[MaterialDesignColor.YellowSecondary]));
         }
     }
 }

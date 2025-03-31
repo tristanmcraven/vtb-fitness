@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:vtb_fitness_client.Windows"
         mc:Ignorable="d"
-        Title="StartWindow" Height="540" Width="960"
+        Title="VTB Fitness" Height="540" Width="960"
         WindowStyle="None"
-        WindowState="Maximized">
+        WindowState="Maximized"
+        Style="{StaticResource MaterialDesignWindow}"
+        Loaded="Window_Loaded">
     <Grid x:Name="body">
 
-        <Grid>
+        <Grid Background="{StaticResource bg}">
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="75*" />

@@ -38,6 +38,8 @@ namespace vtb_fitness_client.Windows
                 SystemSounds.Hand.Play();
             else if (type == DialogWindowType.Warning)
                 SystemSounds.Exclamation.Play();
+            else if (type == DialogWindowType.Info)
+                SystemSounds.Exclamation.Play();
 
             title_TextBlock.Text = title;
             message_TextBlock.Text = message;
@@ -71,7 +73,7 @@ namespace vtb_fitness_client.Windows
                     Background = new SolidColorBrush(Colors.Black),
                     Name = "tint"
                 };
-                tint.Background.Opacity = 0.7;
+                tint.Background.Opacity = 0.8;
                 Grid.SetColumnSpan(body, 10);
                 Grid.SetRowSpan(body, 10);
                 Panel.SetZIndex(body, 2);

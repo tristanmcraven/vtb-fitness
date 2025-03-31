@@ -28,6 +28,8 @@ namespace vtb_fitness_client.Pages
             InitializeComponent();
         }
 
+        private bool IsSomethingEmpty() => String.IsNullOrWhiteSpace(login_TextBox.Text) || String.IsNullOrWhiteSpace(passwordBox.Password);
+
         private void signIn_Button_Click(object sender, RoutedEventArgs e)
         {
             var login = login_TextBox.Text;
@@ -43,10 +45,41 @@ namespace vtb_fitness_client.Pages
 
         public async void SignIn(string login, string password)
         {
-            var user = await ApiClient._User.SignIn(login, password);
-            if (user != null)
+            if (IsSomethingEmpty())
             {
-                WindowManager.Close<StartWindow>();
+                new DialogWindow(WindowManager.Get<StartWindow>(),
+                                 "Ошибка",
+                                 "Введите данные от учётной записи",
+                                 DialogWindowButtons.Ok,
+                                 DialogWindowType.Error)
+                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                return;
+            }
+            var user = await ApiClient._User.SignIn(login, password);
+            if (user == null)
+            {
+                new DialogWindow(WindowManager.Get<StartWindow>(),
+                                 "Ошибка",
+                                 "Неправильный логин и/или пароль",
+                                 DialogWindowButtons.Ok,
+                                 DialogWindowType.Error)
+                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                return;
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            login_TextBox.Focus();
+        }
+
+        private void Page_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    signIn_Button_Click(null, null);
+                    break;
             }
         }
     }

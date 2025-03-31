@@ -87,7 +87,7 @@ namespace vtb_fitness_client.Pages
                 return;
             }
 
-            if (DoPasswordsMatch())
+            if (!DoPasswordsMatch())
             {
                 new DialogWindow(WindowManager.Get<StartWindow>(),
                  "Ошибка",
@@ -129,15 +129,26 @@ namespace vtb_fitness_client.Pages
                 }
             };
             var user = await ApiClient._User.SignUp(dto);
+
             if (user == null)
             {
                 new DialogWindow(WindowManager.Get<StartWindow>(),
-                    "Ошибка",
-                    "Что-то пошло не так",
-                    DialogWindowButtons.Ok,
-                    DialogWindowType.Error)
+                                 "Ошибка",
+                                 "Что-то пошло не так",
+                                 DialogWindowButtons.Ok,
+                                 DialogWindowType.Error)
                 { Owner = WindowManager.Get<StartWindow>()}.ShowDialog();
                 return;
+            }
+            else
+            {
+                new DialogWindow(WindowManager.Get<StartWindow>(),
+                                 "Успешная регистрация",
+                                 "Пожалуйста, войдите в систему",
+                                 DialogWindowButtons.Ok,
+                                 DialogWindowType.Info)
+                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                PageManager.MainFrame.GoBack();
             }
         }
 
