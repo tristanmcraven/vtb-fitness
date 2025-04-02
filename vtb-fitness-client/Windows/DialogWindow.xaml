@@ -18,9 +18,9 @@
                              RadiusX="1"
                              RadiusY="1.3"
                              >
-            <GradientStop Color="#002783"
+            <GradientStop Color="{StaticResource magic_blue_color}"
                           Offset="-1" />
-            <GradientStop Color="{StaticResource dark_blue_color}"
+            <GradientStop Color="{StaticResource magic_dark_blue_color}"
                           Offset="1" />
         </RadialGradientBrush>
     </Window.Background>

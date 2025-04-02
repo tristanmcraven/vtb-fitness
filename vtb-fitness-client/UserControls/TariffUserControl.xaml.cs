@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using vtb_fitness_client.Utility;
 
-namespace vtb_fitness_client.Windows
+namespace vtb_fitness_client.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for TariffUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TariffUserControl : UserControl
     {
-        public MainWindow()
+        public TariffUserControl()
         {
             InitializeComponent();
-        }
-
-        private void main_Frame_Loaded(object sender, RoutedEventArgs e)
-        {
-            PageManager.MainFrame = main_Frame;
         }
     }
 }

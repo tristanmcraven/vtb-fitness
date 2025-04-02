@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -66,6 +67,9 @@ namespace vtb_fitness_client.Pages
                 { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
                 return;
             }
+            App.CurrentUser = user;
+            new MainWindow().Show();
+            WindowManager.Close<StartWindow>();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

@@ -6,11 +6,114 @@
         xmlns:local="clr-namespace:vtb_fitness_client.Windows"
         xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="VTB Fitness" Height="1080" Width="1920"
         WindowStyle="None"
         WindowState="Maximized"
         Style="{StaticResource MaterialDesignWindow}">
+
+    <Window.Background>
+        <RadialGradientBrush RadiusX="1"
+                             RadiusY="1"
+                             Center="0.4,0.5"
+                             GradientOrigin="2.5,2">
+            <GradientStop Color="{StaticResource magic_blue_color}"
+                          Offset="0" />
+            <GradientStop Color="{StaticResource bg_color}"
+                          Offset="1" />
+        </RadialGradientBrush>
+    </Window.Background>
+
+    <Window.Resources>
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource global_TextBlock}">
+            <Setter Property="VerticalAlignment"
+                    Value="Center" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver"
+                         Value="True">
+                    <Setter Property="Cursor"
+                            Value="Hand" />
+                    <Setter Property="TextDecorations"
+                            Value="Underline" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="logo_Grid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <Image Source="/Assets/Images/vtb-logo-tp.png"
+                       Width="130"/>
+
+                <TextBlock Text="ВТБ Фитнес"
+                           Grid.Column="1"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource global_TextBlock}"/>
+
+            </Grid>
+
+            <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Hidden"
+                          CanContentScroll="False"
+                          Grid.Column="1">
+
+                <StackPanel Orientation="Horizontal">
+                    
+                    <StackPanel Orientation="Horizontal"
+                                x:Name="user_StackPanel">
+                        <TextBlock x:Name="tracker_TextBlock"
+                                   Text="Трекер" />
+                        <TextBlock x:Name="tariffs_TextBlock"
+                                   Text="Абонементы" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                x:Name="mod_StackPanel">
+                        <TextBlock x:Name="users_TextBlock"
+                                   Text="Пользователи" />
+                        <TextBlock x:Name="trainers_TextBlock"
+                                   Text="Тренеры" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                x:Name="trainer_StackPanel">
+                        
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"
+                                x:Name="admin_StackPanel">
+                        <TextBlock x:Name="mods_TextBlock"
+                                   Text="Модераторы" />
+                    </StackPanel>
+                    
+                </StackPanel>
+
+
+            </ScrollViewer>
+            
+        </Grid>
+        
+        <Frame x:Name="main_Frame"
+               NavigationUIVisibility="Hidden"
+               Loaded="main_Frame_Loaded"
+               Grid.Row="1"/>
         
     </Grid>
 </Window>

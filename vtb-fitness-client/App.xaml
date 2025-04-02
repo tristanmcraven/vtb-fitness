@@ -28,7 +28,15 @@
                              Color="#202735" />
             <SolidColorBrush x:Key="bg"
                              Color="#1c1f26" />
+            <SolidColorBrush x:Key="magic_blue"
+                             Color="#002783" />
+            <SolidColorBrush x:Key="magic_dark_blue"
+                             Color="#020224" />
+
             <Color x:Key="dark_blue_color">#202735</Color>
+            <Color x:Key="bg_color">#1c1f26</Color>
+            <Color x:Key="magic_blue_color">#002783</Color>
+            <Color x:Key="magic_dark_blue_color">#020224</Color>
 
             <Style TargetType="ScrollViewer"
                    BasedOn="{StaticResource MaterialDesignScrollViewer}">

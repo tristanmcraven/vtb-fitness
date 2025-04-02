@@ -10,5 +10,6 @@ namespace vtb_fitness_client.Utility
     public static class PageManager
     {
         public static Frame MainFrame { get; set; }
+        public static Frame SubFrame { get; set; }
     }
 }
