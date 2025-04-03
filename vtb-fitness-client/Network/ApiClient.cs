@@ -52,5 +52,12 @@ namespace vtb_fitness_client.Network
                 return await SendRequest<User>("user/sign_up", HttpMethod.Post, dto);
             }
         }
+
+        public static class _Tariff
+        {
+            public static async Task<List<Tariff>> Get() => await SendRequest<List<Tariff>>("tariff", HttpMethod.Get);
+
+            public static async Task<Tariff?> Create(TariffCreateDto dto) => await SendRequest<Tariff>("tariff", HttpMethod.Post, dto);
+        }
     }
 }

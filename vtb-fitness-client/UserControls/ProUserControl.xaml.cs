@@ -20,9 +20,17 @@ namespace vtb_fitness_client.UserControls
     /// </summary>
     public partial class ProUserControl : UserControl
     {
-        public ProUserControl()
+        private string _pro;
+        public ProUserControl(string pro)
         {
             InitializeComponent();
+            _pro = pro;
+            InitView();
+        }
+
+        private void InitView()
+        {
+            pro_TextBlock.Text = _pro;
         }
     }
 }

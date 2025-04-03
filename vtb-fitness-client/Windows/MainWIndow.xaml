@@ -9,7 +9,8 @@
         Title="VTB Fitness" Height="1080" Width="1920"
         WindowStyle="None"
         WindowState="Maximized"
-        Style="{StaticResource MaterialDesignWindow}">
+        Style="{StaticResource MaterialDesignWindow}"
+        Loaded="Window_Loaded">
 
     <Window.Background>
         <RadialGradientBrush RadiusX="1"
@@ -39,81 +40,88 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
+
+    <Grid x:Name="body">
 
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
 
-            <Grid x:Name="logo_Grid">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
-                <Image Source="/Assets/Images/vtb-logo-tp.png"
-                       Width="130"/>
+                <Grid x:Name="logo_Grid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="ВТБ Фитнес"
-                           Grid.Column="1"
-                           VerticalAlignment="Center"
-                           Style="{StaticResource global_TextBlock}"/>
+                    <Image Source="/Assets/Images/vtb-logo-tp.png"
+                           Width="130" />
+
+                    <TextBlock Text="ВТБ Фитнес"
+                               Grid.Column="1"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource global_TextBlock}" />
+
+                </Grid>
+
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Hidden"
+                              CanContentScroll="False"
+                              Grid.Column="1">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="user_StackPanel">
+                            <TextBlock x:Name="tracker_TextBlock"
+                                       Text="Трекер" />
+                            <TextBlock x:Name="tariffs_TextBlock"
+                                       Text="Абонементы"
+                                       MouseLeftButtonUp="tariffs_TextBlock_MouseLeftButtonUp" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="mod_StackPanel">
+                            <TextBlock x:Name="users_TextBlock"
+                                       Text="Пользователи" />
+                            <TextBlock x:Name="trainers_TextBlock"
+                                       Text="Тренеры" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="trainer_StackPanel">
+
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="admin_StackPanel">
+                            <TextBlock x:Name="mods_TextBlock"
+                                       Text="Модераторы" />
+                        </StackPanel>
+
+                    </StackPanel>
+
+
+                </ScrollViewer>
 
             </Grid>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Hidden"
-                          CanContentScroll="False"
-                          Grid.Column="1">
+            <Frame x:Name="main_Frame"
+                   NavigationUIVisibility="Hidden"
+                   Loaded="main_Frame_Loaded"
+                   Grid.Row="1" />
 
-                <StackPanel Orientation="Horizontal">
-                    
-                    <StackPanel Orientation="Horizontal"
-                                x:Name="user_StackPanel">
-                        <TextBlock x:Name="tracker_TextBlock"
-                                   Text="Трекер" />
-                        <TextBlock x:Name="tariffs_TextBlock"
-                                   Text="Абонементы" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal"
-                                x:Name="mod_StackPanel">
-                        <TextBlock x:Name="users_TextBlock"
-                                   Text="Пользователи" />
-                        <TextBlock x:Name="trainers_TextBlock"
-                                   Text="Тренеры" />
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal"
-                                x:Name="trainer_StackPanel">
-                        
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal"
-                                x:Name="admin_StackPanel">
-                        <TextBlock x:Name="mods_TextBlock"
-                                   Text="Модераторы" />
-                    </StackPanel>
-                    
-                </StackPanel>
-
-
-            </ScrollViewer>
-            
         </Grid>
-        
-        <Frame x:Name="main_Frame"
-               NavigationUIVisibility="Hidden"
-               Loaded="main_Frame_Loaded"
-               Grid.Row="1"/>
-        
+
     </Grid>
+    
+
 </Window>

@@ -80,8 +80,6 @@ public partial class VtbContext : DbContext
 
             entity.HasIndex(e => e.Number, "passport_number_key").IsUnique();
 
-            entity.HasIndex(e => e.Series, "passport_series_key").IsUnique();
-
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.BirthDate).HasColumnName("birth_date");
             entity.Property(e => e.BirthPlace)
@@ -123,6 +121,9 @@ public partial class VtbContext : DbContext
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Period).HasColumnName("period");
             entity.Property(e => e.Price).HasColumnName("price");
+            entity.Property(e => e.Pros)
+                .HasColumnType("character varying(250)[]")
+                .HasColumnName("pros");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -159,7 +160,7 @@ public partial class VtbContext : DbContext
                 .HasColumnName("name");
             entity.Property(e => e.PassportId).HasColumnName("passport_id");
             entity.Property(e => e.PasswordHash)
-                .HasMaxLength(25)
+                .HasMaxLength(250)
                 .HasColumnName("password_hash");
             entity.Property(e => e.Pfp).HasColumnName("pfp");
             entity.Property(e => e.Phone)

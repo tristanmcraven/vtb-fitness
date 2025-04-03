@@ -15,8 +15,6 @@ public partial class User
 
     public string Login { get; set; } = null!;
 
-    public string PasswordHash { get; set; } = null!;
-
     public int? RoleId { get; set; }
 
     public DateTime? CreatedAt { get; set; }
@@ -32,6 +30,8 @@ public partial class User
     public int? PassportId { get; set; }
 
     public DateOnly? WorkingInVtbSince { get; set; }
+
+    public string? PasswordHash { get; set; }
 
     public virtual BankingDetail? BankingDetails { get; set; }
 

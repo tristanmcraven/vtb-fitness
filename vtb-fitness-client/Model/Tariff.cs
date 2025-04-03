@@ -15,5 +15,7 @@ public partial class Tariff
 
     public TimeSpan? Period { get; set; }
 
+    public List<string>? Pros { get; set; }
+
     public virtual ICollection<UserTariff> UserTariffs { get; set; } = new List<UserTariff>();
 }

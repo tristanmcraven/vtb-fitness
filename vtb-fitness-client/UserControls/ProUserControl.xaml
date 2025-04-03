@@ -7,14 +7,15 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="800"
-             Background="Black">
+             Background="Transparent">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Width="50">
+        <Grid Width="50"
+              Height="50">
             <Grid.Background>
                 <RadialGradientBrush GradientOrigin="0.5,0.5"
                                      RadiusX="1"
@@ -28,7 +29,7 @@
             </Grid.Background>
         </Grid>
 
-        <TextBlock x:Name="content_TextBlock"
+        <TextBlock x:Name="pro_TextBlock"
                    Grid.Column="2" />
 
     </Grid>
