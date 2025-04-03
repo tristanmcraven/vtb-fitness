@@ -34,7 +34,7 @@
 
     <Grid x:Name="body">
 
-        <Grid>
+        <Grid Margin="20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="1*" />
@@ -121,9 +121,17 @@
 
                 <Border x:Name="profile_Border"
                         Grid.Column="2"
-                        Background="Transparent">
+                        Background="{StaticResource magic_dark_blue}"
+                        BorderBrush="Gray"
+                        BorderThickness="2"
+                        Height="100"
+                        Width="100"
+                        Margin="0 0 15 0"
+                        CornerRadius="50"
+                        MouseEnter="profile_Border_MouseEnter"
+                        MouseLeave="profile_Border_MouseLeave">
                     <Grid>
-                        <Image Source="/Assets/Images/pfp1.png" />
+                        <Image Source="/Assets/Images/pfp1.png"/>
                     </Grid>
                 </Border>
 
@@ -138,108 +146,115 @@
                   Grid.Row="1"
                   HorizontalAlignment="Right"
                   VerticalAlignment="Top"
-                  Background="{StaticResource magic_dark_blue}">
-                <StackPanel Orientation="Vertical"
-                            Margin="15">
-                    <StackPanel.Resources>
-                        <Style TargetType="Button"
-                               BasedOn="{StaticResource global_Button}">
-                            <Setter Property="Padding"
-                                    Value="0" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Left" />
-                            <Setter Property="VerticalContentAlignment"
-                                    Value="Center" />
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="Height"
-                                    Value="70" />
-                            <Setter Property="BorderThickness"
-                                    Value="0" />
-                            <Setter Property="md:ButtonAssist.CornerRadius"
-                                    Value="10" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver"
-                                         Value="True">
-                                    <Setter Property="Background"
-                                            Value="#70FFFFFF" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
+                  Margin="0 -15 0 0"
+                  MouseLeave="popup_MouseLeave">
+                <Border Background="{StaticResource magic_dark_blue}"
+                        BorderBrush="Gray"
+                        BorderThickness="2"
+                        CornerRadius="20">
+                    <StackPanel Orientation="Vertical"
+                                Margin="15">
+                        <StackPanel.Resources>
+                            <Style TargetType="Button"
+                                   BasedOn="{StaticResource global_Button}">
+                                <Setter Property="Padding"
+                                        Value="0" />
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Left" />
+                                <Setter Property="VerticalContentAlignment"
+                                        Value="Center" />
+                                <Setter Property="Background"
+                                        Value="Transparent" />
+                                <Setter Property="Height"
+                                        Value="70" />
+                                <Setter Property="BorderThickness"
+                                        Value="0" />
+                                <Setter Property="md:ButtonAssist.CornerRadius"
+                                        Value="10" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="#70FFFFFF" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
 
-                        <Style TargetType="Image"
-                               BasedOn="{StaticResource global_Image}">
-                            <Setter Property="Height"
-                                    Value="50" />
-                            <Setter Property="Margin"
-                                    Value="10 10 20 10" />
-                        </Style>
-                    </StackPanel.Resources>
-                    <TextBlock Text="Вы вошли как:"
-                               Style="{StaticResource global_TextBlock}"
-                               Foreground="Gray"
-                               Padding="0"
-                               FontSize="16"/>
-                    <TextBlock x:Name="role_TextBlock"
-                               Text="Sample Role"
-                               Foreground="#e0e0e0"
-                               Padding="0"
-                               FontSize="18"
-                               Margin="0 5 0 0"/>
-                    <TextBlock x:Name="fullname_TextBlock"
-                               Text="Sample Name Sample"
-                               Foreground="White"
-                               FontSize="20"
-                               Padding="0"
-                               Margin="0 0 0 10"/>
-                    <Button x:Name="profile_Button"
-                            Click="profile_Button_Click">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="/Assets/Images/profile.png" />
-                            <TextBlock Text="Профиль"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       FontFamily="{StaticResource demi_bold}"
-                                       FontSize="18"/>
-                        </Grid>
-                    </Button>
-                    <uc:SeparatorUserControl />
-                    <Button x:Name="changeUser_Button"
-                            Click="changeUser_Button_Click">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="/Assets/Images/logout.png" />
-                            <TextBlock Text="Сменить пользователя"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       FontFamily="{StaticResource demi_bold}"
-                                       FontSize="18"
-                                       Margin="0 0 20 0"/>
-                        </Grid>
-                    </Button>
-                    <Button x:Name="quit_Button"
-                            Click="quit_Button_Click">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Image Source="/Assets/Images/quit.png" />
-                            <TextBlock Text="Выйти"
-                                       Grid.Column="1"
-                                       VerticalAlignment="Center"
-                                       FontFamily="{StaticResource demi_bold}"
-                                       FontSize="18"/>
-                        </Grid>
-                    </Button>
-                </StackPanel>
+                            <Style TargetType="Image"
+                                   BasedOn="{StaticResource global_Image}">
+                                <Setter Property="Height"
+                                        Value="50" />
+                                <Setter Property="Margin"
+                                        Value="10 10 20 10" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="Вы вошли как:"
+                                   Style="{StaticResource global_TextBlock}"
+                                   Foreground="Gray"
+                                   Padding="0"
+                                   FontSize="16" />
+                        <TextBlock x:Name="role_TextBlock"
+                                   Text="Sample Role"
+                                   Foreground="#e0e0e0"
+                                   Padding="0"
+                                   FontSize="18"
+                                   Margin="0 5 0 0" />
+                        <TextBlock x:Name="fullname_TextBlock"
+                                   Text="Sample Name Sample"
+                                   Foreground="White"
+                                   FontSize="20"
+                                   Padding="0"
+                                   Margin="0 0 0 10" />
+                        <Button x:Name="profile_Button"
+                                Click="profile_Button_Click">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Assets/Images/profile.png" />
+                                <TextBlock Text="Профиль"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource demi_bold}"
+                                           FontSize="18" />
+                            </Grid>
+                        </Button>
+                        <uc:SeparatorUserControl />
+                        <Button x:Name="changeUser_Button"
+                                Click="changeUser_Button_Click">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Assets/Images/logout.png" />
+                                <TextBlock Text="Сменить пользователя"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource demi_bold}"
+                                           FontSize="18"
+                                           Margin="0 0 20 0" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="quit_Button"
+                                Click="quit_Button_Click">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <Image Source="/Assets/Images/quit.png" />
+                                <TextBlock Text="Выйти"
+                                           Grid.Column="1"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{StaticResource demi_bold}"
+                                           FontSize="18" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </Border>
+
             </Grid>
 
         </Grid>

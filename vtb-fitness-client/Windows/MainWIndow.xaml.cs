@@ -94,5 +94,37 @@ namespace vtb_fitness_client.Windows
             if (dw.DialogResult)
                 Application.Current.Shutdown();
         }
+
+        private void profile_Border_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ShowPopup();
+        }
+
+        private void profile_Border_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (!popup.IsMouseOver)
+            {
+                HidePopup();
+            }
+        }
+
+        private void popup_MouseLeave(object sender, MouseEventArgs e)
+        {
+            HidePopup();
+        }
+
+        private void HidePopup()
+        {
+            popup.Visibility = Visibility.Collapsed;
+            profile_Border.CornerRadius = new CornerRadius(50);
+            profile_Border.BorderThickness = new Thickness(2);
+        }
+
+        private void ShowPopup()
+        {
+            popup.Visibility = Visibility.Visible;
+            profile_Border.CornerRadius = new CornerRadius(50, 50, 0, 0);
+            profile_Border.BorderThickness = new Thickness(2, 2, 2, 0);
+        }
     }
 }
