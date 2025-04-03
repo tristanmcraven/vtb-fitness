@@ -55,6 +55,11 @@
                 <Setter Property="RenderOptions.BitmapScalingMode"
                         Value="HighQuality" />
             </Style>
+            <Style x:Key="global_Image"
+                   TargetType="Image">
+                <Setter Property="RenderOptions.BitmapScalingMode"
+                        Value="HighQuality" />
+            </Style>
 
             <Style x:Key="global_TextBox"
                    TargetType="TextBox"

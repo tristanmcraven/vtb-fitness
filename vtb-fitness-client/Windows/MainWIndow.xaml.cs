@@ -26,6 +26,21 @@ namespace vtb_fitness_client.Windows
         public MainWindow()
         {
             InitializeComponent();
+            InitView();
+        }
+
+        private void InitView()
+        {
+            var user = App.CurrentUser;
+            fullname_TextBlock.Text = $"{user.Lastname} {user.Name} {user.Middlename}";
+            role_TextBlock.Text = App.CurrentUser.RoleId switch
+            {
+                1 => "Администратор",
+                2 => "Модератор",
+                3 => "Сотрудник ВТБ",
+                4 => "Тренер",
+                _ => "Неизвестный"
+            };
         }
 
         private void main_Frame_Loaded(object sender, RoutedEventArgs e)
@@ -40,9 +55,44 @@ namespace vtb_fitness_client.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //no idea why
             var paletteHelper = new PaletteHelper();
             paletteHelper.SetTheme(Theme.Create(BaseTheme.Light, SwatchHelper.Lookup[MaterialDesignColor.Blue], SwatchHelper.Lookup[MaterialDesignColor.YellowSecondary]));
             paletteHelper.SetTheme(Theme.Create(BaseTheme.Dark, SwatchHelper.Lookup[MaterialDesignColor.Blue], SwatchHelper.Lookup[MaterialDesignColor.YellowSecondary]));
+        }
+
+        private void profile_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new ProfilePage());
+        }
+
+        private void changeUser_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dw = new DialogWindow(WindowManager.Get<MainWindow>(),
+                          "Выход",
+                          "Вы уверены, что хотите сменить пользователя?",
+                          DialogWindowButtons.YesNo,
+                          DialogWindowType.Warning)
+            { Owner = WindowManager.Get<MainWindow>() };
+            dw.ShowDialog();
+            if (dw.DialogResult)
+            {
+                new StartWindow().Show();
+                Close();
+            }
+        }
+
+        private void quit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dw = new DialogWindow(WindowManager.Get<MainWindow>(),
+                                      "Выход",
+                                      "Вы уверены, что хотите закрыть приложение?",
+                                      DialogWindowButtons.YesNo,
+                                      DialogWindowType.Warning)
+            { Owner = WindowManager.Get<MainWindow>() };
+            dw.ShowDialog();
+            if (dw.DialogResult)
+                Application.Current.Shutdown();
         }
     }
 }

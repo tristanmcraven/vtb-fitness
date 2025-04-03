@@ -18,6 +18,12 @@
     <None Remove="Assets\Fonts\VTB Group Cond Light.ttf" />
     <None Remove="Assets\Fonts\VTB Group Demi Bold.ttf" />
     <None Remove="Assets\Fonts\VTB Group Light.ttf" />
+    <None Remove="Assets\Images\default-pfp.png" />
+    <None Remove="Assets\Images\logout.png" />
+    <None Remove="Assets\Images\pfp.png" />
+    <None Remove="Assets\Images\pfp1.png" />
+    <None Remove="Assets\Images\profile.png" />
+    <None Remove="Assets\Images\quit.png" />
     <None Remove="Assets\Images\vtb-logo-tp.png" />
     <None Remove="Assets\Videos\vidnew.mp4" />
   </ItemGroup>
@@ -51,6 +57,24 @@
     <Resource Include="Assets\Fonts\VTB Group Cond Light.ttf" />
     <Resource Include="Assets\Fonts\VTB Group Demi Bold.ttf" />
     <Resource Include="Assets\Fonts\VTB Group Light.ttf" />
+    <Resource Include="Assets\Images\default-pfp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\pfp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\pfp1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\profile.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\quit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\vtb-logo-tp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
