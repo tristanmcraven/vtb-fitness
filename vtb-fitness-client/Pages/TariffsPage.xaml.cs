@@ -23,6 +23,12 @@ namespace vtb_fitness_client.Pages
         public TariffsPage()
         {
             InitializeComponent();
+            InitView();
+        }
+
+        private void InitView()
+        {
+            
         }
     }
 }
