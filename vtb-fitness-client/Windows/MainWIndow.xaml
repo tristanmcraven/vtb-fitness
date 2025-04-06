@@ -19,7 +19,7 @@
                              Center="0.4,0.5"
                              GradientOrigin="2.5,2">
             <GradientStop Color="{StaticResource magic_blue_color}"
-                          Offset="0" />
+                          Offset="0.2" />
             <GradientStop Color="{StaticResource bg_color}"
                           Offset="1" />
         </RadialGradientBrush>
@@ -59,14 +59,17 @@
                     <TextBlock Text="ВТБ Фитнес"
                                Grid.Column="1"
                                VerticalAlignment="Center"
-                               Style="{StaticResource global_TextBlock}" />
+                               Style="{StaticResource global_TextBlock}"
+                               FontSize="28"
+                               FontFamily="{StaticResource demi_bold}"/>
 
                 </Grid>
 
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Hidden"
                               CanContentScroll="False"
-                              Grid.Column="1">
+                              Grid.Column="1"
+                              Margin="50 0 0 0">
 
                     <StackPanel Orientation="Horizontal">
                         <StackPanel.Resources>
@@ -74,6 +77,12 @@
                                    BasedOn="{StaticResource global_TextBlock}">
                                 <Setter Property="VerticalAlignment"
                                         Value="Center" />
+                                <Setter Property="Margin"
+                                        Value="20 0 0 0" />
+                                <Setter Property="FontFamily"
+                                        Value="{StaticResource light}" />
+                                <Setter Property="FontSize"
+                                        Value="20" />
                                 <Style.Triggers>
                                     <Trigger Property="IsMouseOver"
                                              Value="True">
@@ -98,9 +107,11 @@
                         <StackPanel Orientation="Horizontal"
                                     x:Name="mod_StackPanel">
                             <TextBlock x:Name="users_TextBlock"
-                                       Text="Пользователи" />
+                                       Text="Пользователи"
+                                       MouseLeftButtonUp="users_TextBlock_MouseLeftButtonUp"/>
                             <TextBlock x:Name="trainers_TextBlock"
-                                       Text="Тренеры" />
+                                       Text="Тренеры"
+                                       MouseLeftButtonUp="trainers_TextBlock_MouseLeftButtonUp"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
@@ -111,7 +122,8 @@
                         <StackPanel Orientation="Horizontal"
                                     x:Name="admin_StackPanel">
                             <TextBlock x:Name="mods_TextBlock"
-                                       Text="Модераторы" />
+                                       Text="Модераторы"
+                                       MouseLeftButtonUp="mods_TextBlock_MouseLeftButtonUp"/>
                         </StackPanel>
 
                     </StackPanel>
@@ -140,14 +152,28 @@
             <Frame x:Name="main_Frame"
                    NavigationUIVisibility="Hidden"
                    Loaded="main_Frame_Loaded"
-                   Grid.Row="1" />
+                   Grid.Row="1"
+                   Margin="300 0"/>
+
+            <Border x:Name="patchup"
+                    Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Background="{StaticResource magic_dark_blue}"
+                    Width="96"
+                    Height="10"
+                    Margin="4 -15 17 0"
+                    Panel.ZIndex="2"
+                    IsHitTestVisible="False"
+                    Visibility="Collapsed"/>
 
             <Grid x:Name="popup"
                   Grid.Row="1"
                   HorizontalAlignment="Right"
                   VerticalAlignment="Top"
                   Margin="0 -15 0 0"
-                  MouseLeave="popup_MouseLeave">
+                  MouseLeave="popup_MouseLeave"
+                  Visibility="Collapsed">
                 <Border Background="{StaticResource magic_dark_blue}"
                         BorderBrush="Gray"
                         BorderThickness="2"

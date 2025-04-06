@@ -63,7 +63,7 @@ namespace vtb_fitness_client.Windows
 
         private void profile_Button_Click(object sender, RoutedEventArgs e)
         {
-            PageManager.MainFrame.Navigate(new ProfilePage());
+            PageManager.MainFrame.Navigate(new ProfilePage(App.CurrentUser));
         }
 
         private void changeUser_Button_Click(object sender, RoutedEventArgs e)
@@ -116,6 +116,7 @@ namespace vtb_fitness_client.Windows
         private void HidePopup()
         {
             popup.Visibility = Visibility.Collapsed;
+            patchup.Visibility = Visibility.Collapsed;
             profile_Border.CornerRadius = new CornerRadius(50);
             profile_Border.BorderThickness = new Thickness(2);
         }
@@ -123,8 +124,24 @@ namespace vtb_fitness_client.Windows
         private void ShowPopup()
         {
             popup.Visibility = Visibility.Visible;
+            patchup.Visibility = Visibility.Visible;
             profile_Border.CornerRadius = new CornerRadius(50, 50, 0, 0);
             profile_Border.BorderThickness = new Thickness(2, 2, 2, 0);
+        }
+
+        private void mods_TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new UsersPage(UserSearchType.Mods));
+        }
+
+        private void users_TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new UsersPage(UserSearchType.Users));
+        }
+
+        private void trainers_TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new UsersPage(UserSearchType.Trainers));
         }
     }
 }

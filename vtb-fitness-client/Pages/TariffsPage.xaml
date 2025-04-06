@@ -9,9 +9,17 @@
       Title="TariffsPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Абонементы"
+                   Style="{StaticResource header_TextBlock}" />
+        
         <ScrollViewer HorizontalScrollBarVisibility="hidden"
                       VerticalScrollBarVisibility="Auto"
-                      CanContentScroll="False">
+                      CanContentScroll="False"
+                      Grid.Row="1">
             <StackPanel Orientation="Vertical"
                         x:Name="tariffs_StackPanel">
                 

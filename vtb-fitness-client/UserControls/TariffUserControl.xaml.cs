@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using vtb_fitness_client.Model;
 using vtb_fitness_client.Utility;
 using vtb_fitness_client.Windows;
+using MaterialDesignThemes.Wpf;
 
 namespace vtb_fitness_client.UserControls
 {
@@ -33,6 +34,9 @@ namespace vtb_fitness_client.UserControls
 
         private void InitView()
         {
+            var nameTb = expander.Header as TextBlock;
+            nameTb.Text = _tariff.Name;
+
             var pros = _tariff.Pros;
             foreach (var p in pros)
             {

@@ -20,6 +20,7 @@
     <None Remove="Assets\Fonts\VTB Group Light.ttf" />
     <None Remove="Assets\Images\default-pfp.png" />
     <None Remove="Assets\Images\logout.png" />
+    <None Remove="Assets\Images\no-results.png" />
     <None Remove="Assets\Images\pfp.png" />
     <None Remove="Assets\Images\pfp1.png" />
     <None Remove="Assets\Images\profile.png" />
@@ -61,6 +62,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\logout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\no-results.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\pfp.png">

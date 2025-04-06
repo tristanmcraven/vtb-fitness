@@ -40,9 +40,10 @@ namespace vtb_fitness_client.Pages
             if (App.CurrentUser.RoleId == 1)
             {
                 var button = new Button
-                { 
+                {
                     Content = "Добавить новый абонемент",
-                    Style = Application.Current.FindResource("global_Button") as Style
+                    Style = Application.Current.FindResource("global_Button") as Style,
+                    Margin = new Thickness(0, 0, 0, 20)
                 };
                 button.Click += (s, e) =>
                 {

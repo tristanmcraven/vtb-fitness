@@ -74,5 +74,40 @@ namespace vtb_fitness_api.Controllers
             await _context.SaveChangesAsync();
             return Ok(user);
         }
+
+        [HttpGet("{id}/current_tariff")]
+        public async Task<IActionResult> GetCurrentTariff(int id)
+        {
+            var tariff = await _context.UserTariffs.Where(x => x.UserId == id && x.ExpiresAt > DateTime.Now).Include(x => x.Tariff).FirstOrDefaultAsync();
+            return tariff != null ? Ok(tariff) : NotFound();
+        }
+
+        //awful
+        [HttpGet("search/users")]
+        public async Task<IActionResult> SearchUsers(string? q)
+        {
+            if (String.IsNullOrWhiteSpace(q))
+                return Ok(await _context.Users.Where(x => x.RoleId == 3).ToListAsync());
+            q = q.ToLower();
+            return Ok(await _context.Users.Where(x => (x.Lastname + x.Name + x.Middlename).ToLower().Contains(q) && x.RoleId == 3).Include(x => x.Role).ToListAsync());
+        }
+
+        [HttpGet("search/mods")]
+        public async Task<IActionResult> SearchMods(string? q)
+        {
+            if (String.IsNullOrWhiteSpace(q))
+                return Ok(await _context.Users.Where(x => x.RoleId == 2).ToListAsync());
+            q = q.ToLower();
+            return Ok(await _context.Users.Where(x => (x.Lastname + x.Name + x.Middlename).ToLower().Contains(q) && x.RoleId == 2).Include(x => x.Role).ToListAsync());
+        }
+
+        [HttpGet("search/trainers")]
+        public async Task<IActionResult> SearchTrainers(string? q)
+        {
+            if (String.IsNullOrWhiteSpace(q))
+                return Ok(await _context.Users.Where(x => x.RoleId == 4).ToListAsync());
+            q = q.ToLower();
+            return Ok(await _context.Users.Where(x => (x.Lastname + x.Name + x.Middlename).ToLower().Contains(q) && x.RoleId == 4).Include(x => x.Role).ToListAsync());
+        }
     }
 }

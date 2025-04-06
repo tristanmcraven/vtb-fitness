@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http;
 using System.Text;
+using System.Windows.Navigation;
 using vtb_fitness_client.Dto;
 using vtb_fitness_client.Model;
+using vtb_fitness_client.Utility;
 
 namespace vtb_fitness_client.Network
 {
@@ -51,6 +53,23 @@ namespace vtb_fitness_client.Network
             {
                 return await SendRequest<User>("user/sign_up", HttpMethod.Post, dto);
             }
+
+            public static async Task<List<User>> Get() => await SendRequest<List<User>>("user", HttpMethod.Get);
+
+            public static async Task<UserTariff?> GetCurrentTariff(int id)
+            {
+                return await SendRequest<UserTariff>($"user/{id}/current_tariff", HttpMethod.Get);
+            }
+
+            public static async Task<List<User>> Search(string q, UserSearchType type)
+            {
+                return type switch
+                {
+                    UserSearchType.Users => await SendRequest<List<User>>("user/search/users", HttpMethod.Get),
+                    UserSearchType.Mods => await SendRequest<List<User>>("user/search/mods", HttpMethod.Get),
+                    UserSearchType.Trainers => await SendRequest<List<User>>("user/search/trainers", HttpMethod.Get)
+                };
+            }
         }
 
         public static class _Tariff
@@ -58,6 +77,12 @@ namespace vtb_fitness_client.Network
             public static async Task<List<Tariff>> Get() => await SendRequest<List<Tariff>>("tariff", HttpMethod.Get);
 
             public static async Task<Tariff?> Create(TariffCreateDto dto) => await SendRequest<Tariff>("tariff", HttpMethod.Post, dto);
+        }
+
+        public static class _Role
+        {
+            public static async Task<List<Role>> Get() => await SendRequest<List<Role>>("role", HttpMethod.Get);
+            public static async Task<Role> GetById(int? id) => await SendRequest<Role>($"role/{id}", HttpMethod.Get);
         }
     }
 }

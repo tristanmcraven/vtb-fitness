@@ -1,0 +1,92 @@
+﻿<Page x:Class="vtb_fitness_client.Pages.UsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:vtb_fitness_client.Pages"
+      xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UsersPage">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource global_TextBlock}">
+            
+        </Style>
+
+        <Style TargetType="TextBox"
+               BasedOn="{StaticResource global_TextBox}">
+            
+        </Style>
+
+        <Style TargetType="Button"
+               BasedOn="{StaticResource global_Button}">
+            
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical"
+                    Margin="0 0 0 15">
+            <TextBlock x:Name="searchType_TextBlock"
+                       Text="Sample Text"
+                       HorizontalAlignment="Center"
+                       FontFamily="{StaticResource demi_bold}"
+                       FontSize="22"
+                       Margin="0 0 0 15">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="Black"
+                                      Direction="270"
+                                      Opacity="1"
+                                      BlurRadius="10"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Border>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="search_TextBox"
+                             md:HintAssist.Hint="Поиск"
+                             md:TextFieldAssist.HasClearButton="True"/>
+
+                    <Button x:Name="search_Button"
+                            Content="Поиск"
+                            Click="search_Button_Click"
+                            Grid.Column="1"
+                            Width="200"
+                            Margin="20 0 0 0"/>
+
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical"
+                        x:Name="users_StackPanel">
+                
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel x:Name="noResults_StackPanel"
+                    Grid.Row="1"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Visibility="Collapsed">
+            <Image Source="/Assets/Images/no-results.png"
+                   Height="150"/>
+            <TextBlock Text="Поиск не дал результатов."
+                       FontSize="24"/>
+        </StackPanel>
+        
+    </Grid>
+</Page>

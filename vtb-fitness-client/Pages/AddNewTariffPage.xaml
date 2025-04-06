@@ -17,7 +17,8 @@
 
         <Style TargetType="TextBox"
                BasedOn="{StaticResource global_TextBox}">
-            
+            <Setter Property="Margin"
+                    Value="0 0 0 10" />
         </Style>
 
         <Style TargetType="Button"
@@ -32,13 +33,14 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
-        
+
         <ScrollViewer HorizontalScrollBarVisibility="Hidden"
                       VerticalScrollBarVisibility="Auto"
                       CanContentScroll="False">
             
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="Добавление нового абонемента" />
+                <TextBlock Text="Добавление нового абонемента"
+                           Style="{StaticResource header_TextBlock}"/>
                 <TextBox x:Name="name_TextBox"
                          md:HintAssist.Hint="Название абонемента" />
                 <TextBox x:Name="description_TextBox"
@@ -47,8 +49,12 @@
                          md:HintAssist.Hint="Цена" />
                 <TextBox x:Name="period_TextBox"
                          md:HintAssist.Hint="Срок абонемента (в месяцах)" />
-                <TextBlock Text="Преимущества абонемента" />
-                <TextBlock Text="Укажите преимущества абонемента, которые будут отображаться как список на главной странице абонемента." />
+                <TextBlock Text="Преимущества абонемента"
+                           FontSize="24"
+                           Margin="0 5"
+                           FontFamily="{StaticResource demi_bold}"/>
+                <TextBlock Text="Укажите преимущества абонемента, которые будут отображаться как список на главной странице абонемента."
+                           Margin="0 0 0 10"/>
 
                 <StackPanel Orientation="Vertical"
                             x:Name="pros_StackPanel">
@@ -63,7 +69,8 @@
                     Grid.Row="1">
             <Button x:Name="add_Button"
                     Content="Добавить"
-                    Click="add_Button_Click" />
+                    Click="add_Button_Click"
+                    Margin="0 0 0 15"/>
 
             <Button x:Name="goBack_Button"
                     Content="Назад"

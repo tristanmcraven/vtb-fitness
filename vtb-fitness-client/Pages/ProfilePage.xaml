@@ -9,6 +9,39 @@
       Title="ProfilePage">
 
     <Grid>
-        
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                      VerticalScrollBarVisibility="Auto"
+                      CanContentScroll="False">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Профиль" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical">
+                        <Image x:Name="pfp_Image" />
+                        <Button x:Name="changePfp_Button"
+                                Content="Изменить изображение"
+                                Click="changePfp_Button_Click" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                Grid.Column="1">
+                        <TextBlock x:Name="fullName_TextBlock"
+                                   Text="Lastname Name Middlename"/>
+                        <TextBlock x:Name="role_TextBlock"
+                                   Text="Role" />
+                        <TextBlock x:Name="registrationDate_TextBlock"
+                                   Text="01-01-1970" />
+                        <TextBlock x:Name="phone_TextBlock"
+                                   Text="+7something" />
+                        <TextBlock x:Name="email_TextBlock"
+                                   Text="zxc@gmail.com" />
+
+
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
