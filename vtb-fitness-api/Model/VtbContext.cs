@@ -17,11 +17,15 @@ public partial class VtbContext : DbContext
 
     public virtual DbSet<BankingDetail> BankingDetails { get; set; }
 
+    public virtual DbSet<Exercise> Exercises { get; set; }
+
     public virtual DbSet<Passport> Passports { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<Tariff> Tariffs { get; set; }
+
+    public virtual DbSet<Tracker> Trackers { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -70,6 +74,18 @@ public partial class VtbContext : DbContext
             entity.Property(e => e.Kpp)
                 .HasMaxLength(9)
                 .HasColumnName("kpp");
+        });
+
+        modelBuilder.Entity<Exercise>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("exercise_pkey");
+
+            entity.ToTable("exercise");
+
+            entity.HasIndex(e => e.Name, "uq_exercise_name").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnName("name");
         });
 
         modelBuilder.Entity<Passport>(entity =>
@@ -124,6 +140,33 @@ public partial class VtbContext : DbContext
             entity.Property(e => e.Pros)
                 .HasColumnType("character varying(250)[]")
                 .HasColumnName("pros");
+        });
+
+        modelBuilder.Entity<Tracker>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("tracker_pkey");
+
+            entity.ToTable("tracker");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ExerciseId).HasColumnName("exercise_id");
+            entity.Property(e => e.Meters).HasColumnName("meters");
+            entity.Property(e => e.Reps).HasColumnName("reps");
+            entity.Property(e => e.Sits).HasColumnName("sits");
+            entity.Property(e => e.Timestamp)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("timestamp");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Exercise).WithMany(p => p.Trackers)
+                .HasForeignKey(d => d.ExerciseId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_tracker_exercise_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Trackers)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_tracker_user_id");
         });
 
         modelBuilder.Entity<User>(entity =>
