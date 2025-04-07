@@ -98,7 +98,8 @@
                         <StackPanel Orientation="Horizontal"
                                     x:Name="user_StackPanel">
                             <TextBlock x:Name="tracker_TextBlock"
-                                       Text="Трекер" />
+                                       Text="Трекер"
+                                       MouseLeftButtonUp="tracker_TextBlock_MouseLeftButtonUp"/>
                             <TextBlock x:Name="tariffs_TextBlock"
                                        Text="Абонементы"
                                        MouseLeftButtonUp="tariffs_TextBlock_MouseLeftButtonUp" />

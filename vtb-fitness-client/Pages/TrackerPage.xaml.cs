@@ -13,24 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace vtb_fitness_client.UserControls
+namespace vtb_fitness_client.Pages
 {
     /// <summary>
-    /// Interaction logic for TariffPriceUserControl.xaml
+    /// Interaction logic for TrackerPage.xaml
     /// </summary>
-    public partial class TariffPriceUserControl : UserControl
+    public partial class TrackerPage : Page
     {
-        private double? _price;
-        public TariffPriceUserControl(double? price)
+        public TrackerPage()
         {
             InitializeComponent();
-            _price = price;
-            InitView();
         }
 
-        private void InitView()
+        private void goBack_Button_Click(object sender, RoutedEventArgs e)
         {
-            price_TextBlock.Text = _price.ToString() + "₽";
+
         }
     }
 }

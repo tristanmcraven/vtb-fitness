@@ -143,5 +143,10 @@ namespace vtb_fitness_client.Windows
         {
             PageManager.MainFrame.Navigate(new UsersPage(UserSearchType.Trainers));
         }
+
+        private void tracker_TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new TrackerPage());
+        }
     }
 }

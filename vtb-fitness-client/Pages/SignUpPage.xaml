@@ -15,6 +15,8 @@
                BasedOn="{StaticResource global_TextBox}">
             <Setter Property="Margin"
                     Value="0 0 0 10" />
+            <Setter Property="md:TextFieldAssist.CharacterCounterVisibility"
+                    Value="Collapsed" />
         </Style>
         <Style TargetType="ComboBox"
                BasedOn="{StaticResource global_ComboBox}">
@@ -62,7 +64,7 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Visible"
                       CanContentScroll="False">
             
             <StackPanel Orientation="Vertical">
@@ -74,17 +76,24 @@
                            Margin="0 10 0 20"/>
 
                 <TextBox x:Name="lastName_TextBox"
-                         md:HintAssist.Hint="Фамилия" />
+                         md:HintAssist.Hint="Фамилия"
+                         MaxLength="50"/>
                 <TextBox x:Name="name_TextBox"
-                         md:HintAssist.Hint="Имя" />
+                         md:HintAssist.Hint="Имя"
+                         MaxLength="50"/>
                 <TextBox x:Name="middleName_TextBox"
-                         md:HintAssist.Hint="Отчество" />
+                         md:HintAssist.Hint="Отчество"
+                         MaxLength="50"/>
                 <TextBox x:Name="phone_TextBox"
-                         md:HintAssist.Hint="Номер телефона" />
+                         md:HintAssist.Hint="Номер телефона"
+                         MaxLength="10"
+                         md:TextFieldAssist.PrefixText="+7"/>
                 <TextBox x:Name="email_TextBox"
-                         md:HintAssist.Hint="Email" />
+                         md:HintAssist.Hint="Email"
+                         MaxLength="50"/>
                 <TextBlock Text="Фотография"
-                           Style="{StaticResource global_TextBlock}"/>
+                           Style="{StaticResource global_TextBlock}"
+                           FontSize="17"/>
                 <Button x:Name="photo_Button"
                         Content="Выбрать изображение..."
                         Click="photo_Button_Click" />
@@ -106,17 +115,22 @@
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="passportSeries_TextBox"
-                                     md:HintAssist.Hint="Серия" />
+                                     md:HintAssist.Hint="Серия"
+                                     MaxLength="4"/>
                             <TextBox x:Name="passportNumber_TextBox"
                                      md:HintAssist.Hint="Номер"
-                                     Grid.Column="2"/>
+                                     Grid.Column="2"
+                                     MaxLength="6"/>
                         </Grid>
                         <TextBox x:Name="issuedBy_TextBox"
                                  md:HintAssist.Hint="Пасспорт выдан" />
                         <DatePicker x:Name="issuedDate_DatePicker"
                                     md:HintAssist.Hint="Дата выдачи" />
                         <TextBox x:Name="unitCode_TextBox"
-                                 md:HintAssist.Hint="Код подразделения" />
+                                 md:HintAssist.Hint="Код подразделения"
+                                 MaxLength="7"
+                                 TextChanged="unitCode_TextBox_TextChanged"/>
+                        
                         <DatePicker x:Name="birthDay_DatePicker"
                                     md:HintAssist.Hint="Дата рождения" />
                         <TextBox x:Name="birthPlace_TextBox"

@@ -7,7 +7,8 @@
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="450"
-             d:DesignWidth="800">
+             d:DesignWidth="800"
+             Margin="0 0 0 30">
 
     <UserControl.Resources>
         <Style TargetType="TextBlock"
@@ -17,11 +18,34 @@
     </UserControl.Resources>
     
     <Expander IsExpanded="True"
-              x:Name="expander">
+              x:Name="expander"
+              >
         <Expander.Header>
             <TextBlock x:Name="tariffName_TextBlock"
-                       Text="Sample Tariff" />
+                       Text="Sample Tariff"
+                       Style="{StaticResource header_TextBlock}"
+                       HorizontalAlignment="Left"
+                       Margin="0"
+                       FontSize="28"/>
         </Expander.Header>
+        <md:ExpanderAssist.HeaderBackground>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+                <GradientStop Color="{StaticResource magic_dark_blue_color}"
+                              Offset="0" />
+                <GradientStop Color="{StaticResource bg_color}"
+                              Offset="1" />
+            </LinearGradientBrush>
+        </md:ExpanderAssist.HeaderBackground>
+        <Expander.Background>
+            <LinearGradientBrush StartPoint="0,0"
+                                 EndPoint="1,1">
+                <GradientStop Color="{StaticResource bg_color}"
+                              Offset="0" />
+                <GradientStop Color="{StaticResource dark_blue_color}"
+                              Offset="0" />
+            </LinearGradientBrush>
+        </Expander.Background>
         <Grid Margin="20">
 
             <Grid.ColumnDefinitions>

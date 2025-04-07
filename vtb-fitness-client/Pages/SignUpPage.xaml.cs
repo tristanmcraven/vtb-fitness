@@ -199,5 +199,25 @@ namespace vtb_fitness_client.Pages
             }
             e.Handled = true;
         }
+
+        private void unitCode_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //ai generated ahh, check func later
+            var tb = sender as TextBox;
+
+            if (tb == null) return;
+
+            string digits = new string(tb.Text.Where(char.IsDigit).ToArray());
+
+            if (digits.Length > 6)
+                digits = digits.Substring(0, 6);
+
+            if (digits.Length > 3)
+                tb.Text = digits.Insert(3, "-");
+            else
+                tb.Text = digits;
+
+            tb.CaretIndex = tb.Text.Length;
+        }
     }
 }

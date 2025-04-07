@@ -35,7 +35,9 @@ namespace vtb_fitness_client.UserControls
         private void InitView()
         {
             var nameTb = expander.Header as TextBlock;
-            nameTb.Text = _tariff.Name;
+            nameTb.Text = $"{_tariff.Name} ({_tariff.Period.Value.Hours} мес.)";
+
+            ExpanderAssist.SetExpanderButtonContent(expander, new TariffPriceUserControl(_tariff.Price));
 
             var pros = _tariff.Pros;
             foreach (var p in pros)

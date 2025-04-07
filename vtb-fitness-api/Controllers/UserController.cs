@@ -63,6 +63,7 @@ namespace vtb_fitness_api.Controllers
                 Email = dto.Email,
                 Pfp = dto.Pfp,
                 RoleId = dto.RoleId,
+                CreatedAt = DateTime.Now,
                 WorkingInVtbSince = dto.WorkingInVtbSince,
                 Login = dto.Login,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),

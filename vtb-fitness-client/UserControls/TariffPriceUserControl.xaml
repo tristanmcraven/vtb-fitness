@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:vtb_fitness_client.UserControls"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d"
              d:DesignHeight="50"
              d:DesignWidth="100">
@@ -12,6 +13,8 @@
                BasedOn="{StaticResource global_TextBlock}">
             <Setter Property="VerticalAlignment"
                     Value="Center" />
+            <Setter Property="FontSize"
+                    Value="24" />
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -19,10 +22,13 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
+        
         <TextBlock x:Name="price_TextBlock"
-                   Text="66666"/>
+                   Text="66666" />
+        
         <TextBlock x:Name="discountedPrice_TextBlock"
                    Text="6666"
-                   Grid.Column="1"/>
+                   Grid.Column="1"
+                   Margin="15 0 0 0"/>
     </Grid>
 </UserControl>

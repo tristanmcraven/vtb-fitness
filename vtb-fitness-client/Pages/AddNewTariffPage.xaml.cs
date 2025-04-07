@@ -108,6 +108,7 @@ namespace vtb_fitness_client.Pages
                                  DialogWindowButtons.Ok,
                                  DialogWindowType.Info)
                 { Owner = WindowManager.Get<MainWindow>() }.ShowDialog();
+                PageManager.MainFrame.Navigate(new TariffsPage());
                 return;
             }
             else
