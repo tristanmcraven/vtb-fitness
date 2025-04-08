@@ -27,8 +27,7 @@ namespace vtb_fitness_client.Utility
             return outputImage;
         }
 
-        //public static BitmapImage GetImageFromPath(string path) =>
-        //    File.Exists(path) ? new BitmapImage(new Uri($"pack://application:,,,{path}")) : GetDefaultImage();
+        public static BitmapImage GetImageFromPackPath(string path) => new BitmapImage(new Uri($"pack://application:,,,/Assets/Images/exer/{path}.png"));
 
         public static BitmapImage GetImageFromPath(string path) =>
             File.Exists(path) ? new BitmapImage(new Uri(path)) : GetDefaultImage();

@@ -98,6 +98,7 @@ namespace vtb_fitness_client.Windows
         private void profile_Border_MouseEnter(object sender, MouseEventArgs e)
         {
             ShowPopup();
+            Cursor = Cursors.Hand;
         }
 
         private void profile_Border_MouseLeave(object sender, MouseEventArgs e)
@@ -106,6 +107,7 @@ namespace vtb_fitness_client.Windows
             {
                 HidePopup();
             }
+            Cursor = null;
         }
 
         private void popup_MouseLeave(object sender, MouseEventArgs e)

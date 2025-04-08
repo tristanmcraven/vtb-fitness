@@ -11,6 +11,8 @@ public partial class Exercise
 
     public int? TypeId { get; set; }
 
+    public string? ImgName { get; set; }
+
     public virtual ICollection<Tracker> Trackers { get; set; } = new List<Tracker>();
 
     public virtual ExerciseType? Type { get; set; }

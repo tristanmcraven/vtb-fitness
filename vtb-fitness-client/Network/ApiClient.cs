@@ -70,6 +70,8 @@ namespace vtb_fitness_client.Network
                     UserSearchType.Trainers => await SendRequest<List<User>>("user/search/trainers", HttpMethod.Get)
                 };
             }
+
+            public static async Task<List<Tracker>> GetTracker(int id) => await SendRequest<List<Tracker>>($"user/{id}/tracker", HttpMethod.Get);
         }
 
         public static class _Tariff

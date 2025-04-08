@@ -87,6 +87,7 @@ public partial class VtbContext : DbContext
             entity.HasIndex(e => e.Name, "uq_exercise_name").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ImgName).HasColumnName("img_name");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.TypeId).HasColumnName("type_id");
 

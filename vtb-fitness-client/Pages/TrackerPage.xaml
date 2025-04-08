@@ -41,5 +41,10 @@
                 Grid.Row="1"
                 Visibility="Collapsed"/>
 
+        <Button x:Name="addTracker_Button"
+                Content="Добавить"
+                Click="addTracker_Button_Click"
+                Grid.Row="1" />
+
     </Grid>
 </Page>
