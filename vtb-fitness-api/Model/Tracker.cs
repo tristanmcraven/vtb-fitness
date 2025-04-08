@@ -19,6 +19,8 @@ public partial class Tracker
 
     public DateTime Timestamp { get; set; }
 
+    public int? Weight { get; set; }
+
     public virtual Exercise Exercise { get; set; } = null!;
 
     public virtual User User { get; set; } = null!;

@@ -19,6 +19,8 @@ public partial class VtbContext : DbContext
 
     public virtual DbSet<Exercise> Exercises { get; set; }
 
+    public virtual DbSet<ExerciseType> ExerciseTypes { get; set; }
+
     public virtual DbSet<Passport> Passports { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -83,6 +85,21 @@ public partial class VtbContext : DbContext
             entity.ToTable("exercise");
 
             entity.HasIndex(e => e.Name, "uq_exercise_name").IsUnique();
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnName("name");
+            entity.Property(e => e.TypeId).HasColumnName("type_id");
+
+            entity.HasOne(d => d.Type).WithMany(p => p.Exercises)
+                .HasForeignKey(d => d.TypeId)
+                .HasConstraintName("fk_exercise_type_id");
+        });
+
+        modelBuilder.Entity<ExerciseType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("exercise_type_pkey");
+
+            entity.ToTable("exercise_type");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
@@ -157,6 +174,7 @@ public partial class VtbContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("timestamp");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.Weight).HasColumnName("weight");
 
             entity.HasOne(d => d.Exercise).WithMany(p => p.Trackers)
                 .HasForeignKey(d => d.ExerciseId)
