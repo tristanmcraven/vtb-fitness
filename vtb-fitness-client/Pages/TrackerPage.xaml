@@ -38,7 +38,8 @@
         <Button x:Name="goBack_Button"
                 Content="Назад"
                 Click="goBack_Button_Click"
-                Grid.Row="1" />
+                Grid.Row="1"
+                Visibility="Collapsed"/>
 
     </Grid>
 </Page>

@@ -24,6 +24,7 @@ namespace vtb_fitness_client.Pages
     /// </summary>
     public partial class SignUpPage : Page
     {
+        private byte[]? _selectedImage = null;
         public SignUpPage()
         {
             InitializeComponent();
@@ -105,7 +106,7 @@ namespace vtb_fitness_client.Pages
                 Middlename = middleName_TextBox.Text,
                 Phone = phone_TextBox.Text,
                 Email = email_TextBox.Text,
-                Pfp = null,
+                Pfp = _selectedImage,
                 RoleId = roleId,
                 WorkingInVtbSince = role_ComboBox.SelectedIndex == 1 ? null : DateOnly.FromDateTime((DateTime)workingInVtbSince_DatePicker.SelectedDate!),
                 Login = login_TextBox.Text,
@@ -159,7 +160,13 @@ namespace vtb_fitness_client.Pages
 
         private void photo_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            var result = ImageHelper.GetImageFromFileDialog(WindowManager.Get<StartWindow>());
+            var fileName = result.FileName;
+            if (fileName != null)
+            {
+                photo_Button.Content = fileName;
+                _selectedImage = result.RawImage;
+            }
         }
 
         private void role_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -110,5 +110,11 @@ namespace vtb_fitness_api.Controllers
             q = q.ToLower();
             return Ok(await _context.Users.Where(x => (x.Lastname + x.Name + x.Middlename).ToLower().Contains(q) && x.RoleId == 4).Include(x => x.Role).ToListAsync());
         }
+
+        [HttpGet("{id}/tracker")]
+        public async Task<IActionResult> GetTracker(int id)
+        {
+            return Ok(await _context.Trackers.Where(t => t.UserId == id).ToListAsync());
+        }
     }
 }
