@@ -9,7 +9,8 @@
         Closing="Window_Closing"
         Style="{StaticResource MaterialDesignWindow}"
         WindowStartupLocation="CenterOwner"
-        WindowStyle="None">
+        WindowStyle="None"
+        ResizeMode="NoResize">
     <Window.Background>
         <LinearGradientBrush StartPoint="0,0"
                              EndPoint="1,1">
@@ -25,11 +26,12 @@
             
         </Style>
         <Style TargetType="Button"
-               BasedOn="{StaticResource global_Button}">
-            <Setter Property="Width"
-                    Value="150" />
-            <Setter Property="Margin"
-                    Value="20 0 0 0" />
+               BasedOn="{StaticResource MaterialDesignOutlinedButton}">
+            
+        </Style>
+        <Style TargetType="DatePicker"
+               BasedOn="{StaticResource global_DatePicker}">
+            
         </Style>
     </Window.Resources>
     <Grid Margin="30">
@@ -50,18 +52,63 @@
                 <TextBlock Text="Кардио"
                            Style="{StaticResource header_TextBlock}"
                            HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Vertical"
+                            x:Name="cardio_StackPanel">
+                    
+                </StackPanel>
+                <Button x:Name="addCardio_Button"
+                        Content="Добавить кардио упражнение"
+                        Click="addCardio_Button_Click" />
+
+                <TextBlock Text="Силовые упражнения"
+                           Style="{StaticResource header_TextBlock}"
+                           HorizontalAlignment="Left" />
+                <StackPanel x:Name="strength_StackPanel">
+                    
+                </StackPanel>
+                <Button x:Name="addStrength_Button"
+                        Content="Добавить силовые упражнения"
+                        Click="addStrength_Button_Click" />
+
+                <TextBlock Text="Масса тела (собственный вес)"
+                           Style="{StaticResource header_TextBlock}"
+                           HorizontalAlignment="Left" />
+                <StackPanel x:Name="weight_StackPanel">
+                    
+                </StackPanel>
+                <Button x:Name="addWeight_Button"
+                        Content="Добавить упражнение"
+                        Click="addWeight_Button_Click"
+                        Margin="0 0 0 40"/>
+
+                <Button x:Name="addDate_Button"
+                        Content="Добавить дату вручную"
+                        Click="addDate_Button_Click" />
+                <DatePicker x:Name="datePicker"
+                            Language="ru-RU"
+                            Visibility="Collapsed"/>
             </StackPanel>
+
         </ScrollViewer>
 
         <StackPanel Orientation="Horizontal"
                     Grid.Row="2"
                     HorizontalAlignment="Right">
+            <StackPanel.Resources>
+                <Style TargetType="Button"
+                       BasedOn="{StaticResource global_Button}">
+                    
+                </Style>
+            </StackPanel.Resources>
             <Button x:Name="addTracker_Button"
                     Content="Добавить"
-                    Click="addTracker_Button_Click" />
+                    Click="addTracker_Button_Click"
+                    Width="150"/>
             <Button x:Name="goBack_Button"
                     Content="Назад"
-                    Click="goBack_Button_Click" />
+                    Click="goBack_Button_Click"
+                    Width="150"
+                    Margin="20 0 0 0"/>
         </StackPanel>
         
     </Grid>

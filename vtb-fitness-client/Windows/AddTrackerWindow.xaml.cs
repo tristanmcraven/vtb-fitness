@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using vtb_fitness_client.UserControls;
 
 namespace vtb_fitness_client.Windows
 {
@@ -76,7 +77,28 @@ namespace vtb_fitness_client.Windows
 
         private void goBack_Button_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
 
+        private void addCardio_Button_Click(object sender, RoutedEventArgs e)
+        {
+            cardio_StackPanel.Children.Add(new CardioUserControl());
+        }
+
+        private void addStrength_Button_Click(object sender, RoutedEventArgs e)
+        {
+            strength_StackPanel.Children.Add(new StrengthUserControl());
+        }
+
+        private void addWeight_Button_Click(object sender, RoutedEventArgs e)
+        {
+            weight_StackPanel.Children.Add(new WeightUserControl());
+        }
+
+        private void addDate_Button_Click(object sender, RoutedEventArgs e)
+        {
+            addDate_Button.Visibility = Visibility.Collapsed;
+            datePicker.Visibility = Visibility.Visible;
         }
     }
 }
