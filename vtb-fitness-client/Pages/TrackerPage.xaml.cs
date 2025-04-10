@@ -38,11 +38,13 @@ namespace vtb_fitness_client.Pages
             var trackerByMonth = _tracker
                 .GroupBy(x => new { x.Timestamp.Year, x.Timestamp.Month })
                 .OrderBy(x => x.Key.Year)
-                .ThenBy(x => x.Key.Month);
+                .ThenByDescending(x => x.Key.Month);
 
             foreach (var month in trackerByMonth)
             {
-                var tmuc = new TrackerMonthUserControl($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month.Key.Month)}", month.ToList());
+                var monthName = new CultureInfo("ru-RU").DateTimeFormat.GetMonthName(month.Key.Month);
+                var capMonth = char.ToUpper(monthName[0]) + monthName.Substring(1);
+                var tmuc = new TrackerMonthUserControl($"{capMonth}", month.ToList());
                 tracker_stackPanel.Children.Add(tmuc);
             }
 

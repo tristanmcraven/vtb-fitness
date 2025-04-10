@@ -24,6 +24,11 @@ namespace vtb_fitness_client.UserControls
     public partial class WeightUserControl : UserControl
     {
         private List<Exercise> _exercises = new();
+
+        public int Sits = 0;
+        public int Reps = 0;
+
+        public string Exercise = "";
         public WeightUserControl()
         {
             InitializeComponent();
@@ -45,7 +50,18 @@ namespace vtb_fitness_client.UserControls
             if (item != null)
             {
                 weight_Image.Source = ImageHelper.GetImageFromPackPath((await ApiClient._Exercise.GetByName(item.ToString())).ImgName);
+                Exercise = item.ToString();
             }
+        }
+
+        private void sits_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Sits = int.Parse(sits_TextBox.Text);
+        }
+
+        private void reps_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Reps = int.Parse(reps_TextBox.Text);
         }
     }
 }

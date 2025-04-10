@@ -24,6 +24,9 @@ namespace vtb_fitness_client.UserControls
     public partial class CardioUserControl : UserControl
     {
         private List<Exercise> _exercises = new();
+
+        public int Meters = 0;
+        public string Exercise = "";
         public CardioUserControl()
         {
             InitializeComponent();
@@ -45,7 +48,13 @@ namespace vtb_fitness_client.UserControls
             if (item != null)
             {
                 cardio_Image.Source = ImageHelper.GetImageFromPackPath((await ApiClient._Exercise.GetByName(item.ToString())).ImgName);
+                Exercise = item.ToString();
             }
+        }
+
+        private void meters_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Meters = int.Parse(meters_TextBox.Text);
         }
     }
 }

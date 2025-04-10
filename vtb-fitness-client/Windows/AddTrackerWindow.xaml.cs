@@ -11,7 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using vtb_fitness_client.Dto;
+using vtb_fitness_client.Model;
+using vtb_fitness_client.Network;
+using vtb_fitness_client.Pages;
 using vtb_fitness_client.UserControls;
+using vtb_fitness_client.Utility;
 
 namespace vtb_fitness_client.Windows
 {
@@ -70,9 +75,81 @@ namespace vtb_fitness_client.Windows
             }
         }
 
-        private void addTracker_Button_Click(object sender, RoutedEventArgs e)
+        private async void addTracker_Button_Click(object sender, RoutedEventArgs e)
         {
+            var exercises = new List<TrackerCreateDto>();
 
+            var date = datePicker.SelectedDate ?? DateTime.Now;
+
+            var cardioChildren = cardio_StackPanel.Children;
+            if (cardioChildren.Count > 0)
+            {
+                foreach (var item in cardioChildren)
+                {
+                    var uc = item as CardioUserControl;
+                    exercises.Add(new TrackerCreateDto
+                    {
+                        UserId = App.CurrentUser.Id,
+                        ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
+                        Meters = uc.Meters,
+                        TimeStamp = date
+                    });
+                }
+            }
+
+            var strengthChildren = strength_StackPanel.Children;
+            if (strengthChildren.Count > 0)
+            {
+                foreach (var item in strengthChildren)
+                {
+                    var uc = item as StrengthUserControl;
+                    exercises.Add(new TrackerCreateDto
+                    {
+                        UserId = App.CurrentUser.Id,
+                        ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
+                        Sits = uc.Sits,
+                        Reps = uc.Reps,
+                        TimeStamp = date,
+                        Weight = uc.Weight
+                    });
+                }
+            }
+
+            var weightChildren = weight_StackPanel.Children;
+            if (weightChildren.Count > 0)
+            {
+                foreach (var item in weightChildren)
+                {
+                    var uc = item as WeightUserControl;
+                    exercises.Add(new TrackerCreateDto
+                    {
+                        UserId = App.CurrentUser.Id,
+                        ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
+                        Sits = uc.Sits,
+                        Reps = uc.Reps,
+                        TimeStamp = date
+                    });
+                }
+            }
+
+            if (!exercises.Any())
+            {
+                new DialogWindow(WindowManager.Get<MainWindow>(),
+                                 "Ошибка",
+                                 "Пожалуйста, добавьте хотя бы одно упражнение",
+                                 DialogWindowButtons.Ok,
+                                 DialogWindowType.Error)
+                { Owner = WindowManager.Get<MainWindow>() }.ShowDialog();
+                return;
+            }
+
+            foreach (var item in exercises)
+            {
+                await ApiClient._Tracker.Create(item);
+            }
+
+            Close();
+            PageManager.MainFrame.Navigate(new TrackerPage());
         }
 
         private void goBack_Button_Click(object sender, RoutedEventArgs e)

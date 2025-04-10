@@ -44,13 +44,15 @@ namespace vtb_fitness_client.UserControls
             {
                 pros_StackPanel.Children.Add(new ProUserControl(p));
             }
+
+            
         }
 
-        private void buy_Button_Click(object sender, RoutedEventArgs e)
+        private async void buy_Button_Click(object sender, RoutedEventArgs e)
         {
             var dw = new DialogWindow(WindowManager.Get<MainWindow>(),
                                       "Подтверждение",
-                                      $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за {_tariff.Price}₽?",
+                                      $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за {Helper.GetDiscountedPriceAsString((double)_tariff.Price, await Helper.GetUserSalePercent(App.CurrentUser.Id))}₽?",
                                       DialogWindowButtons.YesNo,
                                       DialogWindowType.Info)
             { Owner = WindowManager.Get<MainWindow>() };

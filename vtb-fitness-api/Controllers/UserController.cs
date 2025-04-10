@@ -114,7 +114,13 @@ namespace vtb_fitness_api.Controllers
         [HttpGet("{id}/tracker")]
         public async Task<IActionResult> GetTracker(int id)
         {
-            return Ok(await _context.Trackers.Where(t => t.UserId == id).ToListAsync());
+            return Ok(await _context.Trackers.Where(t => t.UserId == id).Include(x => x.Exercise).ToListAsync());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _context.Users.FirstOrDefaultAsync(x => x.Id == id));
         }
     }
 }

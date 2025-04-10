@@ -56,6 +56,8 @@ namespace vtb_fitness_client.Network
 
             public static async Task<List<User>> Get() => await SendRequest<List<User>>("user", HttpMethod.Get);
 
+            public static async Task<User> GetById(int id) => await SendRequest<User>($"user/{id}", HttpMethod.Get);
+
             public static async Task<UserTariff?> GetCurrentTariff(int id)
             {
                 return await SendRequest<UserTariff>($"user/{id}/current_tariff", HttpMethod.Get);
@@ -94,6 +96,13 @@ namespace vtb_fitness_client.Network
             public static async Task<List<Exercise>> GetStrength() => await SendRequest<List<Exercise>>("exercise/strength", HttpMethod.Get);
             public static async Task<List<Exercise>> GetWeight() => await SendRequest<List<Exercise>>("exercise/weight", HttpMethod.Get);
             public static async Task<Exercise> GetByName(string name) => await SendRequest<Exercise>($"exercise/name?name={name}", HttpMethod.Get);
+
+            
+        }
+
+        public static class _Tracker
+        {
+            public static async Task<Tracker> Create(TrackerCreateDto dto) => await SendRequest<Tracker>("tracker", HttpMethod.Post, dto);
         }
 
 

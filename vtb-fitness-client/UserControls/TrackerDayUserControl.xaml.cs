@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,9 @@ namespace vtb_fitness_client.UserControls
         //nuke this later so no one would see this POZOR
         private void InitView()
         {
+            var first = _exercises.First();
+            day_TextBlock.Text = $"{first.Timestamp.Day} {new CultureInfo("ru-RU").DateTimeFormat.GetAbbreviatedMonthName(first.Timestamp.Month)}";
+
             _maxCardio = _exercises.Where(x => x.Exercise.TypeId == Types.Cardio)
                         .OrderByDescending(x => x.Meters)
                         .FirstOrDefault();
@@ -57,6 +61,7 @@ namespace vtb_fitness_client.UserControls
                 cardio_Image.Source = ImageHelper.GetImageFromPackPath(_maxCardio.Exercise.ImgName);
                 cardioName_TextBlock.Text = _maxCardio.Exercise.Name;
                 cardioResult_TextBlock.Text = _maxCardio.Meters.ToString() + " м";
+                noCardio_Grid.Visibility = Visibility.Collapsed;
             }
 
             if (_maxStrength == null)
@@ -69,6 +74,7 @@ namespace vtb_fitness_client.UserControls
                 strength_Image.Source = ImageHelper.GetImageFromPackPath(_maxStrength.Exercise.ImgName);
                 strengthName_TextBlock.Text = _maxStrength.Exercise.Name;
                 strengthResult_TextBlock.Text = $"{_maxStrength.Sits} x {_maxStrength.Reps} ({_maxStrength.Weight} кг)";
+                noStrength_Grid.Visibility = Visibility.Collapsed;
             }
 
             if (_maxWeight == null)
@@ -81,6 +87,7 @@ namespace vtb_fitness_client.UserControls
                 weight_Image.Source = ImageHelper.GetImageFromPackPath(_maxWeight.Exercise.ImgName);
                 weightName_TextBlock.Text = _maxWeight.Exercise.Name;
                 weightResult_TextBlock.Text = $"{_maxWeight.Sits} x {_maxWeight.Reps}";
+                noWeight_Grid.Visibility = Visibility.Collapsed;
             }
         }
     }

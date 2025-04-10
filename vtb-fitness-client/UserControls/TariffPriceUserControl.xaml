@@ -29,6 +29,7 @@
         <TextBlock x:Name="discountedPrice_TextBlock"
                    Text="6666"
                    Grid.Column="1"
-                   Margin="15 0 0 0"/>
+                   Margin="15 0 0 0"
+                   Visibility="Collapsed"/>
     </Grid>
 </UserControl>

@@ -43,13 +43,16 @@
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <TextBox x:Name="sits_TextBox"
-                     md:HintAssist.Hint="Подходы" />
+                     md:HintAssist.Hint="Подходы"
+                     TextChanged="sits_TextBox_TextChanged"/>
             <TextBox x:Name="reps_TextBox"
                      md:HintAssist.Hint="Повторения"
-                     Grid.Column="1"/>
+                     Grid.Column="1"
+                     TextChanged="reps_TextBox_TextChanged"/>
             <TextBox x:Name="weight_TextBox"
                      md:HintAssist.Hint="Вес"
-                     Grid.Column="2"/>
+                     Grid.Column="2"
+                     TextChanged="weight_TextBox_TextChanged"/>
         </Grid>
     </Grid>
 </UserControl>

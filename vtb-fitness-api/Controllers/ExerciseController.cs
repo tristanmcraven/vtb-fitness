@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using vtb_fitness_api.Dto;
 using vtb_fitness_api.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -43,5 +44,6 @@ namespace vtb_fitness_api.Controllers
         {
             return Ok(await _context.Exercises.Where(x => x.TypeId == 4).ToListAsync());
         }
+
     }
 }

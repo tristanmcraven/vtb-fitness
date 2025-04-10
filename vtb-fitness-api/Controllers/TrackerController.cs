@@ -17,7 +17,7 @@ namespace vtb_fitness_api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _context.Trackers.ToListAsync());
+            return Ok(await _context.Trackers.Include(x => x.Exercise).ToListAsync());
         }
 
         [HttpPost]
@@ -27,10 +27,11 @@ namespace vtb_fitness_api.Controllers
             {
                 UserId = dto.UserId,
                 ExerciseId = dto.ExerciseId,
-                Sits = dto.Sits,
-                Reps = dto.Reps,
-                Meters = dto.Meters,
+                Sits = dto.Sits ?? null,
+                Reps = dto.Reps ?? null,
+                Meters = dto.Meters ?? null,
                 Timestamp = dto.TimeStamp ?? DateTime.Now,
+                Weight = dto.Weight ?? null,
             };
             _context.Trackers.Add(trackerRecord);
             await _context.SaveChangesAsync();
