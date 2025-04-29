@@ -91,13 +91,25 @@ namespace vtb_fitness_client.Pages
             if (!DoPasswordsMatch())
             {
                 new DialogWindow(WindowManager.Get<StartWindow>(),
-                 "Ошибка",
-                 "Пароли не совпадают",
-                 DialogWindowButtons.Ok,
-                 DialogWindowType.Error)
+                                 "Ошибка",
+                                 "Пароли не совпадают",
+                                 DialogWindowButtons.Ok,
+                                 DialogWindowType.Error)
                 { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
                 return;
             }
+
+            if (!Helper.IsEmailCorrect(email_TextBox.Text))
+            {
+                new DialogWindow(WindowManager.Get<StartWindow>(),
+                                 "Ошибка",
+                                 "Некорректный адрес электронной почты",
+                                 DialogWindowButtons.Ok,
+                                 DialogWindowType.Error)
+                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                return;
+            }
+
             var roleId = role_ComboBox.SelectedIndex == 0 ? 3 : 4;
             var dto = new UserSignUpDto
             {
@@ -135,7 +147,7 @@ namespace vtb_fitness_client.Pages
             {
                 new DialogWindow(WindowManager.Get<StartWindow>(),
                                  "Ошибка",
-                                 "Что-то пошло не так",
+                                 "Что-то пошло не так. Скорее всего, пользователь с таким логином уже существует",
                                  DialogWindowButtons.Ok,
                                  DialogWindowType.Error)
                 { Owner = WindowManager.Get<StartWindow>()}.ShowDialog();
@@ -225,6 +237,21 @@ namespace vtb_fitness_client.Pages
                 tb.Text = digits;
 
             tb.CaretIndex = tb.Text.Length;
+        }
+
+        private void phone_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Helper.IsNumeric(e.Text)) e.Handled = true;
+        }
+
+        private void phone_TextBox_Pasting(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(DataFormats.Text))
+            {
+                string text = (string)e.DataObject.GetData(DataFormats.Text);
+                if (!Helper.IsNumeric(text))
+                    e.CancelCommand();
+            } else e.CancelCommand();
         }
     }
 }

@@ -27,7 +27,8 @@ namespace vtb_fitness_client.Windows
         public StartWindow()
         {
             InitializeComponent();
-
+            Left = -1920;
+            Top = 0;
         }
 
         private void signIn_Button_Click(object sender, RoutedEventArgs e)

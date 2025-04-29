@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using vtb_fitness_client.Network;
@@ -44,5 +45,9 @@ namespace vtb_fitness_client.Utility
         {
             return Math.Round(price * ((100 - salePercent) / 100.0), 0).ToString();
         }
+
+        public static bool IsNumeric(string value) => int.TryParse(value, out _);
+
+        public static bool IsEmailCorrect(string value) => MailAddress.TryCreate(value, out _);
     }
 }

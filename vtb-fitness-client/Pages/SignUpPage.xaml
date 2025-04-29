@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:vtb_fitness_client.Pages"
       xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="300"
+      d:DesignHeight="1080" d:DesignWidth="300"
       KeyUp="Page_KeyUp"
       Title="SignUpPage">
 
@@ -78,33 +78,44 @@
                 <TextBox x:Name="lastName_TextBox"
                          md:HintAssist.Hint="Фамилия"
                          MaxLength="50"/>
+                
                 <TextBox x:Name="name_TextBox"
                          md:HintAssist.Hint="Имя"
                          MaxLength="50"/>
+                
                 <TextBox x:Name="middleName_TextBox"
                          md:HintAssist.Hint="Отчество"
                          MaxLength="50"/>
+                
                 <TextBox x:Name="phone_TextBox"
                          md:HintAssist.Hint="Номер телефона"
                          MaxLength="10"
-                         md:TextFieldAssist.PrefixText="+7"/>
+                         md:TextFieldAssist.PrefixText="+7"
+                         PreviewTextInput="phone_TextBox_PreviewTextInput"
+                         DataObject.Pasting="phone_TextBox_Pasting"/>
+                
                 <TextBox x:Name="email_TextBox"
                          md:HintAssist.Hint="Email"
                          MaxLength="50"/>
+                
                 <TextBlock Text="Фотография"
                            Style="{StaticResource global_TextBlock}"
                            FontSize="17"/>
+                
                 <Button x:Name="photo_Button"
                         Content="Выбрать изображение..."
                         Click="photo_Button_Click" />
+                
                 <ComboBox x:Name="role_ComboBox"
                           md:HintAssist.Hint="Вы:"
                           SelectionChanged="role_ComboBox_SelectionChanged">
                     <ComboBoxItem>Сотрудник ВТБ</ComboBoxItem>
                     <ComboBoxItem>Тренер</ComboBoxItem>
                 </ComboBox>
+                
                 <DatePicker x:Name="workingInVtbSince_DatePicker"
-                            md:HintAssist.Hint="Вы работаете в ВТБ с:" />
+                            md:HintAssist.Hint="Вы работаете в ВТБ с:"/>
+                
                 <Expander x:Name="passport_Expander"
                           Header="Паспортные данные">
                     <StackPanel Orientation="Vertical">
