@@ -75,6 +75,12 @@ namespace vtb_fitness_client.Pages
             return passwordBox.Password == passwordBoxConfirm.Password;
         }
 
+        private bool AreDatesValid() =>
+            Helper.IsDateValid(birthDay_DatePicker.SelectedDate) ||
+            Helper.IsDateValid(issuedDate_DatePicker.SelectedDate) ||
+            Helper.IsDateValid(workingInVtbSince_DatePicker.SelectedDate);
+
+
         private async void SignUp()
         {
             if (IsSomethingEmpty())
@@ -108,6 +114,11 @@ namespace vtb_fitness_client.Pages
                                  DialogWindowType.Error)
                 { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
                 return;
+            }
+
+            if (!AreDatesValid())
+            {
+
             }
 
             var roleId = role_ComboBox.SelectedIndex == 0 ? 3 : 4;

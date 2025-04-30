@@ -41,6 +41,13 @@ namespace vtb_fitness_client.Windows
                 4 => "Тренер",
                 _ => "Неизвестный"
             };
+
+            if (user.Id == 3)
+            {
+                users_TextBlock.Visibility = Visibility.Collapsed;
+                trainers_TextBlock.Visibility = Visibility.Collapsed;
+                mods_TextBlock.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void main_Frame_Loaded(object sender, RoutedEventArgs e)

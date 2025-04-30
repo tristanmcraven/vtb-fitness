@@ -49,5 +49,14 @@ namespace vtb_fitness_client.Utility
         public static bool IsNumeric(string value) => int.TryParse(value, out _);
 
         public static bool IsEmailCorrect(string value) => MailAddress.TryCreate(value, out _);
+
+        public static bool IsDateValid(DateTime? value)
+        {
+            if (value == null) return false;
+
+            var date = value.Value.Date;
+
+            return date <= DateTime.Today && date.Year <= 1900;
+        }
     }
 }
