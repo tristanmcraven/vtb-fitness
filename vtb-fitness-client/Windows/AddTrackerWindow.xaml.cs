@@ -134,12 +134,7 @@ namespace vtb_fitness_client.Windows
 
             if (!exercises.Any())
             {
-                new DialogWindow(WindowManager.Get<MainWindow>(),
-                                 "Ошибка",
-                                 "Пожалуйста, добавьте хотя бы одно упражнение",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<MainWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Пожалуйста, добавьте хотя бы одно упражнение").ShowDialog();
                 return;
             }
 

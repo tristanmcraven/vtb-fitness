@@ -82,12 +82,7 @@ namespace vtb_fitness_client.Pages
         {
             if (IsSomethingEmpty())
             {
-                new DialogWindow(WindowManager.Get<MainWindow>(),
-                                 "Ошибка",
-                                 "Введите всю информацию об абонементе",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<MainWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Введите всю информацию об абонементе").ShowDialog();
                 return;
             }
 
@@ -102,23 +97,13 @@ namespace vtb_fitness_client.Pages
             var tariff = await ApiClient._Tariff.Create(dto);
             if (tariff != null)
             {
-                new DialogWindow(WindowManager.Get<MainWindow>(),
-                                 "Успех",
-                                 "Абонемент успешно добавлен!",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Info)
-                { Owner = WindowManager.Get<MainWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Success, "Абонемент успешно добавлен!").ShowDialog();
                 PageManager.MainFrame.Navigate(new TariffsPage());
                 return;
             }
             else
             {
-                new DialogWindow(WindowManager.Get<MainWindow>(),
-                                 "Ошибка",
-                                 "Что-то пошло не так",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<MainWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Что-то пошло не так").ShowDialog();
                 return;
             }
 

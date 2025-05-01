@@ -50,12 +50,9 @@ namespace vtb_fitness_client.UserControls
 
         private async void buy_Button_Click(object sender, RoutedEventArgs e)
         {
-            var dw = new DialogWindow(WindowManager.Get<MainWindow>(),
-                                      "Подтверждение",
-                                      $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за {Helper.GetDiscountedPriceAsString((double)_tariff.Price, await Helper.GetUserSalePercent(App.CurrentUser.Id))}₽?",
-                                      DialogWindowButtons.YesNo,
-                                      DialogWindowType.Info)
-            { Owner = WindowManager.Get<MainWindow>() };
+            var dw = new DialogWindow(DialogWindowType.Confirmation,
+                                      $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за " +
+                                      $"{Helper.GetDiscountedPriceAsString((double)_tariff.Price, await Helper.GetUserSalePercent(App.CurrentUser.Id))}₽?");
             dw.ShowDialog();
             if (dw.DialogResult)
             {

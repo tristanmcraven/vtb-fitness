@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using vtb_fitness_client.Dto;
 using vtb_fitness_client.Network;
 using vtb_fitness_client.Utility;
@@ -38,7 +27,7 @@ namespace vtb_fitness_client.Pages
 
         private bool IsSomethingEmpty()
         {
-            bool result = 
+            bool result =
                 String.IsNullOrWhiteSpace(lastName_TextBox.Text) ||
                 String.IsNullOrWhiteSpace(name_TextBox.Text) ||
                 String.IsNullOrWhiteSpace(middleName_TextBox.Text) ||
@@ -85,40 +74,26 @@ namespace vtb_fitness_client.Pages
         {
             if (IsSomethingEmpty())
             {
-                new DialogWindow(WindowManager.Get<StartWindow>(),
-                                 "Ошибка",
-                                 "Сначала заполните все поля!",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Сначала заполните все поля!").ShowDialog();
                 return;
             }
 
             if (!DoPasswordsMatch())
             {
-                new DialogWindow(WindowManager.Get<StartWindow>(),
-                                 "Ошибка",
-                                 "Пароли не совпадают",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Пароли не совпадают").ShowDialog();
                 return;
             }
 
             if (!Helper.IsEmailCorrect(email_TextBox.Text))
             {
-                new DialogWindow(WindowManager.Get<StartWindow>(),
-                                 "Ошибка",
-                                 "Некорректный адрес электронной почты",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Некорректный адрес электронной почты").ShowDialog();
                 return;
             }
 
             if (!AreDatesValid())
             {
-
+                new DialogWindow(DialogWindowType.Error, "Даты не корректны").ShowDialog();
+                return;
             }
 
             var roleId = role_ComboBox.SelectedIndex == 0 ? 3 : 4;
@@ -156,22 +131,12 @@ namespace vtb_fitness_client.Pages
 
             if (user == null)
             {
-                new DialogWindow(WindowManager.Get<StartWindow>(),
-                                 "Ошибка",
-                                 "Что-то пошло не так. Скорее всего, пользователь с таким логином уже существует",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<StartWindow>()}.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Что-то пошло не так. Скорее всего, пользователь с таким логином уже существует").ShowDialog();
                 return;
             }
             else
             {
-                new DialogWindow(WindowManager.Get<StartWindow>(),
-                                 "Успешная регистрация",
-                                 "Пожалуйста, войдите в систему",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Info)
-                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Success, "Пожалуйста, войдите в систему", "Успешная регистрация").ShowDialog();
                 PageManager.MainFrame.GoBack();
             }
         }
@@ -183,7 +148,9 @@ namespace vtb_fitness_client.Pages
 
         private void photo_Button_Click(object sender, RoutedEventArgs e)
         {
-            var result = ImageHelper.GetImageFromFileDialog(WindowManager.Get<StartWindow>());
+            WindowManager.AddTintToActiveWindow();
+            var result = ImageHelper.GetImageFromFileDialog();
+            WindowManager.RemoveTintFromActiveWindow();
             var fileName = result.FileName;
             if (fileName != null)
             {
@@ -250,19 +217,20 @@ namespace vtb_fitness_client.Pages
             tb.CaretIndex = tb.Text.Length;
         }
 
-        private void phone_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void VerifyNumericInput(object sender, TextCompositionEventArgs e)
         {
             if (!Helper.IsNumeric(e.Text)) e.Handled = true;
         }
 
-        private void phone_TextBox_Pasting(object sender, DataObjectPastingEventArgs e)
+        private void VerifyNumericPaste(object sender, DataObjectPastingEventArgs e)
         {
             if (e.DataObject.GetDataPresent(DataFormats.Text))
             {
                 string text = (string)e.DataObject.GetData(DataFormats.Text);
                 if (!Helper.IsNumeric(text))
                     e.CancelCommand();
-            } else e.CancelCommand();
+            }
+            else e.CancelCommand();
         }
     }
 }

@@ -91,8 +91,8 @@
                          md:HintAssist.Hint="Номер телефона"
                          MaxLength="10"
                          md:TextFieldAssist.PrefixText="+7"
-                         PreviewTextInput="phone_TextBox_PreviewTextInput"
-                         DataObject.Pasting="phone_TextBox_Pasting"/>
+                         PreviewTextInput="VerifyNumericInput"
+                         DataObject.Pasting="VerifyNumericPaste"/>
                 
                 <TextBox x:Name="email_TextBox"
                          md:HintAssist.Hint="Email"
@@ -127,11 +127,15 @@
                             </Grid.ColumnDefinitions>
                             <TextBox x:Name="passportSeries_TextBox"
                                      md:HintAssist.Hint="Серия"
-                                     MaxLength="4"/>
+                                     MaxLength="4"
+                                     PreviewTextInput="VerifyNumericInput"
+                                     DataObject.Pasting="VerifyNumericPaste"/>
                             <TextBox x:Name="passportNumber_TextBox"
                                      md:HintAssist.Hint="Номер"
                                      Grid.Column="2"
-                                     MaxLength="6"/>
+                                     MaxLength="6"
+                                     PreviewTextInput="VerifyNumericInput"
+                                     DataObject.Pasting="VerifyNumericPaste"/>
                         </Grid>
                         <TextBox x:Name="issuedBy_TextBox"
                                  md:HintAssist.Hint="Пасспорт выдан" />
@@ -156,26 +160,40 @@
                                    MaxWidth="350"
                                    HorizontalAlignment="Left"
                                    Margin="15 -10 0 10">
-                            Пожалуйста, укажите банковские реквизиты для перечисления заработной платы.
+                            Пожалуйста, укажите банковские реквизиты для перечисления
+                            заработной платы.
                         </TextBlock>
                         <TextBox x:Name="correspondentAccount_TextBox"
-                                 md:HintAssist.Hint="Расчётный счёт" />
+                                 md:HintAssist.Hint="Расчётный счёт"
+                                 MaxLength="20"
+                                 PreviewTextInput="VerifyNumericInput"
+                                 DataObject.Pasting="VerifyNumericPaste"/>
                         <TextBox x:Name="bik_TextBox"
-                                 md:HintAssist.Hint="БИК" />
+                                 md:HintAssist.Hint="БИК"
+                                 MaxLength="9"
+                                 DataObject.Pasting="VerifyNumericPaste"
+                                 PreviewTextInput="VerifyNumericInput"/>
                         <TextBox x:Name="bankName_TextBox"
-                                 md:HintAssist.Hint="Название Банка" />
+                                 md:HintAssist.Hint="Название Банка"
+                                 />
                         <TextBox Name="debitCardNumber_TextBox"
-                                 md:HintAssist.Hint="Номер банковской карты (16 цифр)" />
+                                 md:HintAssist.Hint="Номер банковской карты (16 цифр)"
+                                 MaxLength="16"
+                                 PreviewTextInput="VerifyNumericInput"
+                                 DataObject.Pasting="VerifyNumericPaste"/>
                     </StackPanel>
                 </Expander>
 
                 <TextBox x:Name="login_TextBox"
                          md:HintAssist.Hint="Логин"
-                         Margin="0 20 0 10"/>
+                         Margin="0 20 0 10"
+                         MaxLength="25"/>
                 <PasswordBox x:Name="passwordBox"
-                             md:HintAssist.Hint="Пароль" />
+                             md:HintAssist.Hint="Пароль"
+                             MaxLength="25"/>
                 <PasswordBox x:Name="passwordBoxConfirm"
-                             md:HintAssist.Hint="Пароль ещё раз" />
+                             md:HintAssist.Hint="Пароль ещё раз"
+                             MaxLength="25"/>
 
             </StackPanel>
             

@@ -38,7 +38,7 @@ namespace vtb_fitness_client.Utility
             return File.ReadAllBytes(path);
         }
 
-        public static (string? FileName, byte[]? RawImage) GetImageFromFileDialog(Window? senderWindow = null)
+        public static (string? FileName, byte[]? RawImage) GetImageFromFileDialog()
         {
             var ofd = new OpenFileDialog
             {
@@ -52,11 +52,7 @@ namespace vtb_fitness_client.Utility
                 var bmp = GetImageFromPath(path);
                 if (!IsEqualAspectRatio(bmp))
                 {
-                    new DialogWindow(senderWindow,
-                                     "Ошибка",
-                                     "Изображение должно иметь соотношение сторон 1:1",
-                                     DialogWindowButtons.Ok,
-                                     DialogWindowType.Error) { Owner = senderWindow }.ShowDialog();
+                    new DialogWindow(DialogWindowType.Error, "Изображение должно иметь соотношение сторон 1:1").ShowDialog();
                     return (null, null);
                 }
                 var temp = path.Split('\\');

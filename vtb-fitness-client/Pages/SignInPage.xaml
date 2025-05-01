@@ -65,12 +65,16 @@
             <TextBox x:Name="login_TextBox"
                      md:HintAssist.Hint="Логин"
                      md:TextFieldAssist.HasLeadingIcon="True"
-                     md:TextFieldAssist.LeadingIcon="Login"/>
+                     md:TextFieldAssist.LeadingIcon="Login"
+                     MaxLength="25"
+                     md:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
             <PasswordBox x:Name="passwordBox"
                          md:HintAssist.Hint="Пароль"
                          md:TextFieldAssist.HasLeadingIcon="True"
                          md:TextFieldAssist.LeadingIcon="Password"
-                         Margin="0 0 0 250"/>
+                         Margin="0 0 0 250"
+                         MaxLength="25"
+                         md:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
 
             <Button x:Name="signIn_Button"
                     Content="Войти"

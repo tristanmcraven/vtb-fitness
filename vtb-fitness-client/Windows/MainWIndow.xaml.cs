@@ -75,12 +75,7 @@ namespace vtb_fitness_client.Windows
 
         private void changeUser_Button_Click(object sender, RoutedEventArgs e)
         {
-            var dw = new DialogWindow(WindowManager.Get<MainWindow>(),
-                          "Выход",
-                          "Вы уверены, что хотите сменить пользователя?",
-                          DialogWindowButtons.YesNo,
-                          DialogWindowType.Warning)
-            { Owner = WindowManager.Get<MainWindow>() };
+            var dw = new DialogWindow(DialogWindowType.Confirmation, "Вы уверены, что хотите сменить пользователя?");
             dw.ShowDialog();
             if (dw.DialogResult)
             {
@@ -91,12 +86,7 @@ namespace vtb_fitness_client.Windows
 
         private void quit_Button_Click(object sender, RoutedEventArgs e)
         {
-            var dw = new DialogWindow(WindowManager.Get<MainWindow>(),
-                                      "Выход",
-                                      "Вы уверены, что хотите закрыть приложение?",
-                                      DialogWindowButtons.YesNo,
-                                      DialogWindowType.Warning)
-            { Owner = WindowManager.Get<MainWindow>() };
+            var dw = new DialogWindow(DialogWindowType.Confirmation, "Вы уверены, что хотите закрыть приложение?");
             dw.ShowDialog();
             if (dw.DialogResult)
                 Application.Current.Shutdown();

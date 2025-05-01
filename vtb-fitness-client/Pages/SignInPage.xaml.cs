@@ -48,23 +48,13 @@ namespace vtb_fitness_client.Pages
         {
             if (IsSomethingEmpty())
             {
-                new DialogWindow(WindowManager.Get<StartWindow>(),
-                                 "Ошибка",
-                                 "Введите данные от учётной записи",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Введите данные от учётной записи").ShowDialog();
                 return;
             }
             var user = await ApiClient._User.SignIn(login, password);
             if (user == null)
             {
-                new DialogWindow(WindowManager.Get<StartWindow>(),
-                                 "Ошибка",
-                                 "Неправильный логин и/или пароль",
-                                 DialogWindowButtons.Ok,
-                                 DialogWindowType.Error)
-                { Owner = WindowManager.Get<StartWindow>() }.ShowDialog();
+                new DialogWindow(DialogWindowType.Error, "Неправильный логин и/или пароль").ShowDialog();
                 return;
             }
             App.CurrentUser = user;

@@ -21,77 +21,61 @@ namespace vtb_fitness_client.Windows
     /// </summary>
     public partial class DialogWindow : Window
     {
-        private Window _senderWindow;
         public new bool DialogResult = false;
-        public DialogWindow(Window senderWindow, string title, string message, DialogWindowButtons buttons, DialogWindowType type)
+        public DialogWindow(DialogWindowType type, string message, string? title = null)
         {
-            _senderWindow = senderWindow;
+            Owner = WindowManager.ActiveWindow;
             InitializeComponent();
-            InitView(title, message, buttons, type);
+            InitView(type, message, title);
         }
 
-        private void InitView(string title, string message, DialogWindowButtons buttons, DialogWindowType type)
+        private void InitView(DialogWindowType type, string message, string? title)
         {
-            AddTintToSenderWindow();
+            WindowManager.AddTintToActiveWindow();
 
             if (type == DialogWindowType.Error)
-                SystemSounds.Hand.Play();
-            else if (type == DialogWindowType.Warning)
-                SystemSounds.Exclamation.Play();
-            else if (type == DialogWindowType.Info)
-                SystemSounds.Exclamation.Play();
-
-            title_TextBlock.Text = title;
-            message_TextBlock.Text = message;
-
-            if (buttons == DialogWindowButtons.Ok)
             {
-                ok_Button.Visibility = Visibility.Visible;
-                yes_Button.Visibility = Visibility.Collapsed;
-                no_Button.Visibility = Visibility.Collapsed;
+                SystemSounds.Hand.Play();
+                title_TextBlock.Text = "Ошибка";
+
+                ShowOkButton();
             }
-            else if (buttons == DialogWindowButtons.YesNo) {
-                ok_Button.Visibility = Visibility.Collapsed;
-                yes_Button.Visibility = Visibility.Visible;
-                no_Button.Visibility = Visibility.Visible;
+            else if (type == DialogWindowType.Success)
+            {
+                SystemSounds.Exclamation.Play();
+                title_TextBlock.Text = "Успех";
+
+                ShowOkButton();
             }
+            else if (type == DialogWindowType.Confirmation)
+            {
+                SystemSounds.Exclamation.Play();
+                title_TextBlock.Text = "Подтверждение";
+
+                ShowYesNoButtons();
+            }
+
+            message_TextBlock.Text = message;
+            if (title != null) title_TextBlock.Text = title;
+        }
+
+        private void ShowOkButton()
+        {
+            ok_Button.Visibility = Visibility.Visible;
+            yes_Button.Visibility = Visibility.Collapsed;
+            no_Button.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowYesNoButtons()
+        {
+            ok_Button.Visibility = Visibility.Collapsed;
+            yes_Button.Visibility = Visibility.Visible;
+            no_Button.Visibility = Visibility.Visible;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            RemoveTintFromSenderWindow();
-        }
-
-        private void AddTintToSenderWindow()
-        {
-            var body = _senderWindow.FindName("body") as Grid;
-
-            if (body != null)
-            {
-                var tint = new Border
-                {
-                    Background = new SolidColorBrush(Colors.Black),
-                    Name = "tint"
-                };
-                tint.Background.Opacity = 0.8;
-                Grid.SetColumnSpan(body, 10);
-                Grid.SetRowSpan(body, 10);
-                Panel.SetZIndex(body, 2);
-
-                body.Children.Add(tint);
-            }
-        }
-
-        private void RemoveTintFromSenderWindow()
-        {
-            var body = _senderWindow.FindName("body") as Grid;
-
-            if (body != null)
-            {
-                var tint = body.Children.OfType<Border>().FirstOrDefault(b => b.Name == "tint");
-                if (tint != null)
-                    body.Children.Remove(tint);
-            }
+            WindowManager.RemoveTintFromActiveWindow();
         }
 
         private void ok_Button_Click(object sender, RoutedEventArgs e)
@@ -110,5 +94,7 @@ namespace vtb_fitness_client.Windows
             DialogResult = false;
             Close();
         }
+
+        
     }
 }
