@@ -22,7 +22,7 @@ namespace vtb_fitness_client.Windows
     /// <summary>
     /// Interaction logic for StartWindow.xaml
     /// </summary>
-    public partial class StartWindow : Window
+    public partial class StartWindow : CustomWindow
     {
         public StartWindow()
         {
