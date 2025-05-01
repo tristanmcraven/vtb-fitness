@@ -1,4 +1,4 @@
-﻿<Window x:Class="vtb_fitness_client.Windows.MainWindow"
+﻿<local:CustomWindow x:Class="vtb_fitness_client.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -13,7 +13,7 @@
         Style="{StaticResource MaterialDesignWindow}"
         Loaded="Window_Loaded">
 
-    <Window.Background>
+    <local:CustomWindow.Background>
         <RadialGradientBrush RadiusX="1"
                              RadiusY="1"
                              Center="0.4,0.5"
@@ -23,14 +23,14 @@
             <GradientStop Color="{StaticResource bg_color}"
                           Offset="1" />
         </RadialGradientBrush>
-    </Window.Background>
+    </local:CustomWindow.Background>
 
-    <Window.Resources>
+    <local:CustomWindow.Resources>
         <Style TargetType="TextBlock"
                BasedOn="{StaticResource global_TextBlock}">
             
         </Style>
-    </Window.Resources>
+    </local:CustomWindow.Resources>
 
     <Grid x:Name="body">
 
@@ -289,4 +289,4 @@
     </Grid>
     
 
-</Window>
+</local:CustomWindow>

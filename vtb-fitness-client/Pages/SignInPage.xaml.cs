@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using vtb_fitness_client.Network;
 using vtb_fitness_client.Utility;
 using vtb_fitness_client.Windows;
@@ -31,35 +20,51 @@ namespace vtb_fitness_client.Pages
 
         private bool IsSomethingEmpty() => String.IsNullOrWhiteSpace(login_TextBox.Text) || String.IsNullOrWhiteSpace(passwordBox.Password);
 
-        private void signIn_Button_Click(object sender, RoutedEventArgs e)
+        private async void signIn_Button_Click(object sender, RoutedEventArgs e)
         {
             var login = login_TextBox.Text;
             var password = passwordBox.Password;
 
-            SignIn(login, password);
+            signIn_Button.Background = FindResource("dark_blue") as SolidColorBrush;
+            signIn_Button.BorderBrush = FindResource("dark_blue") as SolidColorBrush;
+            signIn_Button.Content = new ProgressBar
+            {
+                IsIndeterminate = true,
+                Style = (Style)FindResource("MaterialDesignCircularProgressBar")
+            };
+            signIn_Button.Click -= signIn_Button_Click;
+
+            try
+            {
+                if (IsSomethingEmpty())
+                {
+                    new DialogWindow(DialogWindowType.Error, "Введите данные от учётной записи").ShowDialog();
+                    return;
+                }
+
+                var user = await ApiClient._User.SignIn(login, password);
+                if (user == null)
+                {
+                    new DialogWindow(DialogWindowType.Error, "Неправильный логин и/или пароль").ShowDialog();
+                    return;
+                }
+
+                App.CurrentUser = user;
+                new MainWindow().Show();
+                WindowManager.Close<StartWindow>();
+            }
+            finally
+            {
+                signIn_Button.Content = "Войти";
+                signIn_Button.Click += signIn_Button_Click;
+                signIn_Button.ClearValue(Button.BackgroundProperty);
+                signIn_Button.ClearValue(Button.BorderBrushProperty);
+            }
         }
 
         private void signUp_Button_Click(object sender, RoutedEventArgs e)
         {
             PageManager.MainFrame.Navigate(new SignUpPage());
-        }
-
-        public async void SignIn(string login, string password)
-        {
-            if (IsSomethingEmpty())
-            {
-                new DialogWindow(DialogWindowType.Error, "Введите данные от учётной записи").ShowDialog();
-                return;
-            }
-            var user = await ApiClient._User.SignIn(login, password);
-            if (user == null)
-            {
-                new DialogWindow(DialogWindowType.Error, "Неправильный логин и/или пароль").ShowDialog();
-                return;
-            }
-            App.CurrentUser = user;
-            new MainWindow().Show();
-            WindowManager.Close<StartWindow>();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

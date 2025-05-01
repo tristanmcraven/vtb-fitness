@@ -1,4 +1,4 @@
-﻿<Window x:Class="vtb_fitness_client.Windows.AddTrackerWindow"
+﻿<local:CustomWindow x:Class="vtb_fitness_client.Windows.AddTrackerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         ResizeMode="NoResize">
-    <Window.Background>
+    <local:CustomWindow.Background>
         <LinearGradientBrush StartPoint="0,0"
                              EndPoint="1,1">
             <GradientStop Color="{StaticResource magic_blue_color}"
@@ -19,8 +19,8 @@
             <GradientStop Color="{StaticResource magic_dark_blue_color}"
                           Offset="1" />
         </LinearGradientBrush>
-    </Window.Background>
-    <Window.Resources>
+    </local:CustomWindow.Background>
+    <local:CustomWindow.Resources>
         <Style TargetType="TextBlock"
                BasedOn="{StaticResource global_TextBlock}">
             
@@ -33,83 +33,85 @@
                BasedOn="{StaticResource global_DatePicker}">
             
         </Style>
-    </Window.Resources>
-    <Grid Margin="30">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
+    </local:CustomWindow.Resources>
+    <Grid x:Name="body">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-        <TextBlock Text="Добавление тренировки"
-                   Style="{StaticResource header_TextBlock}"/>
+            <TextBlock Text="Добавление тренировки"
+                       Style="{StaticResource header_TextBlock}" />
 
-        <ScrollViewer HorizontalScrollBarVisibility="Hidden"
-                      VerticalScrollBarVisibility="Auto"
-                      CanContentScroll="False"
-                      Grid.Row="1">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Кардио"
-                           Style="{StaticResource header_TextBlock}"
-                           HorizontalAlignment="Left"/>
-                <StackPanel Orientation="Vertical"
-                            x:Name="cardio_StackPanel">
-                    
+            <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                          VerticalScrollBarVisibility="Auto"
+                          CanContentScroll="False"
+                          Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Кардио"
+                               Style="{StaticResource header_TextBlock}"
+                               HorizontalAlignment="Left" />
+                    <StackPanel Orientation="Vertical"
+                                x:Name="cardio_StackPanel">
+
+                    </StackPanel>
+                    <Button x:Name="addCardio_Button"
+                            Content="Добавить кардио упражнение"
+                            Click="addCardio_Button_Click" />
+
+                    <TextBlock Text="Силовые упражнения"
+                               Style="{StaticResource header_TextBlock}"
+                               HorizontalAlignment="Left" />
+                    <StackPanel x:Name="strength_StackPanel">
+
+                    </StackPanel>
+                    <Button x:Name="addStrength_Button"
+                            Content="Добавить силовые упражнения"
+                            Click="addStrength_Button_Click" />
+
+                    <TextBlock Text="Масса тела (собственный вес)"
+                               Style="{StaticResource header_TextBlock}"
+                               HorizontalAlignment="Left" />
+                    <StackPanel x:Name="weight_StackPanel">
+
+                    </StackPanel>
+                    <Button x:Name="addWeight_Button"
+                            Content="Добавить упражнение"
+                            Click="addWeight_Button_Click"
+                            Margin="0 0 0 40" />
+
+                    <Button x:Name="addDate_Button"
+                            Content="Добавить дату вручную"
+                            Click="addDate_Button_Click" />
+                    <DatePicker x:Name="datePicker"
+                                Language="ru-RU"
+                                Visibility="Collapsed" />
                 </StackPanel>
-                <Button x:Name="addCardio_Button"
-                        Content="Добавить кардио упражнение"
-                        Click="addCardio_Button_Click" />
 
-                <TextBlock Text="Силовые упражнения"
-                           Style="{StaticResource header_TextBlock}"
-                           HorizontalAlignment="Left" />
-                <StackPanel x:Name="strength_StackPanel">
-                    
-                </StackPanel>
-                <Button x:Name="addStrength_Button"
-                        Content="Добавить силовые упражнения"
-                        Click="addStrength_Button_Click" />
+            </ScrollViewer>
 
-                <TextBlock Text="Масса тела (собственный вес)"
-                           Style="{StaticResource header_TextBlock}"
-                           HorizontalAlignment="Left" />
-                <StackPanel x:Name="weight_StackPanel">
-                    
-                </StackPanel>
-                <Button x:Name="addWeight_Button"
-                        Content="Добавить упражнение"
-                        Click="addWeight_Button_Click"
-                        Margin="0 0 0 40"/>
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="2"
+                        HorizontalAlignment="Right">
+                <StackPanel.Resources>
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource global_Button}">
 
-                <Button x:Name="addDate_Button"
-                        Content="Добавить дату вручную"
-                        Click="addDate_Button_Click" />
-                <DatePicker x:Name="datePicker"
-                            Language="ru-RU"
-                            Visibility="Collapsed"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button x:Name="addTracker_Button"
+                        Content="Добавить"
+                        Click="addTracker_Button_Click"
+                        Width="150" />
+                <Button x:Name="goBack_Button"
+                        Content="Назад"
+                        Click="goBack_Button_Click"
+                        Width="150"
+                        Margin="20 0 0 0" />
             </StackPanel>
 
-        </ScrollViewer>
-
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="2"
-                    HorizontalAlignment="Right">
-            <StackPanel.Resources>
-                <Style TargetType="Button"
-                       BasedOn="{StaticResource global_Button}">
-                    
-                </Style>
-            </StackPanel.Resources>
-            <Button x:Name="addTracker_Button"
-                    Content="Добавить"
-                    Click="addTracker_Button_Click"
-                    Width="150"/>
-            <Button x:Name="goBack_Button"
-                    Content="Назад"
-                    Click="goBack_Button_Click"
-                    Width="150"
-                    Margin="20 0 0 0"/>
-        </StackPanel>
-        
+        </Grid>
     </Grid>
-</Window>
+</local:CustomWindow>

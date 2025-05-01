@@ -23,7 +23,7 @@ namespace vtb_fitness_client.Windows
     /// <summary>
     /// Interaction logic for AddTrackerWindow.xaml
     /// </summary>
-    public partial class AddTrackerWindow : Window
+    public partial class AddTrackerWindow : CustomWindow
     {
         private Window _senderWindow;
         public AddTrackerWindow(Window senderWindow)
