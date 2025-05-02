@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:vtb_fitness_client.Pages"
       xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1080" d:DesignWidth="1366"
       Title="AddNewTariffPage">
 
     <Page.Resources>
@@ -41,6 +41,7 @@
             <StackPanel Orientation="Vertical">
                 <TextBlock Text="Добавление нового абонемента"
                            Style="{StaticResource header_TextBlock}"/>
+                
                 <TextBox x:Name="name_TextBox"
                          md:HintAssist.Hint="Название абонемента" />
                 <TextBox x:Name="description_TextBox"
@@ -49,6 +50,7 @@
                          md:HintAssist.Hint="Цена" />
                 <TextBox x:Name="period_TextBox"
                          md:HintAssist.Hint="Срок абонемента (в месяцах)" />
+                
                 <TextBlock Text="Преимущества абонемента"
                            FontSize="24"
                            Margin="0 5"
@@ -60,7 +62,192 @@
                             x:Name="pros_StackPanel">
 
                 </StackPanel>
-                
+
+                <TextBlock Text="Часы посещения" />
+                <TextBlock Text="Укажите доступные часы для посещения зала, бассейна или хаммама. Это поможет клиенту понять, когда действует абонемент." />
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.Resources>
+                        <Style TargetType="md:TimePicker"
+                               BasedOn="{StaticResource MaterialDesignOutlinedTimePicker}">
+                            <Setter Property="Padding"
+                                    Value="10" />
+                            <Setter Property="Margin"
+                                    Value="10 0 0 0" />
+                            <Setter Property="md:HintAssist.FloatingScale"
+                                    Value="0.85" />
+                            <Setter Property="FontFamily"
+                                    Value="{StaticResource light}" />
+                            <Setter Property="Is24Hours"
+                                    Value="True" />
+                            <Setter Property="FontSize"
+                                    Value="14" />
+                        </Style>
+
+                        <Style TargetType="GroupBox"
+                               BasedOn="{StaticResource MaterialDesignCardGroupBox}"
+                               >
+                            <Setter Property="md:GroupBoxAssist.HeaderPadding"
+                                    Value="0" />
+                            <Setter Property="Margin"
+                                    Value="0 0 20 0" />
+                        </Style>
+
+                        <Style TargetType="CheckBox"
+                               BasedOn="{StaticResource MaterialDesignFilterChipSecondaryCheckBox}">
+                            
+                        </Style>
+                    </Grid.Resources>
+                    
+                    <GroupBox>
+                        <GroupBox.Header>
+                            <Border 
+                                    Padding="15 5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Тренажёрный зал"
+                                               VerticalAlignment="Center"/>
+                                    <CheckBox x:Name="gymEnabled_CheckBox"
+                                              Grid.Column="1"
+                                              Style="{StaticResource MaterialDesignDarkCheckBox}"
+                                              Background="White"
+                                              Margin="5 0 0 0"
+                                              md:CheckBoxAssist.CheckBoxSize="25"
+                                              IsChecked="True"/>
+                                    <CheckBox x:Name="gym24_CheckBox"
+                                              Grid.Column="2"
+                                              Content="Круглосуточный?"
+                                              HorizontalAlignment="Right"
+                                              Checked="TwentyFourCheckBox_Checked"
+                                              Unchecked="TwentyFourCheckBox_Unchecked"
+                                              Tag="gym"/>
+                                </Grid>
+                            </Border>
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Assets/Images/exer/gym.png"
+                                   Height="32" />
+                            <md:TimePicker x:Name="gymStartHours_TimePicker"
+                                           Grid.Column="1"
+                                           md:HintAssist.Hint="Начало доступа"/>
+                            <md:TimePicker x:Name="gymEndHours_TimePicker"
+                                           Grid.Column="2"
+                                           md:HintAssist.Hint="Конец доступа"/>
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="1">
+                        <GroupBox.Header>
+                            <Border 
+                                    Padding="15 5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Бассейн"
+                                               VerticalAlignment="Center" />
+                                    <CheckBox x:Name="poolEnabled_CheckBox"
+                                              Grid.Column="1"
+                                              Style="{StaticResource MaterialDesignDarkCheckBox}"
+                                              Background="White"
+                                              Margin="5 0 0 0"
+                                              md:CheckBoxAssist.CheckBoxSize="25"
+                                              IsChecked="True"/>
+                                    <CheckBox x:Name="pool24_CheckBox"
+                                              Grid.Column="2"
+                                              Content="Круглосуточный?"
+                                              HorizontalAlignment="Right"
+                                              Checked="TwentyFourCheckBox_Checked"
+                                              Unchecked="TwentyFourCheckBox_Unchecked"
+                                              Tag="pool" />
+                                </Grid>
+                            </Border>
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Assets/Images/exer/swimmer.png"
+                                   Height="32" />
+                            <md:TimePicker x:Name="poolStartHours_TimePicker"
+                                           Grid.Column="1"
+                                           md:HintAssist.Hint="Начало доступа" />
+                            <md:TimePicker x:Name="poolEndHours_TimePicker"
+                                           Grid.Column="2"
+                                           md:HintAssist.Hint="Конец доступа" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Grid.Column="2"
+                              Margin="0">
+                        <GroupBox.Header>
+                            <Border 
+                                    Padding="15 5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Хаммам"
+                                               VerticalAlignment="Center" />
+                                    <CheckBox x:Name="hammamEnabled_CheckBox"
+                                              Grid.Column="1"
+                                              Style="{StaticResource MaterialDesignDarkCheckBox}"
+                                              Background="White"
+                                              Margin="5 0 0 0"
+                                              md:CheckBoxAssist.CheckBoxSize="25"
+                                              IsChecked="True"/>
+                                    <CheckBox x:Name="hammam24_CheckBox"
+                                              Grid.Column="2"
+                                              Content="Круглосуточный?"
+                                              HorizontalAlignment="Right"
+                                              Checked="TwentyFourCheckBox_Checked"
+                                              Unchecked="TwentyFourCheckBox_Unchecked"
+                                              Tag="hammam" />
+                                </Grid>
+                            </Border>
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Assets/Images/exer/sauna.png"
+                                   Height="32" />
+                            <md:TimePicker x:Name="hammamStartHours_TimePicker"
+                                           Grid.Column="1"
+                                           md:HintAssist.Hint="Начало доступа" />
+                            <md:TimePicker x:Name="hammamEndHours_TimePicker"
+                                           Grid.Column="2"
+                                           md:HintAssist.Hint="Конец доступа" />
+                        </Grid>
+                    </GroupBox>
+
+                </Grid>
+
+
             </StackPanel>
             
         </ScrollViewer>

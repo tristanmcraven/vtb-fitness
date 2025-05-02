@@ -29,14 +29,17 @@
     <None Remove="Assets\Images\exer\dumbbell_bench_press.png" />
     <None Remove="Assets\Images\exer\dumbbell_flyes.png" />
     <None Remove="Assets\Images\exer\dumbbell_lunges.png" />
+    <None Remove="Assets\Images\exer\gym.png" />
     <None Remove="Assets\Images\exer\lat_pulldown.png" />
     <None Remove="Assets\Images\exer\leg_extension.png" />
     <None Remove="Assets\Images\exer\leg_press.png" />
     <None Remove="Assets\Images\exer\overhead_press.png" />
     <None Remove="Assets\Images\exer\pullups.png" />
     <None Remove="Assets\Images\exer\pushups.png" />
+    <None Remove="Assets\Images\exer\sauna.png" />
     <None Remove="Assets\Images\exer\seated_cable_row.png" />
     <None Remove="Assets\Images\exer\squats.png" />
+    <None Remove="Assets\Images\exer\swimmer.png" />
     <None Remove="Assets\Images\exer\treadmill.png" />
     <None Remove="Assets\Images\logout.png" />
     <None Remove="Assets\Images\no-results.png" />
@@ -113,6 +116,9 @@
     <Resource Include="Assets\Images\exer\dumbbell_lunges.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Images\exer\gym.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\exer\lat_pulldown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -131,10 +137,16 @@
     <Resource Include="Assets\Images\exer\pushups.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Images\exer\sauna.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\exer\seated_cable_row.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\exer\squats.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\exer\swimmer.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\Images\exer\treadmill.png">

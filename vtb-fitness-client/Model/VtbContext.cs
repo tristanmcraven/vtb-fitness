@@ -152,12 +152,19 @@ public partial class VtbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Description).HasColumnName("description");
+            entity.Property(e => e.GymEndTime).HasColumnName("gym_end_time");
+            entity.Property(e => e.GymStartTime).HasColumnName("gym_start_time");
+            entity.Property(e => e.HammamEndTime).HasColumnName("hammam_end_time");
+            entity.Property(e => e.HammamStartTime).HasColumnName("hammam_start_time");
             entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Period).HasColumnName("period");
+            entity.Property(e => e.PoolEndTime).HasColumnName("pool_end_time");
+            entity.Property(e => e.PoolStartTime).HasColumnName("pool_start_time");
             entity.Property(e => e.Price).HasColumnName("price");
             entity.Property(e => e.Pros)
                 .HasColumnType("character varying(250)[]")
                 .HasColumnName("pros");
+            entity.Property(e => e.TrainerWorkoutsPerWeek).HasColumnName("trainer_workouts_per_week");
         });
 
         modelBuilder.Entity<Tracker>(entity =>

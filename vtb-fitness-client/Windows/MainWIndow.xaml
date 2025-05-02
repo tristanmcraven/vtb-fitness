@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="VTB Fitness" Height="1080" Width="1920"
         WindowStyle="None"
-        WindowState="Maximized"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         Style="{StaticResource MaterialDesignWindow}"
         Loaded="Window_Loaded">
 
@@ -134,16 +135,20 @@
                           Margin="0 0 50 0">
                     
                     <GroupBox.Header>
-                        <TextBlock FontSize="24"
-                                   Background="{StaticResource cross_blue}"
-                                   Padding="10 0"
-                                   Margin="20 0 0 0"
-                                   FontFamily="{StaticResource demi_bold}">
-                            <Run Text="Ваш абонемент:" />
-                            <Run x:Name="currentTariff_Run"
-                                 Text="Nigger"
-                                 />
-                        </TextBlock>
+                        <StackPanel Orientation="Horizontal"
+                                    Background="{StaticResource cross_blue}"
+                                    Margin="20 0">
+                            <TextBlock FontSize="24"
+                                       Padding="10 0 0 0"
+                                       Text="Ваш абонемент: "
+                                       FontFamily="{StaticResource demi_bold}" />
+                            <TextBlock x:Name="currentTariff_Run"
+                                       FontFamily="{StaticResource demi_bold}"
+                                       FontSize="24"
+                                       Padding="5 0"
+                                       Margin="0 0 10 0"/>
+                        </StackPanel>
+
                     </GroupBox.Header>
                     
                     <StackPanel Orientation="Horizontal"

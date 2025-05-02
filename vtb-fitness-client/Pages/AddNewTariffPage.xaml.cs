@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
+﻿using MaterialDesignThemes.Wpf;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -112,6 +113,40 @@ namespace vtb_fitness_client.Pages
         private void goBack_Button_Click(object sender, RoutedEventArgs e)
         {
             PageManager.MainFrame.GoBack();
+        }
+
+        private void TwentyFourCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var tag = (sender as CheckBox)?.Tag as string;
+            if (String.IsNullOrWhiteSpace(tag)) return;
+
+            var startTimePicker = FindName($"{tag}StartHours_TimePicker") as TimePicker;
+            var endTimePicker = FindName($"{tag}EndHours_TimePicker") as TimePicker;
+
+            if (startTimePicker != null) startTimePicker.IsEnabled = false;
+            if (endTimePicker != null) endTimePicker.IsEnabled = false;
+        }
+
+        private void TwentyFourCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var tag = (sender as CheckBox)?.Tag as string;
+            if (String.IsNullOrWhiteSpace(tag)) return;
+
+            var startTimePicker = FindName($"{tag}StartHours_TimePicker") as TimePicker;
+            var endTimePicker = FindName($"{tag}EndHours_TimePicker") as TimePicker;
+
+            if (startTimePicker != null) startTimePicker.IsEnabled = true;
+            if (endTimePicker != null) endTimePicker.IsEnabled = true;
+        }
+
+        private void VerifyNumericInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
+
+        private void VerifyNumericPaste(object sender, DataObjectPastingEventArgs e)
+        {
+
         }
     }
 }

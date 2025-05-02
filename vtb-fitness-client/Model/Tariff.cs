@@ -17,5 +17,19 @@ public partial class Tariff
 
     public List<string>? Pros { get; set; }
 
+    public TimeOnly? GymStartTime { get; set; }
+
+    public TimeOnly? GymEndTime { get; set; }
+
+    public TimeOnly? PoolStartTime { get; set; }
+
+    public TimeOnly? PoolEndTime { get; set; }
+
+    public TimeOnly? HammamStartTime { get; set; }
+
+    public TimeOnly? HammamEndTime { get; set; }
+
+    public int? TrainerWorkoutsPerWeek { get; set; }
+
     public virtual ICollection<UserTariff> UserTariffs { get; set; } = new List<UserTariff>();
 }

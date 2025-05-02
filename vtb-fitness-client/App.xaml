@@ -13,7 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <md:BundledTheme BaseTheme="Dark"
                                  PrimaryColor="Blue"
-                                 SecondaryColor="Yellow" />
+                                 SecondaryColor="Green" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
@@ -196,7 +196,7 @@
                                 </Grid.RowDefinitions>
                                 <Border BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="10"
+                                        CornerRadius="20"
                                         Grid.ColumnSpan="4"
                                         Grid.RowSpan="3"
                                         Grid.Row="1"

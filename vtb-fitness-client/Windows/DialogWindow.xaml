@@ -44,42 +44,46 @@
                     Value="20 0 0 0" />
         </Style>
     </Window.Resources>
-    
-    <Grid Margin="25">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
 
-        <TextBlock x:Name="title_TextBlock"
-                   Text="Caption"
-                   FontFamily="{StaticResource demi_bold}"
-                   Margin="0 0 0 10"
-                   FontSize="20"/>
+    <Border BorderThickness="1.5"
+            BorderBrush="Wheat">
+        <Grid Margin="25">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-        <TextBlock x:Name="message_TextBlock"
-                   Grid.Row="1"
-                   Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum quis ante sit amet tristique. Quisque eu augue sed augue sodales efficitur. In rhoncus cursus iaculis. Praesent ultricies mollis ligula, in hendrerit velit. Suspendisse condimentum leo eget libero interdum dapibus. Integer non molestie nisi."
-                   TextWrapping="WrapWithOverflow"/>
+            <TextBlock x:Name="title_TextBlock"
+                       Text="Caption"
+                       FontFamily="{StaticResource demi_bold}"
+                       Margin="0 0 0 10"
+                       FontSize="20" />
 
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="2"
-                    HorizontalAlignment="Right">
-            
-            <Button x:Name="ok_Button"
-                    Content="ОК"
-                    Click="ok_Button_Click" />
+            <TextBlock x:Name="message_TextBlock"
+                       Grid.Row="1"
+                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum quis ante sit amet tristique. Quisque eu augue sed augue sodales efficitur. In rhoncus cursus iaculis. Praesent ultricies mollis ligula, in hendrerit velit. Suspendisse condimentum leo eget libero interdum dapibus. Integer non molestie nisi."
+                       TextWrapping="WrapWithOverflow" />
 
-            <Button x:Name="yes_Button"
-                    Content="Да"
-                    Click="yes_Button_Click" />
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="2"
+                        HorizontalAlignment="Right">
 
-            <Button x:Name="no_Button"
-                    Content="Нет"
-                    Click="no_Button_Click" />
+                <Button x:Name="ok_Button"
+                        Content="ОК"
+                        Click="ok_Button_Click" />
 
-        </StackPanel>
+                <Button x:Name="yes_Button"
+                        Content="Да"
+                        Click="yes_Button_Click" />
 
-    </Grid>
+                <Button x:Name="no_Button"
+                        Content="Нет"
+                        Click="no_Button_Click" />
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+
 </Window>
