@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:vtb_fitness_client.Windows"
         mc:Ignorable="d"
         Title="VTB Fitness" Height="1080" Width="1920"
-        ResizeMode="NoResize"
         WindowStyle="None"
+        WindowState="Maximized"
         Style="{StaticResource MaterialDesignWindow}"
         Loaded="Window_Loaded">
     <Grid x:Name="body">

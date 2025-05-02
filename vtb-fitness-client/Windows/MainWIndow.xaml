@@ -25,12 +25,6 @@
         </RadialGradientBrush>
     </local:CustomWindow.Background>
 
-    <local:CustomWindow.Resources>
-        <Style TargetType="TextBlock"
-               BasedOn="{StaticResource global_TextBlock}">
-            
-        </Style>
-    </local:CustomWindow.Resources>
 
     <Grid x:Name="body">
 
@@ -44,6 +38,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
@@ -99,7 +94,7 @@
                                     x:Name="user_StackPanel">
                             <TextBlock x:Name="tracker_TextBlock"
                                        Text="Трекер"
-                                       MouseLeftButtonUp="tracker_TextBlock_MouseLeftButtonUp"/>
+                                       MouseLeftButtonUp="tracker_TextBlock_MouseLeftButtonUp" />
                             <TextBlock x:Name="tariffs_TextBlock"
                                        Text="Абонементы"
                                        MouseLeftButtonUp="tariffs_TextBlock_MouseLeftButtonUp" />
@@ -109,10 +104,10 @@
                                     x:Name="mod_StackPanel">
                             <TextBlock x:Name="users_TextBlock"
                                        Text="Пользователи"
-                                       MouseLeftButtonUp="users_TextBlock_MouseLeftButtonUp"/>
+                                       MouseLeftButtonUp="users_TextBlock_MouseLeftButtonUp" />
                             <TextBlock x:Name="trainers_TextBlock"
                                        Text="Тренеры"
-                                       MouseLeftButtonUp="trainers_TextBlock_MouseLeftButtonUp"/>
+                                       MouseLeftButtonUp="trainers_TextBlock_MouseLeftButtonUp" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal"
@@ -124,7 +119,7 @@
                                     x:Name="admin_StackPanel">
                             <TextBlock x:Name="mods_TextBlock"
                                        Text="Модераторы"
-                                       MouseLeftButtonUp="mods_TextBlock_MouseLeftButtonUp"/>
+                                       MouseLeftButtonUp="mods_TextBlock_MouseLeftButtonUp" />
                         </StackPanel>
 
                     </StackPanel>
@@ -132,8 +127,104 @@
 
                 </ScrollViewer>
 
+                <GroupBox x:Name="currentTariff_GroupBox"
+                          Grid.Column="2"
+                          Style="{StaticResource tariff_GroupBox}"
+                          VerticalAlignment="Center"
+                          Margin="0 0 50 0">
+                    
+                    <GroupBox.Header>
+                        <TextBlock FontSize="24"
+                                   Background="{StaticResource cross_blue}"
+                                   Padding="10 0"
+                                   Margin="20 0 0 0"
+                                   FontFamily="{StaticResource demi_bold}">
+                            <Run Text="Ваш абонемент:" />
+                            <Run x:Name="currentTariff_Run"
+                                 Text="Nigger"
+                                 />
+                        </TextBlock>
+                    </GroupBox.Header>
+                    
+                    <StackPanel Orientation="Horizontal"
+                                Margin="20 0">
+                        
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock"
+                                   BasedOn="{StaticResource global_TextBlock}">
+                                
+                            </Style>
+                        </StackPanel.Resources>
+                        
+                        <TextBlock x:Name="noTariff_TextBlock"
+                                   Foreground="DarkGray"
+                                   FontSize="20">
+                            <TextBlock.Resources>
+                                <Style TargetType="Run">
+                                    <Setter Property="BaselineAlignment"
+                                            Value="Center" />
+                                </Style>
+                            </TextBlock.Resources>
+                            <Run Text="У вас ещё нет абонемента."/>
+                            <Image Source="/Assets/Images/sad_emoji.png"
+                                   Height="42"/>
+                            <LineBreak />
+                            <Run Text="Давайте" />
+                            <Run Text="купим его"
+                                 MouseLeftButtonUp="Run_MouseLeftButtonUp">
+                                <Run.Style>
+                                    <Style TargetType="Run">
+                                        <Setter Property="BaselineAlignment"
+                                                Value="Center" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="DeepSkyBlue" />
+                                                <Setter Property="TextDecorations"
+                                                        Value="Underline" />
+                                                <Setter Property="Cursor"
+                                                        Value="Hand" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Run.Style>
+                            </Run>
+                            <Run Text="прямо сейчас?" />
+                            <Image Source="/Assets/Images/wink_emoji.png"
+                                   Height="42"/>
+                        </TextBlock>
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="tariffStatuses_StackPanel">
+                            <StackPanel.Resources>
+                                <Style TargetType="StackPanel">
+                                    <Setter Property="Margin"
+                                            Value="0 0 20 0 " />
+                                </Style>
+                            </StackPanel.Resources>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Тренажёрный зал:" />
+                                <TextBlock x:Name="gymStatus_TextBlock" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Бассейн:" />
+                                <TextBlock x:Name="poolStatus_TextBlock" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Хаммам:" />
+                                <TextBlock x:Name="hammamStatus_TextBlock" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Тренер:" />
+                                <TextBlock x:Name="trainerStatus_TextBlock" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                </GroupBox>
+
                 <Border x:Name="profile_Border"
-                        Grid.Column="2"
+                        Grid.Column="3"
                         Background="{StaticResource magic_dark_blue}"
                         BorderBrush="Gray"
                         BorderThickness="2"

@@ -45,7 +45,9 @@
     <None Remove="Assets\Images\plus.png" />
     <None Remove="Assets\Images\profile.png" />
     <None Remove="Assets\Images\quit.png" />
+    <None Remove="Assets\Images\sad_emoji.png" />
     <None Remove="Assets\Images\vtb-logo-tp.png" />
+    <None Remove="Assets\Images\wink_emoji.png" />
     <None Remove="Assets\Videos\vidnew.mp4" />
   </ItemGroup>
 
@@ -159,7 +161,13 @@
     <Resource Include="Assets\Images\quit.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Images\sad_emoji.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\vtb-logo-tp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Images\wink_emoji.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -190,10 +190,12 @@
                          MaxLength="25"/>
                 <PasswordBox x:Name="passwordBox"
                              md:HintAssist.Hint="Пароль"
-                             MaxLength="25"/>
+                             MaxLength="25"
+                             md:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
                 <PasswordBox x:Name="passwordBoxConfirm"
                              md:HintAssist.Hint="Пароль ещё раз"
-                             MaxLength="25"/>
+                             MaxLength="25"
+                             md:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
 
             </StackPanel>
             

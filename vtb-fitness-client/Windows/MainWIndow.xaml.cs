@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using vtb_fitness_client.Network;
 using vtb_fitness_client.Pages;
 using vtb_fitness_client.Utility;
 
@@ -47,6 +48,28 @@ namespace vtb_fitness_client.Windows
                 users_TextBlock.Visibility = Visibility.Collapsed;
                 trainers_TextBlock.Visibility = Visibility.Collapsed;
                 mods_TextBlock.Visibility = Visibility.Collapsed;
+            }
+
+            UpdateCurrentTariffData();
+        }
+
+        private async Task UpdateCurrentTariffData()
+        {
+            var userTariff = await ApiClient._User.GetCurrentTariff(App.CurrentUser.Id);
+            if (userTariff == null)
+            {
+                currentTariff_Run.Text = "Нет";
+                currentTariff_Run.Background = new SolidColorBrush(Colors.Red);
+
+                tariffStatuses_StackPanel.Visibility = Visibility.Collapsed;
+                noTariff_TextBlock.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                var tariff = userTariff.Tariff;
+
+                currentTariff_Run.Text = tariff.Name + $" {tariff.Period.Value.Hours}";
+
             }
         }
 
@@ -146,6 +169,11 @@ namespace vtb_fitness_client.Windows
         private void tracker_TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             PageManager.MainFrame.Navigate(new TrackerPage());
+        }
+
+        private void Run_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            PageManager.MainFrame.Navigate(new TariffsPage());
         }
     }
 }

@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:vtb_fitness_client"
              xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
-             StartupUri="Windows/StartWindow.xaml">
+             StartupUri="Windows/StartWindow.xaml"
+    xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf">
     <Application.Resources>
 
         <ResourceDictionary>
@@ -32,11 +33,15 @@
                              Color="#002783" />
             <SolidColorBrush x:Key="magic_dark_blue"
                              Color="#020224" />
+            <SolidColorBrush x:Key="cross_blue"
+                             Color="#14213F" />
 
             <Color x:Key="dark_blue_color">#202735</Color>
             <Color x:Key="bg_color">#1c1f26</Color>
             <Color x:Key="magic_blue_color">#002783</Color>
             <Color x:Key="magic_dark_blue_color">#020224</Color>
+            <Color x:Key="cross_blue_color">#14213F</Color>
+            
 
             <Style TargetType="ScrollViewer"
                    BasedOn="{StaticResource MaterialDesignScrollViewer}">
@@ -167,8 +172,66 @@
                 </Style.Triggers>
             </Style>
 
-                   
-            
+            <!--Custom style for GroupBox-->
+            <BorderGapMaskConverter x:Key="BorderGapMaskConverter" />
+            <Style x:Key="tariff_GroupBox"
+                   TargetType="{x:Type GroupBox}">
+                <Setter Property="UseLayoutRounding"
+                        Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Grid SnapsToDevicePixels="true">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="6" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="6" />
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Grid.ColumnSpan="4"
+                                        Grid.RowSpan="3"
+                                        Grid.Row="1"
+                                        SnapsToDevicePixels="False">
+                                    <Border.OpacityMask>
+                                        <MultiBinding ConverterParameter="7"
+                                                      Converter="{StaticResource BorderGapMaskConverter}">
+                                            <Binding Path="ActualWidth"
+                                                     RelativeSource="{RelativeSource Mode=Self}" />
+                                            <Binding Path="ActualHeight"
+                                                     RelativeSource="{RelativeSource Mode=Self}" />
+                                        </MultiBinding>
+                                    </Border.OpacityMask>
+                                </Border>
+                                <Border x:Name="Header"
+                                        Grid.Column="1"
+                                        Padding="5,1,3,0"
+                                        Grid.RowSpan="2"
+                                        Grid.Row="0"
+                                        SnapsToDevicePixels="True">
+                                    <ContentPresenter ContentSource="Header"
+                                                      RecognizesAccessKey="True"
+                                                      SnapsToDevicePixels="True" />
+                                </Border>
+                                <ContentPresenter Grid.Column="1"
+                                                  Grid.ColumnSpan="2"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  Grid.Row="2"
+                                                  SnapsToDevicePixels="False" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
         
     </Application.Resources>
