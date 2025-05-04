@@ -79,7 +79,7 @@ namespace vtb_fitness_api.Controllers
         [HttpGet("{id}/current_tariff")]
         public async Task<IActionResult> GetCurrentTariff(int id)
         {
-            var tariff = await _context.UserTariffs.Where(x => x.UserId == id && x.ExpiresAt > DateTime.Now).Include(x => x.Tariff).FirstOrDefaultAsync();
+            var tariff = await _context.UserTariffs.Where(x => x.UserId == id && x.ExpiresAt > DateTime.Now).Include(x => x.Tariff).OrderBy(x => x.Id).LastOrDefaultAsync();
             return tariff != null ? Ok(tariff) : NotFound();
         }
 

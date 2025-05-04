@@ -53,13 +53,13 @@ namespace vtb_fitness_client.Windows
             UpdateCurrentTariffData();
         }
 
-        private async Task UpdateCurrentTariffData()
+        public async void UpdateCurrentTariffData()
         {
             var userTariff = await ApiClient._User.GetCurrentTariff(App.CurrentUser.Id);
             if (userTariff == null)
             {
-                currentTariff_Run.Text = "Нет";
-                currentTariff_Run.Background = new SolidColorBrush(Colors.Red);
+                currentTariff_TextBlock.Text = "Нет";
+                currentTariff_TextBlock.Background = new SolidColorBrush(Colors.Red);
 
                 tariffStatuses_StackPanel.Visibility = Visibility.Collapsed;
                 noTariff_TextBlock.Visibility = Visibility.Visible;
@@ -68,8 +68,15 @@ namespace vtb_fitness_client.Windows
             {
                 var tariff = userTariff.Tariff;
 
-                currentTariff_Run.Text = tariff.Name + $" {tariff.Period.Value.Hours}";
+                currentTariff_TextBlock.Text = tariff.Name + $" {Helper.GetTariffDuration(tariff)}";
+                currentTariff_TextBlock.ClearValue(TextBlock.BackgroundProperty);
 
+                gymStatus_TextBlock.Text = Helper.GetFacilityStatus(tariff.GymStartTime, tariff.GymEndTime, gymStatus_TextBlock);
+                poolStatus_TextBlock.Text = Helper.GetFacilityStatus(tariff.PoolStartTime, tariff.PoolEndTime, poolStatus_TextBlock);
+                hammamStatus_TextBlock.Text = Helper.GetFacilityStatus(tariff.HammamStartTime, tariff.HammamEndTime, hammamStatus_TextBlock);
+
+                tariffStatuses_StackPanel.Visibility = Visibility.Visible;
+                noTariff_TextBlock.Visibility = Visibility.Collapsed;
             }
         }
 

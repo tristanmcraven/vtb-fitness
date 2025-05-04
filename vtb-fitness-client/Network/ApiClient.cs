@@ -81,6 +81,7 @@ namespace vtb_fitness_client.Network
             public static async Task<List<Tariff>> Get() => await SendRequest<List<Tariff>>("tariff", HttpMethod.Get);
 
             public static async Task<Tariff?> Create(TariffCreateDto dto) => await SendRequest<Tariff>("tariff", HttpMethod.Post, dto);
+            public static async Task<UserTariff> Purchase(TariffPurchaseDto dto) => await SendRequest<UserTariff>("tariff/purchase", HttpMethod.Post, dto);
         }
 
         public static class _Role

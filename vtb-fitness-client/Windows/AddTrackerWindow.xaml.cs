@@ -36,6 +36,19 @@ namespace vtb_fitness_client.Windows
         private void InitView()
         {
             AddTintToSenderWindow();
+            RefreshTrainers();
+        }
+
+        private async void RefreshTrainers()
+        {
+            var trainers = (await ApiClient._User.Get()).Where(x => x.RoleId == 4).ToList();
+
+            foreach (var t in trainers)
+            {
+                trainer_ComboBox.Items.Add(new TrainerComboBoxUserControl(t));
+            }
+            trainer_ComboBox.Items.Insert(0, new TrainerComboBoxUserControl(null));
+            
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -45,8 +45,8 @@
         </Style>
     </Window.Resources>
 
-    <Border BorderThickness="1.5"
-            BorderBrush="Wheat">
+    <!--<Border BorderThickness="1.5"
+            BorderBrush="Wheat">-->
         <Grid Margin="25">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -84,6 +84,6 @@
             </StackPanel>
 
         </Grid>
-    </Border>
+    <!--</Border>-->
 
 </Window>

@@ -16,6 +16,8 @@ using vtb_fitness_client.Model;
 using vtb_fitness_client.Utility;
 using vtb_fitness_client.Windows;
 using MaterialDesignThemes.Wpf;
+using vtb_fitness_client.Network;
+using vtb_fitness_client.Dto;
 
 namespace vtb_fitness_client.UserControls
 {
@@ -35,7 +37,7 @@ namespace vtb_fitness_client.UserControls
         private void InitView()
         {
             var nameTb = expander.Header as TextBlock;
-            nameTb.Text = $"{_tariff.Name} ({_tariff.Period.Value.Hours} мес.)";
+            nameTb.Text = $"{_tariff.Name} ({Helper.GetTariffDuration(_tariff)} мес.)";
 
             ExpanderAssist.SetExpanderButtonContent(expander, new TariffPriceUserControl(_tariff.Price));
 
@@ -50,13 +52,30 @@ namespace vtb_fitness_client.UserControls
 
         private async void buy_Button_Click(object sender, RoutedEventArgs e)
         {
+            var discountedPrice = Helper.GetDiscountedPrice((double)_tariff.Price, await Helper.GetUserSalePercent(App.CurrentUser.Id));
+
             var dw = new DialogWindow(DialogWindowType.Confirmation,
                                       $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за " +
-                                      $"{Helper.GetDiscountedPriceAsString((double)_tariff.Price, await Helper.GetUserSalePercent(App.CurrentUser.Id))}₽?");
+                                      $"{discountedPrice}₽?");
             dw.ShowDialog();
+
             if (dw.DialogResult)
             {
-
+                var dto = new TariffPurchaseDto
+                {
+                    UserId = App.CurrentUser.Id,
+                    TariffId = _tariff.Id,
+                    MoneyPaid = discountedPrice
+                };
+                var result = await ApiClient._Tariff.Purchase(dto);
+                if (result != null)
+                {
+                    new DialogWindow(DialogWindowType.Success, $"Вы успешно приобрели абонемент {_tariff.Name} за {discountedPrice}₽. Можете приступать к тренировкам!")
+                        .ShowDialog();
+                    WindowManager.Get<MainWindow>().UpdateCurrentTariffData();
+                    return;
+                }
+                else new DialogWindow().ShowDialog();
             }
         }
     }

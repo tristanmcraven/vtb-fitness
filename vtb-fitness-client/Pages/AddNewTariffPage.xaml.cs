@@ -52,7 +52,25 @@ namespace vtb_fitness_client.Pages
                     pros = true;
             }
 
-            return result || pros;
+            bool hours = false;
+            if (gymEnabled_CheckBox.IsChecked == true && gym24_CheckBox.IsChecked == false)
+            {
+                hours = !gymStartHours_TimePicker.SelectedTime.HasValue || !gymEndHours_TimePicker.SelectedTime.HasValue;
+            }
+            if (poolEnabled_CheckBox.IsChecked == true && pool24_CheckBox.IsChecked == false)
+            {
+                hours = !poolStartHours_TimePicker.SelectedTime.HasValue || !poolEndHours_TimePicker.SelectedTime.HasValue;
+            }
+            if (hammamEnabled_CheckBox.IsChecked == true && hammam24_CheckBox.IsChecked == false)
+            {
+                hours = !hammamStartHours_TimePicker.SelectedTime.HasValue || !hammamEndHours_TimePicker.SelectedTime.HasValue;
+            }
+            if (trainerEnabled_CheckBox.IsChecked == true && trainer24_CheckBox.IsChecked == false)
+            {
+                hours = String.IsNullOrWhiteSpace(trainerWorkoutsPerWeek_TextBox.Text);
+            }
+
+            return result || pros || hours;
         }
 
         private void AddProTextBox()
@@ -64,6 +82,7 @@ namespace vtb_fitness_client.Pages
                     AddProTextBox();
             };
             pros_StackPanel.Children.Add(tb);
+            tb.Focus();
         }
 
         private List<string> GetPros()
@@ -92,8 +111,29 @@ namespace vtb_fitness_client.Pages
                 Name = name_TextBox.Text,
                 Description = description_TextBox.Text,
                 Price = Convert.ToDouble(price_TextBox.Text),
-                Period = new TimeSpan(int.Parse(period_TextBox.Text), 0, 0),
-                Pros = GetPros()
+                Period = new TimeSpan(int.Parse(period_TextBox.Text), 0, 0), //it is what it is
+                Pros = GetPros(),
+                GymStartTime = gymEnabled_CheckBox.IsChecked == true 
+                    ? gym24_CheckBox.IsChecked == false 
+                        ? TimeOnly.FromDateTime(gymStartHours_TimePicker.SelectedTime!.Value) : new TimeOnly(00, 00) : null,
+                GymEndTime = gymEnabled_CheckBox.IsChecked == true
+                    ? gym24_CheckBox.IsChecked == false
+                        ? TimeOnly.FromDateTime(gymEndHours_TimePicker.SelectedTime!.Value) : new TimeOnly(00, 00) : null,
+                PoolStartTime = poolEnabled_CheckBox.IsChecked == true
+                    ? pool24_CheckBox.IsChecked == false
+                        ? TimeOnly.FromDateTime(poolStartHours_TimePicker.SelectedTime!.Value) : new TimeOnly(00, 00) : null,
+                PoolEndTime = poolEnabled_CheckBox.IsChecked == true
+                    ? pool24_CheckBox.IsChecked == false
+                        ? TimeOnly.FromDateTime(poolEndHours_TimePicker.SelectedTime!.Value) : new TimeOnly(00, 00) : null,
+                HammamStartTime = hammamEnabled_CheckBox.IsChecked == true
+                    ? hammam24_CheckBox.IsChecked == false
+                        ? TimeOnly.FromDateTime(hammamStartHours_TimePicker.SelectedTime!.Value) : new TimeOnly(00, 00) : null,
+                HammamEndTime = hammamEnabled_CheckBox.IsChecked == true
+                    ? hammam24_CheckBox.IsChecked == false
+                        ? TimeOnly.FromDateTime(hammamEndHours_TimePicker.SelectedTime!.Value) : new TimeOnly(00, 00) : null,
+                TrainerWorkoutsPerWeek = trainerEnabled_CheckBox.IsChecked == true
+                    ? trainer24_CheckBox.IsChecked == false
+                        ? int.Parse(trainerWorkoutsPerWeek_TextBox.Text) : 666 : null
             };
             var tariff = await ApiClient._Tariff.Create(dto);
             if (tariff != null)
@@ -120,6 +160,12 @@ namespace vtb_fitness_client.Pages
             var tag = (sender as CheckBox)?.Tag as string;
             if (String.IsNullOrWhiteSpace(tag)) return;
 
+            if (tag == "trainer")
+            {
+                (FindName($"{tag}WorkoutsPerWeek_TextBox") as TextBox).IsEnabled = false;
+                return;
+            }
+
             var startTimePicker = FindName($"{tag}StartHours_TimePicker") as TimePicker;
             var endTimePicker = FindName($"{tag}EndHours_TimePicker") as TimePicker;
 
@@ -132,6 +178,12 @@ namespace vtb_fitness_client.Pages
             var tag = (sender as CheckBox)?.Tag as string;
             if (String.IsNullOrWhiteSpace(tag)) return;
 
+            if (tag == "trainer")
+            {
+                (FindName($"{tag}WorkoutsPerWeek_TextBox") as TextBox).IsEnabled = true;
+                return;
+            }
+
             var startTimePicker = FindName($"{tag}StartHours_TimePicker") as TimePicker;
             var endTimePicker = FindName($"{tag}EndHours_TimePicker") as TimePicker;
 
@@ -139,14 +191,74 @@ namespace vtb_fitness_client.Pages
             if (endTimePicker != null) endTimePicker.IsEnabled = true;
         }
 
+        private void EnabledCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var cb = sender as CheckBox;
+            if (cb != null)
+            {
+                var gb = Helper.FindParent<GroupBox>(cb);
+                if (gb != null)
+                {
+                    gb.ClearValue(GroupBox.BackgroundProperty);
+                    var headerBorder = gb.Header as Border;
+                    if (headerBorder != null) headerBorder.ClearValue(Border.BackgroundProperty);
+
+                    var tag = cb.Tag as string;
+                    if (tag != null)
+                    {
+                        var _24cb = FindName($"{tag}24_CheckBox") as CheckBox;
+                        if (_24cb != null) _24cb.IsEnabled = true;
+                    }
+                    var content = gb.Content as Grid;
+                    if (content != null)
+                    {
+                        content.IsEnabled = true;
+                    }
+                }
+            }
+        }
+
+        private void EnabledCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var cb = sender as CheckBox;
+            if (cb != null)
+            {
+                var gb = Helper.FindParent<GroupBox>(cb);
+                if ( gb != null )
+                {
+                    gb.Background = FindResource("dark_blue") as SolidColorBrush;
+                    var headerBorder = gb.Header as Border;
+                    if (headerBorder != null) headerBorder.Background = FindResource("dark_blue") as SolidColorBrush;
+
+                    var tag = cb.Tag as string;
+                    if (tag != null)
+                    {
+                        var _24cb = FindName($"{tag}24_CheckBox") as CheckBox;
+                        if (_24cb != null) _24cb.IsEnabled = false;
+                    }
+                    var content = gb.Content as Grid;
+                    if (content != null)
+                    {
+                        content.IsEnabled = false;
+                    }
+                }
+            }
+        }
+
         private void VerifyNumericInput(object sender, TextCompositionEventArgs e)
         {
-
+            if (!Helper.IsNumeric(e.Text)) e.Handled = true;
         }
 
         private void VerifyNumericPaste(object sender, DataObjectPastingEventArgs e)
         {
-
+            if (e.DataObject.GetDataPresent(DataFormats.Text))
+            {
+                string text = (string)e.DataObject.GetData(DataFormats.Text);
+                if (!Helper.IsNumeric(text))
+                    e.CancelCommand();
+            }
+            else e.CancelCommand();
         }
     }
 }

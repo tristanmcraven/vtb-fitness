@@ -14,7 +14,7 @@
                 <md:BundledTheme BaseTheme="Dark"
                                  PrimaryColor="Blue"
                                  SecondaryColor="Green" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <FontFamily x:Key="light">pack://application:,,,/Assets/Fonts/#VTB Group Light</FontFamily>
@@ -60,12 +60,13 @@
                 <Setter Property="RenderOptions.BitmapScalingMode"
                         Value="HighQuality" />
             </Style>
+
             <Style x:Key="global_Image"
                    TargetType="Image">
                 <Setter Property="RenderOptions.BitmapScalingMode"
                         Value="HighQuality" />
             </Style>
-
+            
             <Style x:Key="global_TextBox"
                    TargetType="TextBox"
                    BasedOn="{StaticResource MaterialDesignOutlinedTextBox}">

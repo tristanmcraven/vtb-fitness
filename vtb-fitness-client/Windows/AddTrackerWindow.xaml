@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:vtb_fitness_client.Windows"
         mc:Ignorable="d"
         Title="AddTrackerWindow" Height="800" Width="700"
@@ -49,7 +50,8 @@
                           VerticalScrollBarVisibility="Auto"
                           CanContentScroll="False"
                           Grid.Row="1">
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical"
+                            Margin="0 0 0 20">
                     <TextBlock Text="Кардио"
                                Style="{StaticResource header_TextBlock}"
                                HorizontalAlignment="Left" />
@@ -79,15 +81,25 @@
                     </StackPanel>
                     <Button x:Name="addWeight_Button"
                             Content="Добавить упражнение"
-                            Click="addWeight_Button_Click"
-                            Margin="0 0 0 40" />
+                            Click="addWeight_Button_Click" />
+
+                    <TextBlock Text="Тренер:"
+                               Style="{StaticResource header_TextBlock}"
+                               HorizontalAlignment="Left" />
+                    <ComboBox x:Name="trainer_ComboBox"
+                              SelectedIndex="0"
+                              HorizontalContentAlignment="Left"
+                              Style="{StaticResource global_ComboBox}"/>
+                    
 
                     <Button x:Name="addDate_Button"
                             Content="Добавить дату вручную"
-                            Click="addDate_Button_Click" />
+                            Click="addDate_Button_Click"
+                            Margin="0 40 0 0"/>
                     <DatePicker x:Name="datePicker"
                                 Language="ru-RU"
                                 Visibility="Collapsed" />
+
                 </StackPanel>
 
             </ScrollViewer>

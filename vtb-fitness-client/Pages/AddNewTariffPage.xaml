@@ -19,11 +19,26 @@
                BasedOn="{StaticResource global_TextBox}">
             <Setter Property="Margin"
                     Value="0 0 0 10" />
+            <Setter Property="MaxLength"
+                    Value="150" />
+            <Setter Property="md:TextFieldAssist.CharacterCounterVisibility"
+                    Value="Collapsed" />
         </Style>
 
         <Style TargetType="Button"
                BasedOn="{StaticResource global_Button}">
             
+        </Style>
+
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource global_TextBlock}"
+               x:Key="semiHeader_TextBlock">
+            <Setter Property="FontSize"
+                    Value="22" />
+            <Setter Property="Margin"
+                    Value="0 5" />
+            <Setter Property="FontFamily"
+                    Value="{StaticResource demi_bold}" />
         </Style>
     </Page.Resources>
 
@@ -38,33 +53,56 @@
                       VerticalScrollBarVisibility="Auto"
                       CanContentScroll="False">
             
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical"
+                        Margin="0 0 0 20">
                 <TextBlock Text="Добавление нового абонемента"
-                           Style="{StaticResource header_TextBlock}"/>
-                
+                           Style="{StaticResource header_TextBlock}" />
+
+                <StackPanel Orientation="Vertical"
+                            Margin="20 0 0 10">
+                    <TextBlock Text="Общая информация"
+                               Style="{StaticResource semiHeader_TextBlock}"/>
+                    <TextBlock Text="Введите общую информацию об абонементе." />
+                </StackPanel>
+
                 <TextBox x:Name="name_TextBox"
                          md:HintAssist.Hint="Название абонемента" />
                 <TextBox x:Name="description_TextBox"
-                         md:HintAssist.Hint="Описание" />
+                         md:HintAssist.Hint="Описание"
+                         MaxLength="1000"
+                         MaxWidth="1280"
+                         TextWrapping="Wrap"/>
                 <TextBox x:Name="price_TextBox"
-                         md:HintAssist.Hint="Цена" />
+                         md:HintAssist.Hint="Цена"
+                         md:TextFieldAssist.HasTrailingIcon="True"
+                         md:TextFieldAssist.TrailingIcon="Ruble"
+                         PreviewTextInput="VerifyNumericInput"
+                         DataObject.Pasting="VerifyNumericPaste"
+                         MaxLength="7"/>
                 <TextBox x:Name="period_TextBox"
-                         md:HintAssist.Hint="Срок абонемента (в месяцах)" />
-                
-                <TextBlock Text="Преимущества абонемента"
-                           FontSize="24"
-                           Margin="0 5"
-                           FontFamily="{StaticResource demi_bold}"/>
-                <TextBlock Text="Укажите преимущества абонемента, которые будут отображаться как список на главной странице абонемента."
-                           Margin="0 0 0 10"/>
+                         md:HintAssist.Hint="Срок абонемента (в месяцах)"
+                         PreviewTextInput="VerifyNumericInput"
+                         DataObject.Pasting="VerifyNumericPaste"
+                         MaxLength="2"/>
+
+                <StackPanel Orientation="Vertical"
+                            Margin="20 0 0 10">
+                    <TextBlock Text="Преимущества абонемента"
+                               Style="{StaticResource semiHeader_TextBlock}" />
+                    <TextBlock Text="Укажите преимущества абонемента, которые будут отображаться как список на главной странице абонемента." />
+                </StackPanel>
 
                 <StackPanel Orientation="Vertical"
                             x:Name="pros_StackPanel">
 
                 </StackPanel>
 
-                <TextBlock Text="Часы посещения" />
-                <TextBlock Text="Укажите доступные часы для посещения зала, бассейна или хаммама. Это поможет клиенту понять, когда действует абонемент." />
+                <StackPanel Orientation="Vertical"
+                            Margin="20 0 0 10">
+                    <TextBlock Text="Часы посещения"
+                               Style="{StaticResource semiHeader_TextBlock}"/>
+                    <TextBlock Text="Укажите доступные часы для посещения зала, бассейна или хаммама. Это поможет клиенту понять, когда действует абонемент." />
+                </StackPanel>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -73,6 +111,10 @@
                         <ColumnDefinition Width="1*" />
                         <ColumnDefinition Width="auto" />
                     </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
 
                     <Grid.Resources>
                         <Style TargetType="md:TimePicker"
@@ -92,8 +134,7 @@
                         </Style>
 
                         <Style TargetType="GroupBox"
-                               BasedOn="{StaticResource MaterialDesignCardGroupBox}"
-                               >
+                               BasedOn="{StaticResource MaterialDesignCardGroupBox}">
                             <Setter Property="md:GroupBoxAssist.HeaderPadding"
                                     Value="0" />
                             <Setter Property="Margin"
@@ -102,14 +143,13 @@
 
                         <Style TargetType="CheckBox"
                                BasedOn="{StaticResource MaterialDesignFilterChipSecondaryCheckBox}">
-                            
+
                         </Style>
                     </Grid.Resources>
-                    
+
                     <GroupBox>
                         <GroupBox.Header>
-                            <Border 
-                                    Padding="15 5">
+                            <Border Padding="15 5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
@@ -117,21 +157,24 @@
                                         <ColumnDefinition Width="1*" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="Тренажёрный зал"
-                                               VerticalAlignment="Center"/>
+                                               VerticalAlignment="Center" />
                                     <CheckBox x:Name="gymEnabled_CheckBox"
                                               Grid.Column="1"
                                               Style="{StaticResource MaterialDesignDarkCheckBox}"
                                               Background="White"
                                               Margin="5 0 0 0"
                                               md:CheckBoxAssist.CheckBoxSize="25"
-                                              IsChecked="True"/>
+                                              IsChecked="True"
+                                              Checked="EnabledCheckBox_Checked"
+                                              Unchecked="EnabledCheckBox_Unchecked"
+                                              Tag="gym"/>
                                     <CheckBox x:Name="gym24_CheckBox"
                                               Grid.Column="2"
                                               Content="Круглосуточный?"
                                               HorizontalAlignment="Right"
                                               Checked="TwentyFourCheckBox_Checked"
                                               Unchecked="TwentyFourCheckBox_Unchecked"
-                                              Tag="gym"/>
+                                              Tag="gym" />
                                 </Grid>
                             </Border>
                         </GroupBox.Header>
@@ -145,17 +188,16 @@
                                    Height="32" />
                             <md:TimePicker x:Name="gymStartHours_TimePicker"
                                            Grid.Column="1"
-                                           md:HintAssist.Hint="Начало доступа"/>
+                                           md:HintAssist.Hint="Начало доступа" />
                             <md:TimePicker x:Name="gymEndHours_TimePicker"
                                            Grid.Column="2"
-                                           md:HintAssist.Hint="Конец доступа"/>
+                                           md:HintAssist.Hint="Конец доступа" />
                         </Grid>
                     </GroupBox>
 
                     <GroupBox Grid.Column="1">
                         <GroupBox.Header>
-                            <Border 
-                                    Padding="15 5">
+                            <Border Padding="15 5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
@@ -170,7 +212,10 @@
                                               Background="White"
                                               Margin="5 0 0 0"
                                               md:CheckBoxAssist.CheckBoxSize="25"
-                                              IsChecked="True"/>
+                                              IsChecked="True"
+                                              Checked="EnabledCheckBox_Checked"
+                                              Unchecked="EnabledCheckBox_Unchecked"
+                                              Tag="pool"/>
                                     <CheckBox x:Name="pool24_CheckBox"
                                               Grid.Column="2"
                                               Content="Круглосуточный?"
@@ -201,8 +246,7 @@
                     <GroupBox Grid.Column="2"
                               Margin="0">
                         <GroupBox.Header>
-                            <Border 
-                                    Padding="15 5">
+                            <Border Padding="15 5">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto" />
@@ -217,7 +261,10 @@
                                               Background="White"
                                               Margin="5 0 0 0"
                                               md:CheckBoxAssist.CheckBoxSize="25"
-                                              IsChecked="True"/>
+                                              IsChecked="True"
+                                              Checked="EnabledCheckBox_Checked"
+                                              Unchecked="EnabledCheckBox_Unchecked"
+                                              Tag="hammam"/>
                                     <CheckBox x:Name="hammam24_CheckBox"
                                               Grid.Column="2"
                                               Content="Круглосуточный?"
@@ -245,7 +292,60 @@
                         </Grid>
                     </GroupBox>
 
+                    <GroupBox Grid.Row="1"
+                              Margin="0 20 20 0">
+                        <GroupBox.Header>
+                            <Border Padding="15 5">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="Занятия с тренером"
+                                               VerticalAlignment="Center" />
+                                    <CheckBox x:Name="trainerEnabled_CheckBox"
+                                              Grid.Column="1"
+                                              Style="{StaticResource MaterialDesignDarkCheckBox}"
+                                              Background="White"
+                                              Margin="5 0 0 0"
+                                              md:CheckBoxAssist.CheckBoxSize="25"
+                                              IsChecked="True"
+                                              Checked="EnabledCheckBox_Checked"
+                                              Unchecked="EnabledCheckBox_Unchecked"
+                                              Tag="trainer"
+                                              />
+                                    <CheckBox x:Name="trainer24_CheckBox"
+                                              Grid.Column="2"
+                                              Content="Безлимит?"
+                                              HorizontalAlignment="Right"
+                                              Checked="TwentyFourCheckBox_Checked"
+                                              Unchecked="TwentyFourCheckBox_Unchecked"
+                                              Tag="trainer" />
+                                </Grid>
+                            </Border>
+                        </GroupBox.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Assets/Images/exer/trainer.png"
+                                   Height="32" />
+                            <TextBox x:Name="trainerWorkoutsPerWeek_TextBox"
+                                     Grid.Column="1"
+                                     md:HintAssist.Hint="Количество в неделю"
+                                     PreviewTextInput="VerifyNumericInput"
+                                     DataObject.Pasting="VerifyNumericPaste"
+                                     Margin="10 0 0 0"
+                                     MaxLength="2"
+                                     md:TextFieldAssist.CharacterCounterVisibility="Collapsed"/>
+                        </Grid>
+                    </GroupBox>
+
                 </Grid>
+                
+                
 
 
             </StackPanel>

@@ -29,6 +29,13 @@ namespace vtb_fitness_client.Windows
             InitView(type, message, title);
         }
 
+        public DialogWindow()
+        {
+            Owner = WindowManager.ActiveWindow;
+            InitializeComponent();
+            InitView(DialogWindowType.Error, "Ошибка", "Что-то пошло не так");
+        }
+
         private void InitView(DialogWindowType type, string message, string? title)
         {
             WindowManager.AddTintToActiveWindow();

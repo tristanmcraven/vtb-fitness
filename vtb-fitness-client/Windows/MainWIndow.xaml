@@ -142,7 +142,7 @@
                                        Padding="10 0 0 0"
                                        Text="Ваш абонемент: "
                                        FontFamily="{StaticResource demi_bold}" />
-                            <TextBlock x:Name="currentTariff_Run"
+                            <TextBlock x:Name="currentTariff_TextBlock"
                                        FontFamily="{StaticResource demi_bold}"
                                        FontSize="24"
                                        Padding="5 0"
@@ -209,19 +209,23 @@
                             </StackPanel.Resources>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Тренажёрный зал:" />
-                                <TextBlock x:Name="gymStatus_TextBlock" />
+                                <TextBlock x:Name="gymStatus_TextBlock"
+                                           Padding="5 0"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Бассейн:" />
-                                <TextBlock x:Name="poolStatus_TextBlock" />
+                                <TextBlock x:Name="poolStatus_TextBlock"
+                                           Padding="5 0" />
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Хаммам:" />
-                                <TextBlock x:Name="hammamStatus_TextBlock" />
+                                <TextBlock x:Name="hammamStatus_TextBlock"
+                                           Padding="5 0" />
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="Тренер:" />
-                                <TextBlock x:Name="trainerStatus_TextBlock" />
+                                <TextBlock x:Name="trainerStatus_TextBlock"
+                                           Padding="5 0" />
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

@@ -32,12 +32,38 @@ namespace vtb_fitness_api.Controllers
                 Description = dto.Description,
                 Price = dto.Price,
                 Period = dto.Period,
-                Pros = dto.Pros
+                Pros = dto.Pros,
+                GymStartTime = dto.GymStartTime,
+                GymEndTime = dto.GymEndTime,
+                PoolStartTime = dto.PoolStartTime,
+                PoolEndTime = dto.PoolEndTime,
+                HammamStartTime = dto.HammamStartTime,
+                HammamEndTime = dto.HammamEndTime,
+                TrainerWorkoutsPerWeek = dto.TrainerWorkoutsPerWeek,
             };
             _context.Tariffs.Add(tariff);
             await _context.SaveChangesAsync();
 
             return Ok(tariff);
+        }
+
+        [HttpPost("purchase")]
+        public async Task <IActionResult> Purchase(TariffPurchaseDto dto)
+        {
+            var tariff = await _context.Tariffs.FirstOrDefaultAsync(x => x.Id == dto.TariffId);
+
+            var userTariff = new UserTariff
+            {
+                UserId = dto.UserId,
+                TariffId = dto.TariffId,
+                AcquiredAt = DateTime.Now,
+                ExpiresAt = (DateTime.Now).AddMonths(Convert.ToInt32(tariff.Period.Value.TotalHours)),
+                MoneyPaid = dto.MoneyPaid
+            };
+            _context.UserTariffs.Add(userTariff);
+            await _context.SaveChangesAsync();
+
+            return Ok(userTariff);
         }
     }
 }
