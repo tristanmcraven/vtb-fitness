@@ -143,5 +143,18 @@ namespace vtb_fitness_api.Controllers
 
             return NotFound();
         }
+
+        [HttpGet("{userId}/specs")]
+        public async Task<IActionResult> GetTrainerSpecs(int userId)
+        {
+            var trainer = await _context.Users.Include(x => x.Specs).FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (trainer != null)
+            {
+                return Ok(trainer.Specs.ToList());
+            }
+
+            return NotFound();
+        }
     }
 }

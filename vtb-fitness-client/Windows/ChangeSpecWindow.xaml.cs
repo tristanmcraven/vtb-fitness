@@ -11,27 +11,84 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using vtb_fitness_client.Model;
+using vtb_fitness_client.Dto;
+using vtb_fitness_client.Network;
+using vtb_fitness_client.UserControls;
+using vtb_fitness_client.Utility;
 
 namespace vtb_fitness_client.Windows
 {
     /// <summary>
     /// Interaction logic for ChangeSpecWindow.xaml
     /// </summary>
-    public partial class ChangeSpecWindow : CustomWindow
+    public partial class ChangeSpecWindow : Window
     {
         public ChangeSpecWindow()
         {
             InitializeComponent();
+            Owner = WindowManager.ActiveWindow;
+            InitView();
         }
 
-        private void confirm_Button_Click(object sender, RoutedEventArgs e)
+        //sorry idc about that waraga ^^
+        private async void InitView()
         {
+            WindowManager.AddTintToActiveWindow();
 
+            var specs = await ApiClient._Spec.Get();
+            var currentTrainerSpecs = await ApiClient._TrainerSpecs.GetTrainerSpecs(App.CurrentUser.Id);
+
+            foreach (var spec in specs)
+            {
+                spec1_ComboBox.Items.Add(new SpecUserControl(spec));
+                spec2_ComboBox.Items.Add(new SpecUserControl(spec));
+                spec3_ComboBox.Items.Add(new SpecUserControl(spec));
+            }
+            spec1_ComboBox.Items.Insert(0, new TextBlock { Text = "< Нет >" });
+            spec2_ComboBox.Items.Insert(0, new TextBlock { Text = "< Нет >" });
+            spec3_ComboBox.Items.Insert(0, new TextBlock { Text = "< Нет >" });
+            spec1_ComboBox.SelectedIndex = 0;
+            spec2_ComboBox.SelectedIndex = 0;
+            spec3_ComboBox.SelectedIndex = 0;
+
+            for (int i = 1; i <= currentTrainerSpecs.Count; i++)
+            {
+                var cb = FindName($"spec{i}_ComboBox") as ComboBox;
+                cb.SelectedIndex = currentTrainerSpecs[i-1].Id;
+            }
+        }
+
+        private async void confirm_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedSpecIds = new List<int>();
+            for (int i = 1; i <= 3; i++)
+            {
+                var cb = FindName($"spec{i}_ComboBox") as ComboBox;
+                if (cb.SelectedIndex != 0)
+                {
+                    selectedSpecIds.Add(cb.SelectedIndex);
+                }
+            }
+
+            var result = await ApiClient._TrainerSpecs.Post(new TrainerSpecPostDto
+            {
+                TrainerId = App.CurrentUser.Id,
+                SpecIds = selectedSpecIds
+            });
+
+            if (result != null) Close();
+            else new DialogWindow().ShowDialog();
         }
 
         private void goBack_Button_Click(object sender, RoutedEventArgs e)
         {
+            Close();
+        }
 
+        private void CustomWindow_Closed(object sender, EventArgs e)
+        {
+            WindowManager.RemoveTintFromActiveWindow();
         }
     }
 }

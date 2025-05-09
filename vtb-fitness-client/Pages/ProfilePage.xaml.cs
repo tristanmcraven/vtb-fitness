@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using vtb_fitness_client.Model;
 using vtb_fitness_client.Network;
 using vtb_fitness_client.Utility;
+using vtb_fitness_client.Windows;
 
 namespace vtb_fitness_client.Pages
 {
@@ -95,7 +96,7 @@ namespace vtb_fitness_client.Pages
 
         private void changeSpec_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            new ChangeSpecWindow().ShowDialog();
         }
     }
 }

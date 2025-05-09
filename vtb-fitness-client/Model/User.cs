@@ -44,4 +44,6 @@ public partial class User
     public virtual ICollection<Tracker> TrackerUsers { get; set; } = new List<Tracker>();
 
     public virtual ICollection<UserTariff> UserTariffs { get; set; } = new List<UserTariff>();
+
+    public virtual ICollection<Spec> Specs { get; set; } = new List<Spec>();
 }

@@ -108,6 +108,17 @@ namespace vtb_fitness_client.Network
             public static async Task<Tracker> Create(TrackerCreateDto dto) => await SendRequest<Tracker>("tracker", HttpMethod.Post, dto);
         }
 
+        public static class _Spec
+        {
+            public static async Task<List<Spec>> Get() => await SendRequest<List<Spec>>("spec", HttpMethod.Get);
+        }
+
+        public static class _TrainerSpecs
+        {
+            public static async Task<List<Spec>> Post(TrainerSpecPostDto dto) => await SendRequest<List<Spec>>("trainerspecs", HttpMethod.Post, dto);
+
+            public static async Task<List<Spec>> GetTrainerSpecs(int trainerId) => await SendRequest<List<Spec>>($"user/{trainerId}/specs", HttpMethod.Get);
+        }
 
     }
 }

@@ -25,6 +25,8 @@ public partial class VtbContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
+    public virtual DbSet<Spec> Specs { get; set; }
+
     public virtual DbSet<Tariff> Tariffs { get; set; }
 
     public virtual DbSet<Tracker> Trackers { get; set; }
@@ -142,6 +144,35 @@ public partial class VtbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Name).HasColumnName("name");
+        });
+
+        modelBuilder.Entity<Spec>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("spec_pkey");
+
+            entity.ToTable("spec");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name).HasColumnName("name");
+
+            entity.HasMany(d => d.Trainers).WithMany(p => p.Specs)
+                .UsingEntity<Dictionary<string, object>>(
+                    "TrainerSpec",
+                    r => r.HasOne<User>().WithMany()
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_ts_trainer_id"),
+                    l => l.HasOne<Spec>().WithMany()
+                        .HasForeignKey("SpecId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("fk_ts_spec_id"),
+                    j =>
+                    {
+                        j.HasKey("SpecId", "TrainerId").HasName("trainer_spec_pkey");
+                        j.ToTable("trainer_spec");
+                        j.IndexerProperty<int>("SpecId").HasColumnName("spec_id");
+                        j.IndexerProperty<int>("TrainerId").HasColumnName("trainer_id");
+                    });
         });
 
         modelBuilder.Entity<Tariff>(entity =>

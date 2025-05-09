@@ -27,33 +27,40 @@ namespace vtb_fitness_client.Utility
 
         public static void AddTintToActiveWindow()
         {
-            var body = ActiveWindow!.FindName("body") as Grid;
-
-            if (body != null)
+            if (ActiveWindow != null)
             {
-                var tint = new Border
-                {
-                    Background = new SolidColorBrush(Colors.Black),
-                    Name = "tint"
-                };
-                tint.Background.Opacity = 0.8;
-                Grid.SetColumnSpan(body, 10);
-                Grid.SetRowSpan(body, 10);
-                Panel.SetZIndex(body, 2);
+                var body = ActiveWindow.FindName("body") as Grid;
 
-                body.Children.Add(tint);
+                if (body != null)
+                {
+                    var tint = new Border
+                    {
+                        Background = new SolidColorBrush(Colors.Black),
+                        Name = "tint"
+                    };
+                    tint.Background.Opacity = 0.8;
+                    Grid.SetColumnSpan(body, 10);
+                    Grid.SetRowSpan(body, 10);
+                    Panel.SetZIndex(body, 2);
+
+                    body.Children.Add(tint);
+                }
             }
+
         }
 
         public static void RemoveTintFromActiveWindow()
         {
-            var body = ActiveWindow!.FindName("body") as Grid;
-
-            if (body != null)
+            if (ActiveWindow != null)
             {
-                var tint = body.Children.OfType<Border>().FirstOrDefault(b => b.Name == "tint");
-                if (tint != null)
-                    body.Children.Remove(tint);
+                var body = ActiveWindow.FindName("body") as Grid;
+
+                if (body != null)
+                {
+                    var tint = body.Children.OfType<Border>().FirstOrDefault(b => b.Name == "tint");
+                    if (tint != null)
+                        body.Children.Remove(tint);
+                }
             }
         }
 

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using vtb_fitness_client.Model;
 
 namespace vtb_fitness_client.UserControls
 {
@@ -20,10 +21,17 @@ namespace vtb_fitness_client.UserControls
     /// </summary>
     public partial class SpecUserControl : UserControl
     {
-        
-        public SpecUserControl()
+        private Spec _spec;
+        public SpecUserControl(Spec spec)
         {
             InitializeComponent();
+            _spec = spec;
+            InitView();
+        }
+
+        private void InitView()
+        {
+            spec_TextBlock.Text = _spec.Name;
         }
     }
 }

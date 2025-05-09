@@ -10,8 +10,8 @@
         Width="650"
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
-        Closing="Window_Closing"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Closing="Window_Closing">
     
     <Window.Background>
         <RadialGradientBrush Center="0,0"
