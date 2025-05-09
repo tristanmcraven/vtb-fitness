@@ -19,7 +19,7 @@ namespace vtb_fitness_client.Windows
     /// <summary>
     /// Interaction logic for DialogWindow.xaml
     /// </summary>
-    public partial class DialogWindow : Window
+    public partial class DialogWindow : CustomWindow
     {
         public new bool DialogResult = false;
         public DialogWindow(DialogWindowType type, string message, string? title = null)
@@ -38,8 +38,6 @@ namespace vtb_fitness_client.Windows
 
         private void InitView(DialogWindowType type, string message, string? title)
         {
-            WindowManager.AddTintToActiveWindow();
-
             if (type == DialogWindowType.Error)
             {
                 SystemSounds.Hand.Play();
@@ -81,11 +79,6 @@ namespace vtb_fitness_client.Windows
             ok_Button.Visibility = Visibility.Collapsed;
             yes_Button.Visibility = Visibility.Visible;
             no_Button.Visibility = Visibility.Visible;
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            WindowManager.RemoveTintFromActiveWindow();
         }
 
         private void ok_Button_Click(object sender, RoutedEventArgs e)

@@ -10,9 +10,9 @@ namespace vtb_fitness_client.Windows
 {
     public class CustomWindow : Window
     {
-        protected override void OnContentRendered(EventArgs e)
+        protected override void OnSourceInitialized(EventArgs e)
         {
-            base.OnContentRendered(e);
+            base.OnSourceInitialized(e);
             WindowManager.Register(this);
         }
 

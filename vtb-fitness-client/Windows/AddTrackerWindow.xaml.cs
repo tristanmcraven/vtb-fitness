@@ -35,7 +35,6 @@ namespace vtb_fitness_client.Windows
 
         private void InitView()
         {
-            AddTintToSenderWindow();
             RefreshTrainers();
         }
 
@@ -59,43 +58,6 @@ namespace vtb_fitness_client.Windows
                     trainer_ComboBox.Visibility = Visibility.Collapsed;
                     noTrainer_TextBlock.Visibility = Visibility.Visible;
                 }
-            }
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            RemoveTintFromSenderWindow();
-        }
-
-        private void AddTintToSenderWindow()
-        {
-            var body = _senderWindow.FindName("body") as Grid;
-
-            if (body != null)
-            {
-                var tint = new Border
-                {
-                    Background = new SolidColorBrush(Colors.Black),
-                    Name = "tint"
-                };
-                tint.Background.Opacity = 0.8;
-                Grid.SetColumnSpan(body, 10);
-                Grid.SetRowSpan(body, 10);
-                Panel.SetZIndex(body, 2);
-
-                body.Children.Add(tint);
-            }
-        }
-
-        private void RemoveTintFromSenderWindow()
-        {
-            var body = _senderWindow.FindName("body") as Grid;
-
-            if (body != null)
-            {
-                var tint = body.Children.OfType<Border>().FirstOrDefault(b => b.Name == "tint");
-                if (tint != null)
-                    body.Children.Remove(tint);
             }
         }
 

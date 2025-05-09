@@ -22,7 +22,7 @@ namespace vtb_fitness_client.Windows
     /// <summary>
     /// Interaction logic for ChangeSpecWindow.xaml
     /// </summary>
-    public partial class ChangeSpecWindow : Window
+    public partial class ChangeSpecWindow : CustomWindow
     {
         public ChangeSpecWindow()
         {
@@ -34,8 +34,6 @@ namespace vtb_fitness_client.Windows
         //sorry idc about that waraga ^^
         private async void InitView()
         {
-            WindowManager.AddTintToActiveWindow();
-
             var specs = await ApiClient._Spec.Get();
             var currentTrainerSpecs = await ApiClient._TrainerSpecs.GetTrainerSpecs(App.CurrentUser.Id);
 
@@ -86,9 +84,30 @@ namespace vtb_fitness_client.Windows
             Close();
         }
 
-        private void CustomWindow_Closed(object sender, EventArgs e)
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            WindowManager.RemoveTintFromActiveWindow();
+            var senderCb = (sender as ComboBox)!;
+            var cbs = new List<ComboBox>
+            {
+                spec1_ComboBox,
+                spec2_ComboBox,
+                spec3_ComboBox
+            };
+
+            foreach (var cb in cbs)
+            {
+                if (cb != senderCb)
+                {
+                    if (senderCb.SelectedIndex != 0 && cb.SelectedIndex != 0)
+                    {
+                        if (senderCb.SelectedIndex == cb.SelectedIndex)
+                        {
+                            new DialogWindow(DialogWindowType.Error, "Уже выбрано").ShowDialog();
+                            senderCb.SelectedIndex = 0;
+                        }
+                    }
+                }
+            }
         }
     }
 }

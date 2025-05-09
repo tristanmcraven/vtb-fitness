@@ -16,6 +16,7 @@ namespace vtb_fitness_client.Utility
 
         public static void Register(Window window)
         {
+            AddTintToActiveWindow();
             if (!_windowStack.Contains(window)) _windowStack.Push(window);
         }
 
@@ -23,6 +24,7 @@ namespace vtb_fitness_client.Utility
         {
             if (_windowStack.Count > 0 && _windowStack.Peek() == window) _windowStack.Pop();
             else _windowStack = new Stack<Window>(_windowStack.Where(w => w != window).Reverse()); //rebuild ts
+            RemoveTintFromActiveWindow();
         }
 
         public static void AddTintToActiveWindow()

@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:vtb_fitness_client.Windows"
         mc:Ignorable="d"
         Title="AddTrackerWindow" Height="800" Width="700"
-        Closing="Window_Closing"
         Style="{StaticResource MaterialDesignWindow}"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
