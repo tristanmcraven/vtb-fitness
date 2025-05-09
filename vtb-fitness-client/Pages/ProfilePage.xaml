@@ -16,7 +16,7 @@
         <Style TargetType="Button"
                BasedOn="{StaticResource global_Button}">
             <Setter Property="Margin"
-                    Value="0 0 0 10" />
+                    Value="0 10 0 0" />
         </Style>
     </Page.Resources>
 
@@ -56,6 +56,9 @@
                             <Button x:Name="fireTrainer_Button"
                                     Content="Уволить тренера"
                                     Click="fireTrainer_Button_Click" />
+                            <Button x:Name="changeSpec_Button"
+                                    Content="Изменить специализацию"
+                                    Click="changeSpec_Button_Click" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"

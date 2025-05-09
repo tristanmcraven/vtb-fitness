@@ -21,7 +21,11 @@ public partial class Tracker
 
     public int? Weight { get; set; }
 
+    public int? TrainerId { get; set; }
+
     public virtual Exercise Exercise { get; set; } = null!;
+
+    public virtual User? Trainer { get; set; }
 
     public virtual User User { get; set; } = null!;
 }

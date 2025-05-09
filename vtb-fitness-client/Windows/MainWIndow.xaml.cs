@@ -43,7 +43,7 @@ namespace vtb_fitness_client.Windows
                 _ => "Неизвестный"
             };
 
-            if (user.Id == 3)
+            if (user.RoleId == 3)
             {
                 users_TextBlock.Visibility = Visibility.Collapsed;
                 trainers_TextBlock.Visibility = Visibility.Collapsed;
@@ -74,6 +74,8 @@ namespace vtb_fitness_client.Windows
                 gymStatus_TextBlock.Text = Helper.GetFacilityStatus(tariff.GymStartTime, tariff.GymEndTime, gymStatus_TextBlock);
                 poolStatus_TextBlock.Text = Helper.GetFacilityStatus(tariff.PoolStartTime, tariff.PoolEndTime, poolStatus_TextBlock);
                 hammamStatus_TextBlock.Text = Helper.GetFacilityStatus(tariff.HammamStartTime, tariff.HammamEndTime, hammamStatus_TextBlock);
+                var remainingWorkouts = await ApiClient._User.GetRemainingTrainerWorkouts(App.CurrentUser.Id);
+                trainerStatus_TextBlock.Text = Helper.GetTrainerStatus(remainingWorkouts, trainerStatus_TextBlock, tariff.TrainerWorkoutsPerWeek);
 
                 tariffStatuses_StackPanel.Visibility = Visibility.Visible;
                 noTariff_TextBlock.Visibility = Visibility.Collapsed;

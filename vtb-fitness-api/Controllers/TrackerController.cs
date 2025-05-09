@@ -32,6 +32,7 @@ namespace vtb_fitness_api.Controllers
                 Meters = dto.Meters ?? null,
                 Timestamp = dto.TimeStamp ?? DateTime.Now,
                 Weight = dto.Weight ?? null,
+                TrainerId = dto.TrainerId
             };
             _context.Trackers.Add(trackerRecord);
             await _context.SaveChangesAsync();

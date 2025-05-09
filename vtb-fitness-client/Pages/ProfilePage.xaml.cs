@@ -92,5 +92,10 @@ namespace vtb_fitness_client.Pages
         {
 
         }
+
+        private void changeSpec_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -181,6 +181,7 @@ public partial class VtbContext : DbContext
             entity.Property(e => e.Timestamp)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("timestamp");
+            entity.Property(e => e.TrainerId).HasColumnName("trainer_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Weight).HasColumnName("weight");
 
@@ -189,7 +190,11 @@ public partial class VtbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_tracker_exercise_id");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Trackers)
+            entity.HasOne(d => d.Trainer).WithMany(p => p.TrackerTrainers)
+                .HasForeignKey(d => d.TrainerId)
+                .HasConstraintName("fk_tracker_trainer_id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.TrackerUsers)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_tracker_user_id");

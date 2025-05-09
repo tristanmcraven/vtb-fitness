@@ -48,7 +48,18 @@ namespace vtb_fitness_client.Windows
                 trainer_ComboBox.Items.Add(new TrainerComboBoxUserControl(t));
             }
             trainer_ComboBox.Items.Insert(0, new TrainerComboBoxUserControl(null));
-            
+
+            trainer_ComboBox.SelectedIndex = 0;
+
+            var currentTariff = (await ApiClient._User.GetCurrentTariff(App.CurrentUser.Id))!.Tariff!;
+            if (currentTariff != null)
+            {
+                if (currentTariff.TrainerWorkoutsPerWeek == null || currentTariff.TrainerWorkoutsPerWeek < 1)
+                {
+                    trainer_ComboBox.Visibility = Visibility.Collapsed;
+                    noTrainer_TextBlock.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

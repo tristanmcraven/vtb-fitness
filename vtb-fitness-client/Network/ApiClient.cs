@@ -74,6 +74,8 @@ namespace vtb_fitness_client.Network
             }
 
             public static async Task<List<Tracker>> GetTracker(int id) => await SendRequest<List<Tracker>>($"user/{id}/tracker", HttpMethod.Get);
+
+            public static async Task<int?> GetRemainingTrainerWorkouts(int userId) => await SendRequest<int?>($"user/{userId}/remaining_trainer_workouts", HttpMethod.Get);
         }
 
         public static class _Tariff

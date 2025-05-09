@@ -118,6 +118,44 @@ namespace vtb_fitness_client.Utility
 
         }
 
-        //public static async string GetTrainerStatus()
+        public static string GetTrainerStatus(int? workouts, TextBlock tb, int? totalWorkouts = null)
+        {
+            var value = "";
+            if (workouts == null)
+            {
+                value = "Недоступно";
+                tb.Background = new SolidColorBrush(Colors.DarkOrange);
+            }
+            else
+            {
+                if (totalWorkouts != null && totalWorkouts == 666)
+                {
+                    value = $"Безлимит";
+                    tb.Background = new SolidColorBrush(Colors.Green);
+                }
+                else
+                {
+                    value = $"{workouts} {DeclineWorkoutWord((int)workouts)}";
+                    if (workouts == 0)
+                        tb.Background = new SolidColorBrush(Colors.Red);
+                    else
+                        tb.Background = new SolidColorBrush(Colors.Green);
+                }
+            }
+            return value;
+
+        }
+
+        private static string DeclineWorkoutWord(int workouts)
+        {
+            return workouts switch
+            {
+                1 => "занятие",
+                2 => "занятия",
+                3 => "занятия",
+                4 => "занятия",
+                _ => "занятий"
+            };
+        }
     }
 }

@@ -9,5 +9,6 @@
         public int? Meters { get; set; }
         public DateTime? TimeStamp { get; set; }
         public int? Weight { get; set; }
+        public int? TrainerId { get; set; }
     }
 }

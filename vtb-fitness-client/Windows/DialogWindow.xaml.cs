@@ -44,6 +44,7 @@ namespace vtb_fitness_client.Windows
             {
                 SystemSounds.Hand.Play();
                 title_TextBlock.Text = "Ошибка";
+                Title = "Ошибка";
 
                 ShowOkButton();
             }
@@ -51,6 +52,7 @@ namespace vtb_fitness_client.Windows
             {
                 SystemSounds.Exclamation.Play();
                 title_TextBlock.Text = "Успех";
+                Title = "Успех";
 
                 ShowOkButton();
             }
@@ -58,6 +60,7 @@ namespace vtb_fitness_client.Windows
             {
                 SystemSounds.Exclamation.Play();
                 title_TextBlock.Text = "Подтверждение";
+                Title = "Подтверждение";
 
                 ShowYesNoButtons();
             }

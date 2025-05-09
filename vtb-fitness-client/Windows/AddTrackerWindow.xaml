@@ -86,8 +86,11 @@
                     <TextBlock Text="Тренер:"
                                Style="{StaticResource header_TextBlock}"
                                HorizontalAlignment="Left" />
+                    <TextBlock Text="В ваш абонемент не входят занятия с тренером."
+                               FontSize="20"
+                               x:Name="noTrainer_TextBlock"
+                               Visibility="Collapsed"/>
                     <ComboBox x:Name="trainer_ComboBox"
-                              SelectedIndex="0"
                               HorizontalContentAlignment="Left"
                               Style="{StaticResource global_ComboBox}"/>
                     
@@ -98,7 +101,9 @@
                             Margin="0 40 0 0"/>
                     <DatePicker x:Name="datePicker"
                                 Language="ru-RU"
-                                Visibility="Collapsed" />
+                                Visibility="Collapsed"
+                                Margin="0 40 0 0"
+                                md:HintAssist.Hint="Дата тренировки"/>
 
                 </StackPanel>
 

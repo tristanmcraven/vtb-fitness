@@ -117,10 +117,31 @@ namespace vtb_fitness_api.Controllers
             return Ok(await _context.Trackers.Where(t => t.UserId == id).Include(x => x.Exercise).ToListAsync());
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetById(int userId)
         {
-            return Ok(await _context.Users.FirstOrDefaultAsync(x => x.Id == id));
+            return Ok(await _context.Users.FirstOrDefaultAsync(x => x.Id == userId));
+        }
+
+        [HttpGet("{userId}/remaining_trainer_workouts")]
+        public async Task<IActionResult> GetRemainingTrainerWorkouts(int userId)
+        {
+            var today = DateTime.Today;
+            var daysSinceMonday = (int)today.DayOfWeek == 0 ? 6 : (int)today.DayOfWeek - 1;
+            var startOfWeek = today.AddDays(-daysSinceMonday);
+
+            var trainerWorkouts = await _context.Trackers.Where(x => x.UserId == userId && x.TrainerId != null && x.Timestamp.Date >= startOfWeek && x.Timestamp.Date <= today)
+                .GroupBy(x => x.Timestamp).CountAsync();
+
+            var userTariffRecord = (await _context.UserTariffs.Where(x => x.UserId == userId && x.ExpiresAt > DateTime.Now).Include(x => x.Tariff).OrderBy(x => x.Id).LastOrDefaultAsync());
+            var userTariff = userTariffRecord == null ? null : userTariffRecord.Tariff;
+
+            if (userTariff != null)
+            {
+                return Ok(userTariff.TrainerWorkoutsPerWeek - trainerWorkouts);
+            }
+
+            return NotFound();
         }
     }
 }
