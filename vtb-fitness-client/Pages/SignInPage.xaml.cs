@@ -50,6 +50,7 @@ namespace vtb_fitness_client.Pages
                 }
 
                 App.CurrentUser = user;
+                
                 new MainWindow().Show();
                 WindowManager.Close<StartWindow>();
             }

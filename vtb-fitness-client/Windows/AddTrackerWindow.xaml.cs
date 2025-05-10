@@ -50,6 +50,22 @@ namespace vtb_fitness_client.Windows
 
             trainer_ComboBox.SelectedIndex = 0;
 
+            var currentTrainer = await ApiClient._User.GetTrainer(App.CurrentUser.Id);
+            if (currentTrainer != null)
+            {
+                foreach (var item in trainer_ComboBox.Items)
+                {
+                    if (item is TrainerComboBoxUserControl)
+                    {
+                        var tcbuc = (TrainerComboBoxUserControl)item;
+                        if (tcbuc._trainer != null && tcbuc._trainer.Id == currentTrainer.Id)
+                        {
+                            trainer_ComboBox.SelectedItem = item;
+                        }
+                    }
+                }
+            }
+
             var currentTariff = (await ApiClient._User.GetCurrentTariff(App.CurrentUser.Id))!.Tariff!;
             if (currentTariff != null)
             {
@@ -131,6 +147,7 @@ namespace vtb_fitness_client.Windows
 
             Close();
             PageManager.MainFrame.Navigate(new TrackerPage());
+            WindowManager.Get<MainWindow>().UpdateCurrentTariffData();
         }
 
         private void goBack_Button_Click(object sender, RoutedEventArgs e)

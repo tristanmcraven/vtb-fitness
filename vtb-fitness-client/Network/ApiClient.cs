@@ -75,13 +75,16 @@ namespace vtb_fitness_client.Network
 
             public static async Task<List<Tracker>> GetTracker(int id) => await SendRequest<List<Tracker>>($"user/{id}/tracker", HttpMethod.Get);
 
-            public static async Task<int?> GetRemainingTrainerWorkouts(int userId) => await SendRequest<int?>($"user/{userId}/remaining_trainer_workouts", HttpMethod.Get);
+            public static async Task<int?> GetRemainingTrainerWorkouts(int userId) => await SendRequest<int?>($"user/{userId}/remaining-trainer-workouts", HttpMethod.Get);
+
+            public static async Task<User?> GetTrainer(int userId) => await SendRequest<User?>($"user/{userId}/trainer", HttpMethod.Get);
+
+            public static async Task<User?> AssignTrainer(int userId, int trainerId) => await SendRequest<User?>($"user/{userId}/assign-trainer?trainerId={trainerId}", HttpMethod.Get); 
         }
 
         public static class _Tariff
         {
             public static async Task<List<Tariff>> Get() => await SendRequest<List<Tariff>>("tariff", HttpMethod.Get);
-
             public static async Task<Tariff?> Create(TariffCreateDto dto) => await SendRequest<Tariff>("tariff", HttpMethod.Post, dto);
             public static async Task<UserTariff> Purchase(TariffPurchaseDto dto) => await SendRequest<UserTariff>("tariff/purchase", HttpMethod.Post, dto);
         }
@@ -94,11 +97,11 @@ namespace vtb_fitness_client.Network
 
         public static class _Exercise
         {
-            public static async Task<List<Exercise>> Get() => await SendRequest<List<Exercise>>("exercise", HttpMethod.Get);
-            public static async Task<List<Exercise>> GetCardio() => await SendRequest<List<Exercise>>("exercise/cardio", HttpMethod.Get);
-            public static async Task<List<Exercise>> GetStrength() => await SendRequest<List<Exercise>>("exercise/strength", HttpMethod.Get);
-            public static async Task<List<Exercise>> GetWeight() => await SendRequest<List<Exercise>>("exercise/weight", HttpMethod.Get);
-            public static async Task<Exercise> GetByName(string name) => await SendRequest<Exercise>($"exercise/name?name={name}", HttpMethod.Get);
+            public static async Task<List<Exercise>?> Get() => await SendRequest<List<Exercise>>("exercise", HttpMethod.Get);
+            public static async Task<List<Exercise>?> GetCardio() => await SendRequest<List<Exercise>>("exercise/cardio", HttpMethod.Get);
+            public static async Task<List<Exercise>?> GetStrength() => await SendRequest<List<Exercise>>("exercise/strength", HttpMethod.Get);
+            public static async Task<List<Exercise>?> GetWeight() => await SendRequest<List<Exercise>>("exercise/weight", HttpMethod.Get);
+            public static async Task<Exercise?> GetByName(string name) => await SendRequest<Exercise?>($"exercise/name?name={name}", HttpMethod.Get);
 
             
         }

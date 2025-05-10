@@ -152,7 +152,7 @@
                     </GroupBox.Header>
                     
                     <StackPanel Orientation="Horizontal"
-                                Margin="20 0">
+                                Margin="20 0 0 0">
                         
                         <StackPanel.Resources>
                             <Style TargetType="TextBlock"
@@ -197,35 +197,62 @@
                             </Run>
                             <Run Text="прямо сейчас?" />
                             <Image Source="/Assets/Images/wink_emoji.png"
-                                   Height="42"/>
+                                   Height="42"
+                                   Margin="0 0 20 0"/>
                         </TextBlock>
+                        
                         <StackPanel Orientation="Horizontal"
-                                    x:Name="tariffStatuses_StackPanel">
+                                    x:Name="tariffStatuses_StackPanel"
+                                    Margin="-5 0 5 10">
                             <StackPanel.Resources>
                                 <Style TargetType="StackPanel">
                                     <Setter Property="Margin"
-                                            Value="0 0 20 0 " />
+                                            Value="0 0 10 0 " />
+                                </Style>
+                                <Style TargetType="TextBlock"
+                                       BasedOn="{StaticResource global_TextBlock}"
+                                       x:Key="status_TextBlock">
+                                    <Setter Property="Padding"
+                                            Value="5 0" />
+                                    <Setter Property="HorizontalAlignment"
+                                            Value="Left" />
+                                    <Setter Property="FontSize"
+                                            Value="17" />
+                                    <Setter Property="FontFamily"
+                                            Value="{StaticResource demi_bold}" />
+                                </Style>
+                                <Style TargetType="TextBlock"
+                                       BasedOn="{StaticResource global_TextBlock}"
+                                       x:Key="facility_TextBlock">
+                                    <Setter Property="FontFamily"
+                                            Value="{StaticResource light}" />
+                                    <Setter Property="FontSize"
+                                            Value="20" />
                                 </Style>
                             </StackPanel.Resources>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Тренажёрный зал:" />
+                                <TextBlock Text="Тренажёрный зал:"
+                                           Style="{StaticResource facility_TextBlock}"/>
                                 <TextBlock x:Name="gymStatus_TextBlock"
-                                           Padding="5 0"/>
+                                           Style="{StaticResource status_TextBlock}"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Бассейн:" />
+                                <TextBlock Text="Бассейн:"
+                                           Style="{StaticResource facility_TextBlock}" />
                                 <TextBlock x:Name="poolStatus_TextBlock"
-                                           Padding="5 0" />
+                                           Style="{StaticResource status_TextBlock}"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Хаммам:" />
+                                <TextBlock Text="Хаммам:"
+                                           Style="{StaticResource facility_TextBlock}" />
                                 <TextBlock x:Name="hammamStatus_TextBlock"
-                                           Padding="5 0" />
+                                           Style="{StaticResource status_TextBlock}"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical">
-                                <TextBlock Text="Тренер:" />
+                                <TextBlock Text="Тренер:"
+                                           Style="{StaticResource facility_TextBlock}" />
                                 <TextBlock x:Name="trainerStatus_TextBlock"
-                                           Padding="5 0" />
+                                           Style="{StaticResource status_TextBlock}"/>
                             </StackPanel>
                         </StackPanel>
                     </StackPanel>

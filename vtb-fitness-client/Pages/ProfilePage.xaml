@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:vtb_fitness_client.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="1000" d:DesignWidth="800"
+      d:DesignHeight="1000" d:DesignWidth="1440"
       Title="ProfilePage">
     <Page.Resources>
         <Style TargetType="TextBlock"
@@ -59,6 +59,9 @@
                             <Button x:Name="changeSpec_Button"
                                     Content="Изменить специализацию"
                                     Click="changeSpec_Button_Click" />
+                            <Button x:Name="chooseTrainer_Button"
+                                    Content="Записаться к тренеру"
+                                    Click="chooseTrainer_Button_Click" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
@@ -78,6 +81,16 @@
                                    Text="+7something" />
                         <TextBlock x:Name="email_TextBlock"
                                    Text="zxc@gmail.com" />
+
+                        <TextBlock Text="Текущий абонемент" />
+                        <TextBlock x:Name="noTariff_TextBlock"
+                                   Text="Нет" />
+                        <Grid x:Name="currentTariff_Grid" />
+
+                        <TextBlock Text="Занимается у тренера" />
+                        <TextBlock x:Name="noTrainer_TextBlock"
+                                   Text="Нет"/>
+                        <Grid x:Name="currentTrainer_Grid" />
 
 
                     </StackPanel>

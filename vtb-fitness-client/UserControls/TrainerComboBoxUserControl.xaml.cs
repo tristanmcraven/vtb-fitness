@@ -22,7 +22,7 @@ namespace vtb_fitness_client.UserControls
     /// </summary>
     public partial class TrainerComboBoxUserControl : UserControl
     {
-        private User? _trainer;
+        public User? _trainer;
         public TrainerComboBoxUserControl(User? trainer)
         {
             InitializeComponent();

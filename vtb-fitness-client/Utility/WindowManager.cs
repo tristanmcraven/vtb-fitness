@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace vtb_fitness_client.Utility
 {
@@ -29,39 +31,55 @@ namespace vtb_fitness_client.Utility
 
         public static void AddTintToActiveWindow()
         {
-            if (ActiveWindow != null)
+            if (ActiveWindow?.FindName("body") is Grid body)
             {
-                var body = ActiveWindow.FindName("body") as Grid;
-
-                if (body != null)
+                var tint = new Border
                 {
-                    var tint = new Border
+                    Name = "tint",
+                    Background = new SolidColorBrush(Colors.Black)
                     {
-                        Background = new SolidColorBrush(Colors.Black),
-                        Name = "tint"
-                    };
-                    tint.Background.Opacity = 0.8;
-                    Grid.SetColumnSpan(body, 10);
-                    Grid.SetRowSpan(body, 10);
-                    Panel.SetZIndex(body, 2);
+                        Opacity = 0.0
+                    }
+                };
 
-                    body.Children.Add(tint);
-                }
+                Grid.SetColumnSpan(tint, 10);
+                Grid.SetRowSpan(tint, 10);
+                Panel.SetZIndex(tint, 2);
+                body.Children.Add(tint);
+
+                var animation = new DoubleAnimation
+                {
+                    From = 0.0,
+                    To = 0.8,
+                    Duration = TimeSpan.FromMilliseconds(200),
+                    EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseIn }
+                };
+
+                tint.Background.BeginAnimation(SolidColorBrush.OpacityProperty, animation);
             }
-
         }
 
         public static void RemoveTintFromActiveWindow()
         {
-            if (ActiveWindow != null)
+            if (ActiveWindow?.FindName("body") is Grid body)
             {
-                var body = ActiveWindow.FindName("body") as Grid;
-
-                if (body != null)
+                var tint = body.Children.OfType<Border>().FirstOrDefault(b => b.Name == "tint");
+                if (tint != null)
                 {
-                    var tint = body.Children.OfType<Border>().FirstOrDefault(b => b.Name == "tint");
-                    if (tint != null)
+                    var animation = new DoubleAnimation
+                    {
+                        From = tint.Opacity,
+                        To = 0.0,
+                        Duration = TimeSpan.FromMilliseconds(150),
+                        EasingFunction = new QuadraticEase { EasingMode = EasingMode.EaseOut }
+                    };
+
+                    animation.Completed += async (s, e) =>
+                    {
+                        await Task.Delay(30);
                         body.Children.Remove(tint);
+                    };
+                    tint.Background.BeginAnimation(SolidColorBrush.OpacityProperty, animation);
                 }
             }
         }

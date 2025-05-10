@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using vtb_fitness_client.Model;
 using vtb_fitness_client.Network;
+using vtb_fitness_client.UserControls;
 using vtb_fitness_client.Utility;
 using vtb_fitness_client.Windows;
 
@@ -36,12 +37,17 @@ namespace vtb_fitness_client.Pages
         {
             GetPfp();
 
-            fullName_TextBlock.Text = $"{_user.Lastname} {_user.Name} {_user.Middlename}";
-            role_TextBlock.Text = $"{(await ApiClient._Role.GetById(_user.RoleId)).Name}";
-            registrationDate_TextBlock.Text = $"Дата регистрации: {_user.CreatedAt}";
-            phone_TextBlock.Text = $"Номер телефона: +7{_user.Phone}";
-            email_TextBlock.Text = $"Email: {_user.Email}";
+            DisplayGenericData();
 
+            AdjustRole();
+
+            DisplayCurrentTariff();
+
+            DisplayCurrentTrainer();
+        }
+
+        private void AdjustRole()
+        {
             if (_user.Id == App.CurrentUser.Id)
             {
                 changePfp_Button.Visibility = Visibility.Visible;
@@ -49,7 +55,6 @@ namespace vtb_fitness_client.Pages
                 fireTrainer_Button.Visibility = Visibility.Collapsed;
                 deleteTariff_Button.Visibility = Visibility.Collapsed;
             }
-
 
             if (_user.RoleId == 4)
             {
@@ -67,6 +72,15 @@ namespace vtb_fitness_client.Pages
                 fireTrainer_Button.Visibility = Visibility.Collapsed;
                 fireMod_Button.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private async void DisplayGenericData()
+        {
+            fullName_TextBlock.Text = $"{_user.Lastname} {_user.Name} {_user.Middlename}";
+            role_TextBlock.Text = $"{(await ApiClient._Role.GetById(_user.RoleId)).Name}";
+            registrationDate_TextBlock.Text = $"Дата регистрации: {_user.CreatedAt}";
+            phone_TextBlock.Text = $"Номер телефона: +7{_user.Phone}";
+            email_TextBlock.Text = $"Email: {_user.Email}";
         }
 
         private void GetPfp()
@@ -97,6 +111,73 @@ namespace vtb_fitness_client.Pages
         private void changeSpec_Button_Click(object sender, RoutedEventArgs e)
         {
             new ChangeSpecWindow().ShowDialog();
+        }
+
+        private async void chooseTrainer_Button_Click(object sender, RoutedEventArgs e)
+        {
+            var userTariff = await ApiClient._User.GetCurrentTariff(App.CurrentUser.Id);
+            if (userTariff == null)
+            {
+                new DialogWindow(DialogWindowType.Error, "Вы должны купить абонемент перед тем, как записаться к тренеру.").ShowDialog();
+                return;
+            }
+
+            if (userTariff.Tariff.TrainerWorkoutsPerWeek == null || userTariff.Tariff.TrainerWorkoutsPerWeek < 1)
+            {
+                new DialogWindow(DialogWindowType.Error, "В ваш абонемент не входят занятия с тренером.").ShowDialog();
+                return;
+            }
+
+            var dw = new DialogWindow(DialogWindowType.Confirmation, $"Вы уверены, что хотите записаться" +
+                $" к тренеру {_user.Lastname} {_user.Name} {_user.Middlename}?");
+            dw.ShowDialog();
+
+            if (dw.DialogResult == true)
+            {
+                var result = await ApiClient._User.AssignTrainer(App.CurrentUser.Id, _user.Id);
+                if (result == null) new DialogWindow().ShowDialog();
+                PageManager.MainFrame.Navigate(new ProfilePage(_user));
+            }
+        }
+
+        private async void DisplayCurrentTariff()
+        {
+            var userTariff = await ApiClient._User.GetCurrentTariff(_user.Id);
+
+            if (userTariff == null)
+            {
+                noTariff_TextBlock.Visibility = Visibility.Visible;
+                currentTariff_Grid.Visibility = Visibility.Collapsed;
+            }
+
+            else
+            {
+                var tariff = userTariff.Tariff!;
+
+                noTariff_TextBlock.Visibility = Visibility.Collapsed;
+                currentTariff_Grid.Visibility = Visibility.Visible;
+
+                currentTariff_Grid.Children.Add(new TariffUserControl(tariff, userTariff));
+            }
+        }
+
+        private async void DisplayCurrentTrainer()
+        {
+            var trainer = await ApiClient._User.GetTrainer(_user.Id);
+
+            if (trainer == null)
+            {
+                noTrainer_TextBlock.Visibility = Visibility.Visible;
+                currentTrainer_Grid.Visibility= Visibility.Collapsed;
+            }
+
+            else
+            {
+                noTrainer_TextBlock.Visibility = Visibility.Collapsed;
+                currentTrainer_Grid.Visibility = Visibility.Visible;
+
+                currentTrainer_Grid.Children.Add(new UserUserControl(trainer));
+            }
         }
     }
 }

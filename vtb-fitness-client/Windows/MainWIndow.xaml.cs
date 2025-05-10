@@ -46,7 +46,6 @@ namespace vtb_fitness_client.Windows
             if (user.RoleId == 3)
             {
                 users_TextBlock.Visibility = Visibility.Collapsed;
-                trainers_TextBlock.Visibility = Visibility.Collapsed;
                 mods_TextBlock.Visibility = Visibility.Collapsed;
             }
 

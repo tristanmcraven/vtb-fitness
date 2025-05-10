@@ -123,7 +123,7 @@ namespace vtb_fitness_api.Controllers
             return Ok(await _context.Users.FirstOrDefaultAsync(x => x.Id == userId));
         }
 
-        [HttpGet("{userId}/remaining_trainer_workouts")]
+        [HttpGet("{userId}/remaining-trainer-workouts")]
         public async Task<IActionResult> GetRemainingTrainerWorkouts(int userId)
         {
             var today = DateTime.Today;
@@ -152,6 +152,29 @@ namespace vtb_fitness_api.Controllers
             if (trainer != null)
             {
                 return Ok(trainer.Specs.ToList());
+            }
+
+            return NotFound();
+        }
+
+        [HttpGet("{userId}/trainer")]
+        public async Task<IActionResult> GetTrainer(int userId)
+        {
+            var user = await _context.Users.Include(x => x.Trainer).FirstOrDefaultAsync(x => x.Id == userId);
+            var trainer = user.Trainer;
+
+            return trainer != null ? Ok(trainer) : NotFound();
+        }
+
+        [HttpGet("{userId}/assign-trainer")]
+        public async Task<IActionResult> AssignTrainer(int userId, int trainerId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                user.TrainerId = trainerId;
+                await _context.SaveChangesAsync();
+                return Ok(user);
             }
 
             return NotFound();

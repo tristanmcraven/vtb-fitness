@@ -27,10 +27,12 @@ namespace vtb_fitness_client.UserControls
     public partial class TariffUserControl : UserControl
     {
         private Tariff _tariff;
-        public TariffUserControl(Tariff tariff)
+        private UserTariff? _userTariff = null;
+        public TariffUserControl(Tariff tariff, UserTariff? userTariff = null)
         {
             InitializeComponent();
             _tariff = tariff;
+            _userTariff = userTariff;
             InitView();
         }
 
@@ -47,7 +49,15 @@ namespace vtb_fitness_client.UserControls
                 pros_StackPanel.Children.Add(new ProUserControl(p));
             }
 
-            
+            if (_userTariff != null)
+            {
+                buy_Button.Visibility = Visibility.Collapsed;
+                userTariffData_Grid.Visibility = Visibility.Visible;
+
+                tariffBoughtAt_TextBlock.Text = $"Абонемент приобретён: {Helper.DisplayRuDateTime(_userTariff.AcquiredAt)}";
+                tariffExpiresAt_TextBlock.Text = $"Истекает: {Helper.DisplayRuDateTime(_userTariff.ExpiresAt)}";
+                moneyPaid_TextBlock.Text = $"Приобретено по цене: {_userTariff.MoneyPaid}₽";
+            }
         }
 
         private async void buy_Button_Click(object sender, RoutedEventArgs e)

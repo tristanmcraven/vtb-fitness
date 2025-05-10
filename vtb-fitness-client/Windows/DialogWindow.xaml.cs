@@ -97,7 +97,5 @@ namespace vtb_fitness_client.Windows
             DialogResult = false;
             Close();
         }
-
-        
     }
 }

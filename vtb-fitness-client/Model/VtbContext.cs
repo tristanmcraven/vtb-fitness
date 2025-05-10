@@ -272,6 +272,7 @@ public partial class VtbContext : DbContext
                 .HasMaxLength(10)
                 .HasColumnName("phone");
             entity.Property(e => e.RoleId).HasColumnName("role_id");
+            entity.Property(e => e.TrainerId).HasColumnName("trainer_id");
             entity.Property(e => e.WorkingInVtbSince).HasColumnName("working_in_vtb_since");
 
             entity.HasOne(d => d.BankingDetails).WithMany(p => p.Users)
@@ -287,6 +288,11 @@ public partial class VtbContext : DbContext
             entity.HasOne(d => d.Role).WithMany(p => p.Users)
                 .HasForeignKey(d => d.RoleId)
                 .HasConstraintName("fk_user_role_id");
+
+            entity.HasOne(d => d.Trainer).WithMany(p => p.InverseTrainer)
+                .HasForeignKey(d => d.TrainerId)
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("fk_user_trainer_id");
         });
 
         modelBuilder.Entity<UserTariff>(entity =>

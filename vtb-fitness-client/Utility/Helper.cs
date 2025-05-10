@@ -157,5 +157,12 @@ namespace vtb_fitness_client.Utility
                 _ => "занятий"
             };
         }
+
+        public static string DisplayRuDateTime(DateTime? dateTime)
+        {
+            if (dateTime.HasValue)
+                return dateTime.Value.ToString("dd.MM.yy HH:mm");
+            return "Nigger";
+        }
     }
 }
