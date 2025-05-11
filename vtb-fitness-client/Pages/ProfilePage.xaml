@@ -13,11 +13,6 @@
             <Setter Property="FontSize"
                     Value="20" />
         </Style>
-        <Style TargetType="Button"
-               BasedOn="{StaticResource global_Button}">
-            <Setter Property="Margin"
-                    Value="0 10 0 0" />
-        </Style>
     </Page.Resources>
 
     <Grid>
@@ -43,6 +38,15 @@
                         </Border>
                         <StackPanel Orientation="Vertical"
                                     Margin="0 20 0 0">
+                            <StackPanel.Resources>
+                                <Style TargetType="Button"
+                                       BasedOn="{StaticResource global_Button}">
+                                    <Setter Property="Margin"
+                                            Value="0 10 0 0" />
+                                    <Setter Property="Visibility"
+                                             Value="Collapsed" />
+                                </Style>
+                            </StackPanel.Resources>
                             <Button x:Name="changePfp_Button"
                                     Content="Изменить изображение"
                                     Click="changePfp_Button_Click"
@@ -62,6 +66,9 @@
                             <Button x:Name="chooseTrainer_Button"
                                     Content="Записаться к тренеру"
                                     Click="chooseTrainer_Button_Click" />
+                            <Button x:Name="unChooseTrainer_Button"
+                                    Content="Отписаться от тренера"
+                                    Click="unChooseTrainer_Button_Click" />
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
@@ -75,22 +82,45 @@
                                    Text="Role"
                                    Margin="0 -10 0 0"
                                    Foreground="AntiqueWhite"/>
-                        <TextBlock x:Name="registrationDate_TextBlock"
-                                   Text="01-01-1970" />
-                        <TextBlock x:Name="phone_TextBlock"
-                                   Text="+7something" />
-                        <TextBlock x:Name="email_TextBlock"
-                                   Text="zxc@gmail.com" />
 
-                        <TextBlock Text="Текущий абонемент" />
-                        <TextBlock x:Name="noTariff_TextBlock"
-                                   Text="Нет" />
-                        <Grid x:Name="currentTariff_Grid" />
+                        <StackPanel x:Name="trainerData_StackPanel"
+                                    Visibility="Collapsed">
+                            <TextBlock Text="Специализация"
+                                       Style="{StaticResource header_TextBlock}"
+                                       Margin="0 10 0 0"
+                                       HorizontalAlignment="Left"/>
+                            <StackPanel x:Name="trainerSpecs_StackPanel">
+                                
+                            </StackPanel>
+                        </StackPanel>
+                        
+                        <StackPanel x:Name="generalData_StackPanel"
+                                    Margin="0 10 0 0">
+                            <TextBlock x:Name="registrationDate_TextBlock"
+                                       Text="01-01-1970" />
+                            <TextBlock x:Name="phone_TextBlock"
+                                       Text="+7something" />
+                            <TextBlock x:Name="email_TextBlock"
+                                       Text="zxc@gmail.com" />
+                        </StackPanel>
 
-                        <TextBlock Text="Занимается у тренера" />
-                        <TextBlock x:Name="noTrainer_TextBlock"
-                                   Text="Нет"/>
-                        <Grid x:Name="currentTrainer_Grid" />
+                        <StackPanel x:Name="currentTariff_StackPanel">
+                            <TextBlock Text="Текущий абонемент"
+                                       Style="{StaticResource header_TextBlock}" />
+                            <TextBlock x:Name="noTariff_TextBlock"
+                                       Text="Нет"
+                                       HorizontalAlignment="Center" />
+                            <Grid x:Name="currentTariff_Grid" />
+                        </StackPanel>
+
+                        <StackPanel x:Name="currentTrainer_StackPanel">
+                            <TextBlock Text="Занимается у тренера"
+                                       Style="{StaticResource header_TextBlock}" />
+                            <TextBlock x:Name="noTrainer_TextBlock"
+                                       Text="Нет"
+                                       HorizontalAlignment="Center" />
+                            <Grid x:Name="currentTrainer_Grid" />
+                        </StackPanel>
 
 
                     </StackPanel>

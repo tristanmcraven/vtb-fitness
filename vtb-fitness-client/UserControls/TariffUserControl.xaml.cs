@@ -18,6 +18,7 @@ using vtb_fitness_client.Windows;
 using MaterialDesignThemes.Wpf;
 using vtb_fitness_client.Network;
 using vtb_fitness_client.Dto;
+using System.Windows.Interop;
 
 namespace vtb_fitness_client.UserControls
 {
@@ -54,9 +55,11 @@ namespace vtb_fitness_client.UserControls
                 buy_Button.Visibility = Visibility.Collapsed;
                 userTariffData_Grid.Visibility = Visibility.Visible;
 
-                tariffBoughtAt_TextBlock.Text = $"Абонемент приобретён: {Helper.DisplayRuDateTime(_userTariff.AcquiredAt)}";
-                tariffExpiresAt_TextBlock.Text = $"Истекает: {Helper.DisplayRuDateTime(_userTariff.ExpiresAt)}";
+                tariffBoughtAt_TextBlock.Text = $"Абонемент приобретён: {Helper.GetRuDateTime(_userTariff.AcquiredAt)}";
+                tariffExpiresAt_TextBlock.Text = $"Истекает: {Helper.GetRuDateTime(_userTariff.ExpiresAt)}";
                 moneyPaid_TextBlock.Text = $"Приобретено по цене: {_userTariff.MoneyPaid}₽";
+
+                Margin = new Thickness(0, 0, 0, 10);
             }
         }
 
@@ -64,9 +67,25 @@ namespace vtb_fitness_client.UserControls
         {
             var discountedPrice = Helper.GetDiscountedPrice((double)_tariff.Price, await Helper.GetUserSalePercent(App.CurrentUser.Id));
 
-            var dw = new DialogWindow(DialogWindowType.Confirmation,
-                                      $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за " +
-                                      $"{discountedPrice}₽?");
+            var currentUserTariff = await ApiClient._User.GetCurrentTariff(App.CurrentUser.Id);
+            var purchaseString = "";
+            var expiresAtString = "";
+
+            if (currentUserTariff != null)
+            {
+                var expiresAt = Helper.GetRuDateTime(currentUserTariff.ExpiresAt.Value);
+                expiresAtString = $"{expiresAt.Substring(0, expiresAt.Length - 6)}";
+
+                purchaseString = $"Внимание: у вас уже есть абонемент {currentUserTariff.Tariff.Name} {currentUserTariff.Tariff.Period.Value.TotalHours}, " +
+                    $"действующий до {expiresAtString}. " +
+                    $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за {discountedPrice}₽? Деньги за прошлый абонемент не вернутся!";
+            }
+            else
+            {
+                purchaseString = $"Вы уверены, что хотите купить абонемент \"{_tariff.Name}\" за {discountedPrice}₽?";
+            }
+
+            var dw = new DialogWindow(DialogWindowType.Confirmation, purchaseString);
             dw.ShowDialog();
 
             if (dw.DialogResult)

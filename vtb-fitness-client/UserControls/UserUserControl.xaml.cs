@@ -37,7 +37,7 @@ namespace vtb_fitness_client.UserControls
             fullname_TextBlock.Text = $"{_user.Lastname} {_user.Name} {_user.Middlename}";
             var role = await ApiClient._Role.GetById(_user.RoleId);
             role_TextBlock.Text = $"{role.Name}";
-            registrationDate_TextBlock.Text = $"Дата регистрации: {_user.CreatedAt}";
+            registrationDate_TextBlock.Text = $"Дата регистрации: {Helper.GetRuDateTime(_user.CreatedAt)}";
             phone_TextBlock.Text = $"Номер телефона: +7{_user.Phone}";
             var curTariff = await ApiClient._User.GetCurrentTariff(_user.Id);
             currentTariff_TextBlock.Text = "Действующий абонемент: ";

@@ -17,7 +17,7 @@ namespace vtb_fitness_api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _context.Tariffs.ToListAsync());
+            return Ok(await _context.Tariffs.OrderBy(x => x.Id).ToListAsync());
         }
 
         [HttpPost]
@@ -51,6 +51,7 @@ namespace vtb_fitness_api.Controllers
         public async Task <IActionResult> Purchase(TariffPurchaseDto dto)
         {
             var tariff = await _context.Tariffs.FirstOrDefaultAsync(x => x.Id == dto.TariffId);
+            var user = await _context.Users.FindAsync(dto.UserId);
 
             var userTariff = new UserTariff
             {
@@ -60,6 +61,7 @@ namespace vtb_fitness_api.Controllers
                 ExpiresAt = (DateTime.Now).AddMonths(Convert.ToInt32(tariff.Period.Value.TotalHours)),
                 MoneyPaid = dto.MoneyPaid
             };
+            user.TrainerId = null;
             _context.UserTariffs.Add(userTariff);
             await _context.SaveChangesAsync();
 

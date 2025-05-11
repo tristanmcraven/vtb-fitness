@@ -93,7 +93,7 @@ namespace vtb_fitness_client.Utility
             if (startTime == null || endTime == null)
             {
                 value = "Недоступно";
-                tb.Background = new SolidColorBrush(Colors.Orange);
+                tb.Background = new SolidColorBrush(Colors.DarkOrange);
             }
 
             else if (startTime == endTime)
@@ -104,13 +104,13 @@ namespace vtb_fitness_client.Utility
 
             else if (startTime < now && endTime > now)
             {
-                value = $"Можно (до {endTime})";
+                value = $"Можно (до {endTime:HH:mm})";
                 tb.Background = new SolidColorBrush(Colors.Green);
             }
 
             else
             {
-                value = $"Пока нет (с {startTime})";
+                value = $"Пока нет (с {startTime:HH:mm})";
                 tb.Background = new SolidColorBrush(Colors.Red);
             }
 
@@ -158,7 +158,7 @@ namespace vtb_fitness_client.Utility
             };
         }
 
-        public static string DisplayRuDateTime(DateTime? dateTime)
+        public static string GetRuDateTime(DateTime? dateTime)
         {
             if (dateTime.HasValue)
                 return dateTime.Value.ToString("dd.MM.yy HH:mm");

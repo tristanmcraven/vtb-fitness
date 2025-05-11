@@ -46,8 +46,10 @@ namespace vtb_fitness_client.Utility
                 Filter = "Images (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png",
                 Multiselect = false
             };
+            WindowManager.AddTintToActiveWindow();
             if (ofd.ShowDialog() == true)
             {
+                WindowManager.RemoveTintFromActiveWindow();
                 var path = ofd.FileName;
                 var bmp = GetImageFromPath(path);
                 if (!IsEqualAspectRatio(bmp))
@@ -61,6 +63,7 @@ namespace vtb_fitness_client.Utility
                 var rawImage = CreateImage(path);
                 return (fileName, rawImage);
             }
+            WindowManager.RemoveTintFromActiveWindow();
             return (null, null);
         }
 

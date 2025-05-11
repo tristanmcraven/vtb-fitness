@@ -85,7 +85,8 @@
 
                 <local:SeparatorUserControl />
 
-                <StackPanel Grid.Row="1">
+                <StackPanel Grid.Row="1"
+                            Margin="0 10 0 0">
                     <TextBlock x:Name="tariffBoughtAt_TextBlock" />
                     <TextBlock x:Name="tariffExpiresAt_TextBlock" />
                     <TextBlock x:Name="moneyPaid_TextBlock" />

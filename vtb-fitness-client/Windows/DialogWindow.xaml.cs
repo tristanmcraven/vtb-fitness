@@ -97,5 +97,28 @@ namespace vtb_fitness_client.Windows
             DialogResult = false;
             Close();
         }
+
+        private void CustomWindow_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Enter:
+                    if (ok_Button.Visibility == Visibility.Visible)
+                        ok_Button_Click(sender, e);
+                    if (yes_Button.Visibility == Visibility.Visible)
+                        yes_Button_Click(sender, e);
+                    break;
+                case Key.Escape:
+                    if (no_Button.Visibility == Visibility.Visible)
+                        no_Button_Click(sender, e);
+                    break;
+            }
+        }
+
+        private void CustomWindow_ContentRendered(object sender, EventArgs e)
+        {
+            if (message_TextBlock.ActualHeight > 90)
+                message_TextBlock.FontSize = 16;
+        }
     }
 }

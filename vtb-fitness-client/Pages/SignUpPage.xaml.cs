@@ -148,9 +148,7 @@ namespace vtb_fitness_client.Pages
 
         private void photo_Button_Click(object sender, RoutedEventArgs e)
         {
-            WindowManager.AddTintToActiveWindow();
             var result = ImageHelper.GetImageFromFileDialog();
-            WindowManager.RemoveTintFromActiveWindow();
             var fileName = result.FileName;
             if (fileName != null)
             {

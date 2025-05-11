@@ -213,13 +213,15 @@
                                        BasedOn="{StaticResource global_TextBlock}"
                                        x:Key="status_TextBlock">
                                     <Setter Property="Padding"
-                                            Value="5 0" />
+                                            Value="5 2" />
                                     <Setter Property="HorizontalAlignment"
                                             Value="Left" />
                                     <Setter Property="FontSize"
                                             Value="17" />
                                     <Setter Property="FontFamily"
                                             Value="{StaticResource demi_bold}" />
+                                    <Setter Property="Language"
+                                            Value="ru-RU" />
                                 </Style>
                                 <Style TargetType="TextBlock"
                                        BasedOn="{StaticResource global_TextBlock}"
@@ -228,6 +230,16 @@
                                             Value="{StaticResource light}" />
                                     <Setter Property="FontSize"
                                             Value="20" />
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect Color="Black"
+                                                              RenderingBias="Quality"
+                                                              Opacity="1"
+                                                              BlurRadius="6"
+                                                              Direction="330"
+                                                              ShadowDepth="10"/>
+                                        </Setter.Value>
+                                    </Setter>
                                 </Style>
                             </StackPanel.Resources>
                             <StackPanel Orientation="Vertical">
@@ -352,13 +364,15 @@
                                    Foreground="#e0e0e0"
                                    Padding="0"
                                    FontSize="18"
-                                   Margin="0 5 0 0" />
+                                   Margin="0 5 0 0"
+                                   Style="{StaticResource global_TextBlock}"/>
                         <TextBlock x:Name="fullname_TextBlock"
                                    Text="Sample Name Sample"
                                    Foreground="White"
                                    FontSize="20"
                                    Padding="0"
-                                   Margin="0 0 0 10" />
+                                   Margin="0 0 0 10"
+                                   Style="{StaticResource global_TextBlock}"/>
                         <Button x:Name="profile_Button"
                                 Click="profile_Button_Click">
                             <Grid>

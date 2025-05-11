@@ -80,6 +80,9 @@ namespace vtb_fitness_client.Network
             public static async Task<User?> GetTrainer(int userId) => await SendRequest<User?>($"user/{userId}/trainer", HttpMethod.Get);
 
             public static async Task<User?> AssignTrainer(int userId, int trainerId) => await SendRequest<User?>($"user/{userId}/assign-trainer?trainerId={trainerId}", HttpMethod.Get); 
+
+            public static async Task<User?> UnassignTrainer(int userId, int trainerId) => await SendRequest<User?>($"user/{userId}/unassign-trainer?trainerId={trainerId}", HttpMethod.Get);
+            public static async Task<User?> UpdatePfp(UserUpdatePfpDto dto) => await SendRequest<User?>($"user/{dto.UserId}/update-pfp", HttpMethod.Post, dto);
         }
 
         public static class _Tariff

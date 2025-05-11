@@ -179,5 +179,35 @@ namespace vtb_fitness_api.Controllers
 
             return NotFound();
         }
+
+        [HttpGet("{userId}/unassign-trainer")]
+        public async Task<IActionResult> UnassignTrainer(int userId, int trainerId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user != null)
+            {
+                user.TrainerId = null;
+                await _context.SaveChangesAsync();
+                return Ok(user);
+            }
+
+            return NotFound();
+        }
+
+        [HttpPost("{userId}/update-pfp")]
+        public async Task<IActionResult> UpdatePfp(UserUpdatePfpDto dto)
+        {
+            var user = await _context.Users.FindAsync(dto.UserId);
+
+            if (user != null)
+            {
+                user.Pfp = dto.Pfp;
+                await _context.SaveChangesAsync();
+
+                return Ok(user);
+            }
+
+            return NotFound();
+        }
     }
 }
