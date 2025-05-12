@@ -101,9 +101,9 @@ namespace vtb_fitness_client.Network
         public static class _Exercise
         {
             public static async Task<List<Exercise>?> Get() => await SendRequest<List<Exercise>>("exercise", HttpMethod.Get);
-            public static async Task<List<Exercise>?> GetCardio() => await SendRequest<List<Exercise>>("exercise/cardio", HttpMethod.Get);
-            public static async Task<List<Exercise>?> GetStrength() => await SendRequest<List<Exercise>>("exercise/strength", HttpMethod.Get);
-            public static async Task<List<Exercise>?> GetWeight() => await SendRequest<List<Exercise>>("exercise/weight", HttpMethod.Get);
+            public static async Task<List<Exercise>> GetCardio() => await SendRequest<List<Exercise>>("exercise/cardio", HttpMethod.Get);
+            public static async Task<List<Exercise>> GetStrength() => await SendRequest<List<Exercise>>("exercise/strength", HttpMethod.Get);
+            public static async Task<List<Exercise>> GetWeight() => await SendRequest<List<Exercise>>("exercise/weight", HttpMethod.Get);
             public static async Task<Exercise?> GetByName(string name) => await SendRequest<Exercise?>($"exercise/name?name={name}", HttpMethod.Get);
 
             

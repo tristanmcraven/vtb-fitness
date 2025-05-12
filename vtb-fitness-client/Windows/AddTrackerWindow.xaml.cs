@@ -81,20 +81,20 @@ namespace vtb_fitness_client.Windows
         {
             var exercises = new List<TrackerCreateDto>();
 
-            var date = datePicker.SelectedDate ?? DateTime.Now;
+            var timestamp = datePicker.SelectedDate ?? DateTime.Now;
 
             var cardioChildren = cardio_StackPanel.Children;
             if (cardioChildren.Count > 0)
             {
                 foreach (var item in cardioChildren)
                 {
-                    var uc = item as CardioUserControl;
+                    var uc = item as ExerciseUserControl;
                     exercises.Add(new TrackerCreateDto
                     {
                         UserId = App.CurrentUser.Id,
                         ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
                         Meters = uc.Meters,
-                        TimeStamp = date
+                        TimeStamp = timestamp
                     });
                 }
             }
@@ -104,14 +104,14 @@ namespace vtb_fitness_client.Windows
             {
                 foreach (var item in strengthChildren)
                 {
-                    var uc = item as StrengthUserControl;
+                    var uc = item as ExerciseUserControl;
                     exercises.Add(new TrackerCreateDto
                     {
                         UserId = App.CurrentUser.Id,
                         ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
                         Sits = uc.Sits,
                         Reps = uc.Reps,
-                        TimeStamp = date,
+                        TimeStamp = timestamp,
                         Weight = uc.Weight
                     });
                 }
@@ -122,14 +122,14 @@ namespace vtb_fitness_client.Windows
             {
                 foreach (var item in weightChildren)
                 {
-                    var uc = item as WeightUserControl;
+                    var uc = item as ExerciseUserControl;
                     exercises.Add(new TrackerCreateDto
                     {
                         UserId = App.CurrentUser.Id,
                         ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
                         Sits = uc.Sits,
                         Reps = uc.Reps,
-                        TimeStamp = date
+                        TimeStamp = timestamp
                     });
                 }
             }
@@ -157,17 +157,17 @@ namespace vtb_fitness_client.Windows
 
         private void addCardio_Button_Click(object sender, RoutedEventArgs e)
         {
-            cardio_StackPanel.Children.Add(new CardioUserControl());
+            cardio_StackPanel.Children.Add(new ExerciseUserControl(Utility.ExerciseType.Cardio));
         }
 
         private void addStrength_Button_Click(object sender, RoutedEventArgs e)
         {
-            strength_StackPanel.Children.Add(new StrengthUserControl());
+            strength_StackPanel.Children.Add(new ExerciseUserControl(Utility.ExerciseType.Strength));
         }
 
         private void addWeight_Button_Click(object sender, RoutedEventArgs e)
         {
-            weight_StackPanel.Children.Add(new WeightUserControl());
+            weight_StackPanel.Children.Add(new ExerciseUserControl(Utility.ExerciseType.OwnWeight));
         }
 
         private void addDate_Button_Click(object sender, RoutedEventArgs e)
