@@ -41,13 +41,13 @@ namespace vtb_fitness_client.UserControls
             var first = _exercises.First();
             day_TextBlock.Text = $"{first.Timestamp.Day} {new CultureInfo("ru-RU").DateTimeFormat.GetAbbreviatedMonthName(first.Timestamp.Month)}";
 
-            _maxCardio = _exercises.Where(x => x.Exercise.TypeId == Types.Cardio)
+            _maxCardio = _exercises.Where(x => x.Exercise.TypeId == 1)
                         .OrderByDescending(x => x.Meters)
                         .FirstOrDefault();
-            _maxStrength = _exercises.Where(x => x.Exercise.TypeId == Types.Strength || x.Exercise.TypeId == Types.Machine)
+            _maxStrength = _exercises.Where(x => x.Exercise.TypeId == 2 || x.Exercise.TypeId == 3)
                                      .OrderByDescending(x => (x.Sits * x.Reps * x.Weight))
                                      .FirstOrDefault();
-            _maxWeight = _exercises.Where(x => x.Exercise.TypeId == Types.Weight)
+            _maxWeight = _exercises.Where(x => x.Exercise.TypeId == 4)
                                    .OrderByDescending(x => (x.Sits * x.Reps * x.Weight))
                                    .FirstOrDefault();
 
