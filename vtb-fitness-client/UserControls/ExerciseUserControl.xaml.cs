@@ -81,25 +81,24 @@ namespace vtb_fitness_client.UserControls
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var tb = (TextBox)sender;
-            var tag = tb.Tag;
-            if (tag != null)
+            if (sender is not TextBox tb || tb.Tag is not string tag) return;
+
+            if (!int.TryParse(tb.Text, out var value)) return;
+
+            switch (tag)
             {
-                switch (tag)
-                {
-                    case "meters":
-                        Meters = int.Parse(tb.Text);
-                        break;
-                    case "sits":
-                        Sits = int.Parse(tb.Text);
-                        break;
-                    case "reps":
-                        Reps = int.Parse(tb.Text);
-                        break;
-                    case "weight":
-                        Weight = int.Parse(tb.Text);
-                        break;
-                }
+                case "meters":
+                    Meters = value;
+                    break;
+                case "sits":
+                    Sits = value;
+                    break;
+                case "reps":
+                    Reps = value;
+                    break;
+                case "weight":
+                    Weight = value;
+                    break;
             }
         }
 

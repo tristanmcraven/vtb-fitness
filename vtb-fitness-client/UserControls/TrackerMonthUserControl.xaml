@@ -15,7 +15,7 @@
                        Style="{StaticResource header_TextBlock}"
                        HorizontalAlignment="Left"/>
             <WrapPanel x:Name="days_WrapPanel"
-                       MaxWidth="1280"
+                       MaxWidth="1300"
                        />
         </StackPanel>
     </Grid>

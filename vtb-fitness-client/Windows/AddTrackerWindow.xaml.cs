@@ -83,6 +83,8 @@ namespace vtb_fitness_client.Windows
 
             var timestamp = datePicker.SelectedDate ?? DateTime.Now;
 
+            var trainerId = GetSelectedTrainerId();
+
             var cardioChildren = cardio_StackPanel.Children;
             if (cardioChildren.Count > 0)
             {
@@ -94,7 +96,8 @@ namespace vtb_fitness_client.Windows
                         UserId = App.CurrentUser.Id,
                         ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
                         Meters = uc.Meters,
-                        TimeStamp = timestamp
+                        TimeStamp = timestamp,
+                        TrainerId = trainerId ?? null
                     });
                 }
             }
@@ -112,7 +115,8 @@ namespace vtb_fitness_client.Windows
                         Sits = uc.Sits,
                         Reps = uc.Reps,
                         TimeStamp = timestamp,
-                        Weight = uc.Weight
+                        Weight = uc.Weight,
+                        TrainerId = trainerId ?? null
                     });
                 }
             }
@@ -129,7 +133,8 @@ namespace vtb_fitness_client.Windows
                         ExerciseId = (await ApiClient._Exercise.GetByName(uc.Exercise)).Id,
                         Sits = uc.Sits,
                         Reps = uc.Reps,
-                        TimeStamp = timestamp
+                        TimeStamp = timestamp,
+                        TrainerId = trainerId ?? null
                     });
                 }
             }
@@ -148,6 +153,14 @@ namespace vtb_fitness_client.Windows
             Close();
             PageManager.MainFrame.Navigate(new TrackerPage());
             WindowManager.Get<MainWindow>().UpdateCurrentTariffData();
+        }
+
+        private int? GetSelectedTrainerId()
+        {
+            var tcbuc = trainer_ComboBox.SelectedItem as TrainerComboBoxUserControl;
+            if (tcbuc != null)
+                return tcbuc._trainer.Id;
+            return null;
         }
 
         private void goBack_Button_Click(object sender, RoutedEventArgs e)
