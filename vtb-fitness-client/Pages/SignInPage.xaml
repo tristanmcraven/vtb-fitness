@@ -80,6 +80,23 @@
                     Content="Войти"
                     Click="signIn_Button_Click"
                     Margin="0 0 0 8"/>
+            <ProgressBar IsIndeterminate="True"
+                         Margin="20"
+                         Background="Transparent"
+                         BorderBrush="Black"
+                         Style="{StaticResource MaterialDesignCircularProgressBar}"
+                         Height="50"
+                         Width="50">
+                <!--<ProgressBar.Foreground>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="1,1">
+                        <GradientStop Color="Red"
+                                      Offset="0" />
+                        <GradientStop Color="Blue"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>-->
+            </ProgressBar>
             <Button x:Name="signUp_Button"
                     Content="Регистрация"
                     Click="signUp_Button_Click" />

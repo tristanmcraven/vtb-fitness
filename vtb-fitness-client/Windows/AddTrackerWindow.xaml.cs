@@ -158,7 +158,7 @@ namespace vtb_fitness_client.Windows
         private int? GetSelectedTrainerId()
         {
             var tcbuc = trainer_ComboBox.SelectedItem as TrainerComboBoxUserControl;
-            if (tcbuc != null)
+            if (tcbuc != null && tcbuc._trainer != null)
                 return tcbuc._trainer.Id;
             return null;
         }

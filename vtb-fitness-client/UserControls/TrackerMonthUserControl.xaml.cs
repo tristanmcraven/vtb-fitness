@@ -44,7 +44,8 @@ namespace vtb_fitness_client.UserControls
                 days_WrapPanel.Children.Add(new TrackerDayUserControl(day.ToList()));
             }
 
-            days_WrapPanel.Children.Add(new AddTrackerUserControl());
+            if (_tracker.First().Timestamp.Month == DateTime.Now.Month)
+                days_WrapPanel.Children.Add(new AddTrackerUserControl());
         }
     }
 }
